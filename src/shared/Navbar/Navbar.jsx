@@ -12,8 +12,8 @@ const Navbar = () => {
       <div className="navbar max-w-[1400px] mx-auto px-3">
         {/* Left - Brand */}
         <div className="navbar-start">
-            <img className="w-8 mr-2" src={brand} alt="" />
-          <a className=" text-xl text-black">ThreadQube</a>
+            <img className="w-8 mr-2" src={brand} alt="ThreadQube Logo" />
+          <a className=" text-xl font-semibold text-black">ThreadQube</a>
         </div>
 
         {/* Center - Links for large screen */}
