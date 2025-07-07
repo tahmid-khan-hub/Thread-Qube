@@ -7,7 +7,7 @@ const HomeLayout = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="w-[95%] md:max-w-[1500px] mx-auto">
+      <div className="w-[97%] md:max-w-[1400px] mx-auto">
         <Home></Home>
       </div>
       <Footer></Footer>
