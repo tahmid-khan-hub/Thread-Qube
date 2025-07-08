@@ -1,6 +1,6 @@
 import React from "react";
 import brand from "../../assets/logo.png"
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
     const links = <>
@@ -25,8 +25,8 @@ const Navbar = () => {
 
         {/* Right - Login and Dropdown for small screen */}
         <div className="navbar-end">
-          <a className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white">
-            Join Us
+          <a className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white"><Link to="login">
+            Join Us</Link>
           </a>
 
           {/* Mobile menu */}
