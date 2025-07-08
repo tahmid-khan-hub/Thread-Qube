@@ -1,41 +1,67 @@
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
+import Pagination from "../../shared/Pagination/Pagination";
+import { FaThumbsUp, FaComment } from "react-icons/fa";
 
-const Posts = () => {
+const Posts = ({ page, setTotalPages }) => {
   const axiosSecure = useAxiosSecure();
   const [posts, setPosts] = useState([]);
+  const limit = 5;
 
   useEffect(() => {
-    axiosSecure.get("http://localhost:3000/posts")
+    axiosSecure
+      .get(`http://localhost:3000/posts?page=${page}&limit=${limit}`)
       .then((res) => {
-        setPosts(res.data);
+        setPosts(res.data.posts);
+        setTotalPages(res.data.totalPages);
       })
       .catch((err) => {
         console.error("Error fetching posts:", err);
       });
-  }, [axiosSecure]);
+  }, [page]);
 
   return (
-    <section className="max-w-[1400px] mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-4">All Posts</h2>
+    <>
+      {" "}
+      <section className="max-w-[1400px] mx-auto px-4 py-8">
+        <h2 className="text-3xl text-center my-11 font-bold ">All Posts</h2>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {posts.map((post, index) => (
-          <div key={index} className="bg-white p-4 rounded shadow">
-            <div className="flex items-center space-x-3 mb-2">
-              <img src={post.authorImage} alt="Author" className="w-10 h-10 rounded-full" />
-              <h4 className="font-medium">{post.authorName}</h4>
+        <div className="grid md:grid-cols-2 gap-6">
+          {posts.map((post) => (
+            <div
+              key={post._id}
+              className="bg-white p-4 rounded-md shadow-md border border-gray-300"
+            >
+              <div className="flex items-center space-x-3 mb-5">
+                <img
+                  src={post.authorImage}
+                  alt="Author"
+                  className="w-10 h-10 rounded-full"
+                />
+                <h4 className="font-medium text-black">{post.title}</h4>
+              </div>
+
+              <div className="flex flex-wrap gap-2 text-sm text-gray-600 mb-2">
+                <span className="px-2 py-1 bg-gray-100 rounded">
+                  #{post.tag}
+                </span>
+                <span className="ml-2 mt-1 font-semibold">{new Date(post.postTime).toLocaleDateString()}</span>
+              </div>
+
+              <div className="flex justify-between text-sm font-medium text-gray-700 mt-5">
+                <span className="flex items-center gap-1">
+                  <FaComment /> {post.commentsCount ?? 0} Comments
+                </span>
+                <span className="flex items-center gap-1">
+                  <FaThumbsUp /> {post.votesCount ?? 0} Votes
+                </span>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold mb-1">{post.title}</h3>
-            <p className="text-gray-600 text-sm mb-2">{post.description}</p>
-            <div className="flex justify-between text-sm text-gray-500">
-              <span>Tag: #{post.tag}</span>
-              <span>{new Date(post.postTime).toLocaleDateString()}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+      
+    </>
   );
 };
 
