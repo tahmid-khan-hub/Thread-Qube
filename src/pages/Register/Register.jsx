@@ -17,15 +17,13 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       // Create user with email & password
-      await signUp(data.email, data.password);
+      await signUp(data.email, data.password)
 
       // Update user profile with name and photo URL
-      if (updateUserProfile) {
         await updateUserProfile({
           displayName: data.name,
           photoURL: data.photoURL,
         });
-      }
 
       Swal.fire({
         icon: "success",
@@ -69,16 +67,16 @@ const Register = () => {
               className="input"
               placeholder="Enter your photoURL"
               {...register("photoURL", {
-                pattern: {
-                  value:
-                    /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))/i,
-                  message: "Please enter a valid image URL",
-                },
+                // pattern: {
+                //   value:
+                //     /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))/i,
+                //   message: "Please enter a valid image URL",
+                // },
               })}
             />
-            {errors.photoURL && (
+            {/* {errors.photoURL && (
               <p className="text-red-500 text-sm mt-1">{errors.photoURL.message}</p>
-            )}
+            )} */}
 
             {/* Email */}
             <label className="label">Email</label>
