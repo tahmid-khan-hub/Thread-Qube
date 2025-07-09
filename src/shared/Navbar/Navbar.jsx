@@ -36,33 +36,48 @@ const Navbar = () => {
 
         {/* Right - Login and Dropdown for small screen */}
         <div className="navbar-end">
-          {user?.photoURL ? (
-            <img
-              title={user?.displayName || "User"}
-              className="w-9 h-9 rounded-full object-cover ring-2 ring-orange-500 ring-offset-2"
-              src={user?.photoURL}
-              alt="Profile"
-            />
-          ) : (
-            <img
-              title={user?.displayName || "User"}
-              className="w-9 h-9 rounded-full object-cover "
-              src="https://i.ibb.co/VWP8Nd1t/image.png"
-              alt="Profile"
-            />
-          )}
-
           {user ? (
-            <a
-              onClick={handleLogOut}
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-9 h-9 rounded-full ring-2 ring-orange-500 ring-offset-2">
+                  <img
+                    src={
+                      user?.photoURL || "https://i.ibb.co/VWP8Nd1t/image.png"
+                    }
+                    alt="Profile"
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li className="text-center text-lg px-2 py-1 mb-4 font-semibold text-orange-500 cursor-default">
+                  {user?.displayName}
+                </li>
+                <li>
+                  <Link to="/dashboard" className="text-sm">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <button onClick={handleLogOut} className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white mt-5 text-[15px]">
+                    Log Out
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link
+              to="/login"
               className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white ml-2"
             >
-              <Link to="login">Log Out</Link>
-            </a>
-          ) : (
-            <a className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white ml-2">
-              <Link to="login">Join Us</Link>
-            </a>
+              Join Us
+            </Link>
           )}
 
           {/* Mobile menu */}
