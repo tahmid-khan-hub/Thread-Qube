@@ -10,7 +10,7 @@ const Posts = ({ page, setTotalPages }) => {
 
   useEffect(() => {
     axiosSecure
-      .get(`http://localhost:3000/posts?page=${page}&limit=${limit}`)
+      .get(`http://localhost:3000/Allposts?page=${page}&limit=${limit}`)
       .then((res) => {
         setPosts(res.data.posts);
         setTotalPages(res.data.totalPages);
@@ -36,9 +36,10 @@ const Posts = ({ page, setTotalPages }) => {
                 <img
                   src={post.authorImage}
                   alt="Author"
-                  className="w-10 h-10 rounded-full"
+                  className="w-10 h-10 rounded-full object-cover"
                 />
                 <h4 className="font-medium text-black">{post.title}</h4>
+                <h4 className="font-medium text-black">{post.Name}</h4>
               </div>
 
               <div className="flex flex-wrap gap-2 text-sm text-gray-600 mb-2">
