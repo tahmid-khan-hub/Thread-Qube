@@ -5,11 +5,13 @@ import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { getAuth } from "firebase/auth";
 import app from "../../firebase/firebase.config";
+import useAxiosSecure from "../../hooks/UseAxiosSecure";
 
 const Register = () => {
   const auth = getAuth(app)
   const { signUp, updateUserProfile } = useAuth();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure()
 
   const {
     register,
@@ -28,6 +30,17 @@ const Register = () => {
         photoURL: data.photoURL,
       });
       await auth.currentUser.reload();
+
+      const userInfo = {
+        name: data.name,
+        email: data.email,
+        photoURL: data.photoURL,
+        badge: "bronze",
+        role: "user",
+        createdAt: new Date(),
+      }
+
+      await axiosSecure.post("http://localhost:3000/users", userInfo)
 
       Swal.fire({
         icon: "success",

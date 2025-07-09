@@ -4,6 +4,8 @@ import HomeLayout from "../layout/HomeLayout"
 import Home from "../components/Home/Home"
 import Login from "../pages/Login/Login"
 import Register from "../pages/Register/Register";
+import DashBoardLayout from "../layout/DashBoardLayout";
+import PrivateRoute from "../router/PrivateRoute"
 
 const Routes = createBrowserRouter([
   {
@@ -24,6 +26,17 @@ const Routes = createBrowserRouter([
         }
     ]
   },
+  {
+    path: "dashboard",
+    element: <PrivateRoute>
+      <DashBoardLayout></DashBoardLayout>
+    </PrivateRoute>,
+    children:[
+      {
+
+      }
+    ]
+  }
 ]);
 
 export default Routes;
