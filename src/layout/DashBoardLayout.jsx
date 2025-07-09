@@ -4,7 +4,7 @@ import brand from "../assets/logo.png";
 
 const DashBoardLayout = () => {
   return (
-    <div className="drawer lg:drawer-open bg-green-100 max-w-[1500px] mx-auto">
+    <div className="drawer lg:drawer-open max-w-[1500px] mx-auto">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         <div className="navbar bg-base-300 w-full lg:hidden">
@@ -58,7 +58,7 @@ const DashBoardLayout = () => {
             <NavLink to="dashboard/allrecipe">My Profile</NavLink>
           </li>
           <li>
-            <NavLink to="dashboard/myrecipe">Add Post</NavLink>
+            <NavLink to="dashboard/addPost">Add Post</NavLink>
           </li>
           <li>
             <NavLink to="dashboard/addrecipe">My Posts</NavLink>
