@@ -7,6 +7,7 @@ import Register from "../pages/Register/Register";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import PrivateRoute from "../router/PrivateRoute"
 import AddPost from "../privatePages/AddPost/AddPost";
+import MyPosts from "../privatePages/MyPosts/MyPosts";
 
 const Routes = createBrowserRouter([
   {
@@ -39,6 +40,12 @@ const Routes = createBrowserRouter([
           <AddPost></AddPost>
         </PrivateRoute>
       },
+      {
+        path: "dashboard/myPosts",
+        element: <PrivateRoute>
+          <MyPosts></MyPosts>
+        </PrivateRoute>
+      }
     ]
   }
 ]);

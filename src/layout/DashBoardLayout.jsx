@@ -7,7 +7,7 @@ const DashBoardLayout = () => {
     <div className="drawer lg:drawer-open max-w-[1500px] mx-auto">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
-        <div className="navbar bg-base-300 w-full lg:hidden">
+        <div className="navbar sticky top-0 z-50 bg-base-100 w-full lg:hidden">
           <div className="flex-none ">
             <label
               htmlFor="my-drawer-2"
@@ -61,7 +61,7 @@ const DashBoardLayout = () => {
             <NavLink to="dashboard/addPost">Add Post</NavLink>
           </li>
           <li>
-            <NavLink to="dashboard/addrecipe">My Posts</NavLink>
+            <NavLink to="dashboard/myPosts">My Posts</NavLink>
           </li>
         </ul>
       </div>
