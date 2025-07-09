@@ -39,7 +39,7 @@ const Navbar = () => {
           {user?.photoURL ? (
             <img
               title={user?.displayName || "User"}
-              className="w-9 h-9 rounded-full object-cover ring-2 ring-blue-500 ring-offset-2"
+              className="w-9 h-9 rounded-full object-cover ring-2 ring-orange-500 ring-offset-2"
               src={user?.photoURL}
               alt="Profile"
             />
@@ -47,7 +47,7 @@ const Navbar = () => {
             <img
               title={user?.displayName || "User"}
               className="w-9 h-9 rounded-full object-cover "
-              src="https://i.ibb.co/Kxsnfc4C/image.png"
+              src="https://i.ibb.co/VWP8Nd1t/image.png"
               alt="Profile"
             />
           )}
@@ -55,12 +55,12 @@ const Navbar = () => {
           {user ? (
             <a
               onClick={handleLogOut}
-              className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white"
+              className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white ml-2"
             >
               <Link to="login">Log Out</Link>
             </a>
           ) : (
-            <a className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white">
+            <a className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white ml-2">
               <Link to="login">Join Us</Link>
             </a>
           )}

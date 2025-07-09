@@ -3,9 +3,12 @@ import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import { getAuth } from "firebase/auth";
+import app from "../../firebase/firebase.config";
 
 const Register = () => {
-  const { signUp, updateUserProfile } = useAuth(); 
+  const auth = getAuth(app)
+  const { signUp, updateUserProfile } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -17,13 +20,14 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       // Create user with email & password
-      await signUp(data.email, data.password)
+      await signUp(data.email, data.password);
 
       // Update user profile with name and photo URL
-        await updateUserProfile({
-          displayName: data.name,
-          photoURL: data.photoURL,
-        });
+      await updateUserProfile({
+        displayName: data.name,
+        photoURL: data.photoURL,
+      });
+      await auth.currentUser.reload();
 
       Swal.fire({
         icon: "success",
@@ -32,7 +36,7 @@ const Register = () => {
         showConfirmButton: false,
       });
 
-      navigate("/"); 
+      navigate("/");
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -93,7 +97,9 @@ const Register = () => {
               })}
             />
             {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
             )}
 
             {/* Password */}
@@ -111,7 +117,9 @@ const Register = () => {
               })}
             />
             {errors.password && (
-              <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
             )}
 
             <div>
