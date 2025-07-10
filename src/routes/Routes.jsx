@@ -12,6 +12,7 @@ import MyProfile from "../privatePages/MyProfile/MyProfile";
 import AdminRoute from "../router/AdminRoute";
 import AdminProfile from "../AdminPages/AdminProfile/AdminProfile";
 import ManageUsers from "../AdminPages/ManageUsers/ManageUsers";
+import Announcement from "../AdminPages/Announcement/Announcement";
 
 const Routes = createBrowserRouter([
   {
@@ -72,6 +73,12 @@ const Routes = createBrowserRouter([
         path: "dashboard/manageUsers",
         element: <AdminRoute>
           <ManageUsers></ManageUsers>
+        </AdminRoute>
+      },
+      {
+        path: "dashboard/announcements",
+        element: <AdminRoute>
+          <Announcement></Announcement>
         </AdminRoute>
       }
     ]

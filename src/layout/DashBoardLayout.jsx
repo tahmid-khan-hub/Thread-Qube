@@ -93,7 +93,7 @@ const DashBoardLayout = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="dashboard/announcement">
+                <NavLink to="dashboard/announcements">
                   <MdCampaign className="inline-block mr-2" />
                   Announcement
                 </NavLink>

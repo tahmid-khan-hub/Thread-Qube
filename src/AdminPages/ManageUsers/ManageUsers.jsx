@@ -20,7 +20,7 @@ const ManageUsers = () => {
       text: "Make this user an admin?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#F97316",
+      confirmButtonColor: "#15803D",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, make admin",
     });
