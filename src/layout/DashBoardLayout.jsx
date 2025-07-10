@@ -1,8 +1,12 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
 import brand from "../assets/logo.png";
+import useUserRole from "../hooks/useUserRole";
+import Loader from "../pages/Loader/Loader";
 
 const DashBoardLayout = () => {
+  const { role, roleLoading } = useUserRole();
+  if (roleLoading) return <Loader></Loader>;
   return (
     <div className="drawer lg:drawer-open max-w-[1500px] mx-auto">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -31,9 +35,9 @@ const DashBoardLayout = () => {
           </div>
           <div className="mx-2 flex-1 mb-1 lg:hidden">
             <div className="flex">
-            <img className="w-8 mr-1" src={brand} alt="ThreadQube Logo" />
-            <a className=" text-xl mt-1 font-semibold ">ThreadQube</a>
-          </div>
+              <img className="w-8 mr-1" src={brand} alt="ThreadQube Logo" />
+              <a className=" text-xl mt-1 font-semibold ">ThreadQube</a>
+            </div>
           </div>
         </div>
         {/* Page content here */}
@@ -47,22 +51,48 @@ const DashBoardLayout = () => {
         ></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           {/* Sidebar content here */}
+          {/* logo */}
           <div className="flex">
             <img className="w-8 mr-1" src={brand} alt="ThreadQube Logo" />
             <a className=" text-xl mt-1 font-semibold">ThreadQube</a>
           </div>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="dashboard/myProfile">My Profile</NavLink>
-          </li>
-          <li>
-            <NavLink to="dashboard/addPost">Add Post</NavLink>
-          </li>
-          <li>
-            <NavLink to="dashboard/myPosts">My Posts</NavLink>
-          </li>
+
+          {role === "admin" ? (
+            <>
+              {/* Admin links */}
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="dashboard/adminProfile">Admin Profile</NavLink>
+              </li>
+              <li>
+                <NavLink to="dashboard/manageUsers">Manage Users</NavLink>
+              </li>
+              <li>
+                <NavLink to="dashboard/reportedActivities">Reported Activities</NavLink>
+              </li>
+              <li>
+                <NavLink to="dashboard/announcement">Announcement</NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              {/* user links */}
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="dashboard/myProfile">My Profile</NavLink>
+              </li>
+              <li>
+                <NavLink to="dashboard/addPost">Add Post</NavLink>
+              </li>
+              <li>
+                <NavLink to="dashboard/myPosts">My Posts</NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>

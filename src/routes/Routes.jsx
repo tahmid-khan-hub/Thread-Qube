@@ -9,6 +9,8 @@ import PrivateRoute from "../router/PrivateRoute"
 import AddPost from "../privatePages/AddPost/AddPost";
 import MyPosts from "../privatePages/MyPosts/MyPosts";
 import MyProfile from "../privatePages/MyProfile/MyProfile";
+import AdminRoute from "../router/AdminRoute";
+import AdminProfile from "../AdminPages/AdminProfile/AdminProfile";
 
 const Routes = createBrowserRouter([
   {
@@ -29,12 +31,16 @@ const Routes = createBrowserRouter([
         }
     ]
   },
+
+  // dashboard
   {
     path: "dashboard",
     element: <PrivateRoute>
       <DashBoardLayout></DashBoardLayout>
     </PrivateRoute>,
     children:[
+
+      // user
       {
         path: "dashboard/addPost",
         element: <PrivateRoute>
@@ -52,6 +58,20 @@ const Routes = createBrowserRouter([
         element: <PrivateRoute>
           <MyProfile></MyProfile>
         </PrivateRoute>
+      },
+
+      // admin routes
+      {
+        path: "dashboard/adminProfile",
+        element: <AdminRoute>
+          <AdminProfile></AdminProfile>
+        </AdminRoute>
+      },
+      {
+        path: "dashboard/manageUsers",
+        element: <AdminRoute>
+          
+        </AdminRoute>
       }
     ]
   }
