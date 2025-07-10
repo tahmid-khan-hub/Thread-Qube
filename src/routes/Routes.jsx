@@ -11,6 +11,7 @@ import MyPosts from "../privatePages/MyPosts/MyPosts";
 import MyProfile from "../privatePages/MyProfile/MyProfile";
 import AdminRoute from "../router/AdminRoute";
 import AdminProfile from "../AdminPages/AdminProfile/AdminProfile";
+import ManageUsers from "../AdminPages/ManageUsers/ManageUsers";
 
 const Routes = createBrowserRouter([
   {
@@ -70,7 +71,7 @@ const Routes = createBrowserRouter([
       {
         path: "dashboard/manageUsers",
         element: <AdminRoute>
-          
+          <ManageUsers></ManageUsers>
         </AdminRoute>
       }
     ]
