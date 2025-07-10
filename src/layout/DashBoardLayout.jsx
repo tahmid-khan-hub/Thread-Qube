@@ -32,7 +32,7 @@ const DashBoardLayout = () => {
           <div className="mx-2 flex-1 mb-1 lg:hidden">
             <div className="flex">
             <img className="w-8 mr-1" src={brand} alt="ThreadQube Logo" />
-            <a className=" text-xl mt-1 font-semibold text-black">ThreadQube</a>
+            <a className=" text-xl mt-1 font-semibold ">ThreadQube</a>
           </div>
           </div>
         </div>
@@ -49,13 +49,13 @@ const DashBoardLayout = () => {
           {/* Sidebar content here */}
           <div className="flex">
             <img className="w-8 mr-1" src={brand} alt="ThreadQube Logo" />
-            <a className=" text-xl mt-1 font-semibold text-black">ThreadQube</a>
+            <a className=" text-xl mt-1 font-semibold">ThreadQube</a>
           </div>
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="dashboard/allrecipe">My Profile</NavLink>
+            <NavLink to="dashboard/myProfile">My Profile</NavLink>
           </li>
           <li>
             <NavLink to="dashboard/addPost">Add Post</NavLink>

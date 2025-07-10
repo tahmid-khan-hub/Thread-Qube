@@ -85,23 +85,23 @@ const AddPost = () => {
   return (
     <div className="min-h-screen">
       <div className="w-[96%] md:max-w-xl mx-auto mt-16 mb-12 p-4 border rounded shadow bg-gray-50">
-        <h2 className="text-3xl font-bold mb-4 text-center">Add New Post</h2>
+        <h2 className="text-3xl font-bold mb-4 text-black text-center">Add New Post</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
           {/* Read-only fields */}
           <input
-            className="input w-full bg-gray-200"
+            className="input w-full bg-gray-200 text-gray-500"
             type="text"
             defaultValue={user?.displayName}
             readOnly
           />
           <input
-            className="input w-full bg-gray-200"
+            className="input w-full bg-gray-200 text-gray-500"
             type="email"
             defaultValue={user?.email}
             readOnly
           />
           <input
-            className="input w-full bg-gray-200"
+            className="input w-full bg-gray-200 text-gray-500"
             type="text"
             defaultValue={user?.photoURL}
             readOnly
@@ -109,7 +109,7 @@ const AddPost = () => {
 
           {/* Post Title */}
           <input
-            className="input w-full"
+            className="input w-full bg-gray-200 text-black"
             type="text"
             placeholder="Post Title"
             {...register("title", { required: "Title is required" })}
@@ -120,7 +120,7 @@ const AddPost = () => {
 
           {/* Description */}
           <textarea
-            className="textarea w-full"
+            className="textarea w-full bg-gray-200 text-black"
             placeholder="Post Description"
             {...register("description", {
               required: "Description is required",
@@ -133,7 +133,7 @@ const AddPost = () => {
           {/* Tag dropdown */}
           <select
             {...register("tag", { required: "Please select a tag" })}
-            className="select select-bordered w-full"
+            className="select select-bordered w-full bg-gray-200 text-black"
             defaultValue=""
           >
             <option value="" disabled>
