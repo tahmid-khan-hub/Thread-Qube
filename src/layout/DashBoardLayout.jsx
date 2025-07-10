@@ -51,7 +51,7 @@ const DashBoardLayout = () => {
         {/* Page content here */}
         <Outlet></Outlet>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side border-r border-orange-500">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"
@@ -60,7 +60,7 @@ const DashBoardLayout = () => {
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
           {/* Sidebar content here */}
           {/* logo */}
-          <div className="flex">
+          <div className="flex ml-2 mb-4">
             <img className="w-8 mr-1" src={brand} alt="ThreadQube Logo" />
             <a className=" text-xl mt-1 font-semibold">ThreadQube</a>
           </div>
