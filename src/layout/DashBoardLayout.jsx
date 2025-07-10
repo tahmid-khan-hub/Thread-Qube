@@ -3,6 +3,14 @@ import { NavLink, Outlet } from "react-router";
 import brand from "../assets/logo.png";
 import useUserRole from "../hooks/useUserRole";
 import Loader from "../pages/Loader/Loader";
+import { AiFillHome } from "react-icons/ai";
+import {
+  FaUserCircle,
+  FaRegNewspaper,
+  FaUserShield,
+  FaUsersCog,
+} from "react-icons/fa";
+import { MdPostAdd, MdReportProblem, MdCampaign } from "react-icons/md";
 
 const DashBoardLayout = () => {
   const { role, roleLoading } = useUserRole();
@@ -61,35 +69,62 @@ const DashBoardLayout = () => {
             <>
               {/* Admin links */}
               <li>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/">
+                  <AiFillHome className="inline-block mr-2" />
+                  Home
+                </NavLink>
               </li>
               <li>
-                <NavLink to="dashboard/adminProfile">Admin Profile</NavLink>
+                <NavLink to="dashboard/adminProfile">
+                  <FaUserShield className="inline-block mr-2" />
+                  Admin Profile
+                </NavLink>
               </li>
               <li>
-                <NavLink to="dashboard/manageUsers">Manage Users</NavLink>
+                <NavLink to="dashboard/manageUsers">
+                  <FaUsersCog className="inline-block mr-2" />
+                  Manage Users
+                </NavLink>
               </li>
               <li>
-                <NavLink to="dashboard/reportedActivities">Reported Activities</NavLink>
+                <NavLink to="dashboard/reportedActivities">
+                  <MdReportProblem className="inline-block mr-2" />
+                  Reported Activities
+                </NavLink>
               </li>
               <li>
-                <NavLink to="dashboard/announcement">Announcement</NavLink>
+                <NavLink to="dashboard/announcement">
+                  <MdCampaign className="inline-block mr-2" />
+                  Announcement
+                </NavLink>
               </li>
             </>
           ) : (
             <>
-              {/* user links */}
+              {/* User links */}
               <li>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/">
+                  <AiFillHome className="inline-block mr-2" />
+                  Home
+                </NavLink>
               </li>
               <li>
-                <NavLink to="dashboard/myProfile">My Profile</NavLink>
+                <NavLink to="dashboard/myProfile">
+                  <FaUserCircle className="inline-block mr-2" />
+                  My Profile
+                </NavLink>
               </li>
               <li>
-                <NavLink to="dashboard/addPost">Add Post</NavLink>
+                <NavLink to="dashboard/addPost">
+                  <MdPostAdd className="inline-block mr-2" />
+                  Add Post
+                </NavLink>
               </li>
               <li>
-                <NavLink to="dashboard/myPosts">My Posts</NavLink>
+                <NavLink to="dashboard/myPosts">
+                  <FaRegNewspaper className="inline-block mr-2" />
+                  My Posts
+                </NavLink>
               </li>
             </>
           )}
