@@ -1,18 +1,35 @@
 import React from "react";
-import { useLoaderData, useParams } from "react-router";
+import { useParams } from "react-router";
 import CommentsSection from "../CommentsSection/CommentsSection";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import useAuth from "../../hooks/useAuth";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import Loader from "../Loader/Loader";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  TwitterShareButton,
+  TwitterIcon,
+} from "react-share";
 
 const PostDetails = () => {
-  const postData = useLoaderData();
+  // const postData = useLoaderData();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const queryClient = useQueryClient();
+
+  const { data: postData, isLoading } = useQuery({
+    queryKey: ["post", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`http://localhost:3000/Allposts/${id}`);
+      return res.data;
+    },
+  });
 
   const handleUpvote = async () => {
     if (!user) return Swal.fire("Please log in to upvote");
@@ -43,6 +60,8 @@ const PostDetails = () => {
       Swal.fire("Failed to downvote", "", "error");
     }
   };
+
+  if (isLoading) return <Loader></Loader>;
 
   if (!postData) {
     return (
@@ -97,12 +116,16 @@ const PostDetails = () => {
 
         <div className="flex items-center gap-6 text-sm font-medium text-gray-600 mt-4">
           <div className="flex items-center gap-1">
-            <FaThumbsUp onClick={handleUpvote}></FaThumbsUp>
-            <span className="text-green-600 font-semibold">{upvote || 0}</span>
+            <FaThumbsUp size={21} onClick={handleUpvote} />
+            <span className="text-green-600 text-2xl ml-1 font-semibold">
+              {upvote || 0}
+            </span>
           </div>
           <div className="flex items-center gap-1">
-            <FaThumbsDown onClick={handleDownvote}></FaThumbsDown>
-            <span className="text-red-600 font-semibold">{downVote || 0}</span>
+            <FaThumbsDown size={21} className="mt-1" onClick={handleDownvote} />
+            <span className="text-red-600 text-2xl ml-1 font-semibold">
+              {downVote || 0}
+            </span>
           </div>
           <button
             onClick={() =>
@@ -110,12 +133,33 @@ const PostDetails = () => {
                 .getElementById("comments-section")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
-            className="text-orange-600 underline hover:text-orange-800 transition"
+            className="text-orange-600 text-lg underline hover:text-orange-800 transition"
           >
             Go to Comments
           </button>
         </div>
+
+        {/* Right-bottom aligned share buttons */}
+        <div className="flex justify-end">
+          <div>
+            <p className="text-sm text-gray-600 font-medium mb-2">Share:</p>
+            <div className="flex items-center gap-4">
+              <FacebookShareButton url={window.location.href} quote={title}>
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+
+              <WhatsappShareButton url={window.location.href} title={title}>
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+
+              <TwitterShareButton url={window.location.href} title={title}>
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div id="comments-section">
         <CommentsSection postId={postData._id} />
       </div>
