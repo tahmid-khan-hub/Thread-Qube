@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router";
+import CommentsSection from "../CommentsSection/CommentsSection";
 
 const PostDetails = () => {
   const paramsId = useParams();
@@ -65,6 +66,7 @@ const PostDetails = () => {
           </div>
         </div>
       </div>
+      <CommentsSection postId={id}></CommentsSection>
     </div>
   );
 };
