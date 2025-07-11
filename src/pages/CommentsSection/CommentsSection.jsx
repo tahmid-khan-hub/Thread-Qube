@@ -31,8 +31,11 @@ const CommentsSection = ({ postId }) => {
       );
       return res.data;
     },
-    onSuccess: () => {
+    onSuccess: async() => {
       queryClient.invalidateQueries(["comments", postId]);
+
+      await axiosSecure.patch(`http://localhost:3000/Allposts/${postId}/comment`);
+
       Swal.fire({
         icon: "success",
         title: "Comment added successfully!",

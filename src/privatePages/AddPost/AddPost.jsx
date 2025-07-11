@@ -50,7 +50,8 @@ const AddPost = () => {
       tag: data.tag,
       upVote: 0,
       downVote: 0,
-      createdAt: new Date(),
+      comments: 0,
+      postTime: new Date(),
     };
 
     const res = await axiosSecure.post("http://localhost:3000/Allposts", newPost);

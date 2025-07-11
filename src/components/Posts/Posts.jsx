@@ -27,7 +27,7 @@ const Posts = ({ page, setTotalPages }) => {
       <section className="max-w-[1400px] mx-auto px-4 py-8">
         <h2 className="text-3xl text-center my-11 font-bold ">All Posts</h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-1 gap-6">
           {posts.map((post) => (
             <Link to={`postDetails/${post._id}`}><div
               key={post._id}
@@ -44,7 +44,7 @@ const Posts = ({ page, setTotalPages }) => {
               </div>
 
               <div className="flex flex-wrap gap-2 text-sm text-gray-600 mb-2">
-                <span className="px-2 py-1 bg-gray-100 rounded">
+                <span className=" bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium">
                   #{post.tag}
                 </span>
                 <span className="ml-2 mt-1 font-semibold">{new Date(post.postTime).toLocaleDateString()}</span>
@@ -52,10 +52,10 @@ const Posts = ({ page, setTotalPages }) => {
 
               <div className="flex justify-between text-sm font-medium text-gray-700 mt-5">
                 <span className="flex items-center gap-1">
-                  <FaComment /> {post.commentsCount ?? 0} Comments
+                  <FaComment /> {post.comments ?? 0} Comments
                 </span>
                 <span className="flex items-center gap-1">
-                  <FaThumbsUp /> {post.votesCount ?? 0} Votes
+                  <FaThumbsUp /> {post.upvote - post.downVote} Votes
                 </span>
               </div>
             </div></Link>
