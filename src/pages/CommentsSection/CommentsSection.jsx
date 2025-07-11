@@ -73,7 +73,7 @@ const CommentsSection = ({ postId }) => {
   if (isLoading) return <Loader></Loader>;
 
   return (
-    <div className="mt-10 max-w-3xl mx-auto">
+    <div className="mt-10 max-w-5xl mx-auto">
       <h3 className="text-2xl font-semibold mb-4">
         Comments ({comments.length})
       </h3>
@@ -89,7 +89,7 @@ const CommentsSection = ({ postId }) => {
             />
             <div>
               <p className="font-semibold">{c.userName}</p>
-              <p className="text-gray-700 whitespace-pre-wrap">
+              <p className="text-gray-500 whitespace-pre-wrap">
                 {c.commentText}
               </p>
               <p className="text-xs text-gray-400 mt-1">
@@ -116,7 +116,7 @@ const CommentsSection = ({ postId }) => {
           />
           <button
             type="submit"
-            className={`btn btn-primary self-end ${
+            className={`btn bg-orange-400 text-white self-end ${
               addCommentMutation.isLoading ? "opacity-50" : ""
             }`}
             disabled={addCommentMutation.isLoading}
