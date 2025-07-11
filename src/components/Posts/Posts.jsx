@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import Pagination from "../../shared/Pagination/Pagination";
 import { FaThumbsUp, FaComment } from "react-icons/fa";
+import { Link } from "react-router";
 
 const Posts = ({ page, setTotalPages }) => {
   const axiosSecure = useAxiosSecure();
@@ -28,7 +29,7 @@ const Posts = ({ page, setTotalPages }) => {
 
         <div className="grid md:grid-cols-2 gap-6">
           {posts.map((post) => (
-            <div
+            <Link to={`postDetails/${post._id}`}><div
               key={post._id}
               className="bg-white p-4 rounded-md shadow-md border border-gray-300"
             >
@@ -57,7 +58,7 @@ const Posts = ({ page, setTotalPages }) => {
                   <FaThumbsUp /> {post.votesCount ?? 0} Votes
                 </span>
               </div>
-            </div>
+            </div></Link>
           ))}
         </div>
       </section>

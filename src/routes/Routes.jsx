@@ -13,6 +13,7 @@ import AdminRoute from "../router/AdminRoute";
 import AdminProfile from "../AdminPages/AdminProfile/AdminProfile";
 import ManageUsers from "../AdminPages/ManageUsers/ManageUsers";
 import Announcement from "../AdminPages/Announcement/Announcement";
+import PostDetails from "../pages/PostDetails/PostDetails";
 
 const Routes = createBrowserRouter([
   {
@@ -30,6 +31,11 @@ const Routes = createBrowserRouter([
         {
           path: "register",
           Component: Register,
+        },
+        {
+          path: "postDetails/:id",
+          element: <PostDetails></PostDetails>,
+          loader: () => fetch("http://localhost:3000/Allposts").then(res => res.json())
         }
     ]
   },
