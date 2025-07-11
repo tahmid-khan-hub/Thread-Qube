@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Tags = () => {
-  const tags = ["education", "travel", "technology", "personal-development", "books", "gaming", "music", "career", "health", "sports"]
-  const [activeTag, setActiveTag] = useState(null);
+const Tags = ({ activeTag, setActiveTag }) => {
+  const tags = [
+    "education",
+    "travel",
+    "technology",
+    "personal-development",
+    "books",
+    "gaming",
+    "music",
+    "career",
+    "health",
+    "sports",
+  ];
 
   return (
     <section className="max-w-[1400px] mx-auto px-4 mt-8">
-      <h2 className="text-2xl font-semibold mb-4">Browse by Tags</h2>
-
+      <h2 className="text-3xl font-bold mb-4">Browse by Tags</h2>
       <div className="flex flex-wrap gap-3">
         {tags.map((tag) => (
           <button
@@ -27,5 +36,6 @@ const Tags = () => {
     </section>
   );
 };
+
 
 export default Tags;

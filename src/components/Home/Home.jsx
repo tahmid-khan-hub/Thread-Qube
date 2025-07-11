@@ -5,12 +5,13 @@ import Posts from "../Posts/Posts";
 import Pagination from "../../shared/Pagination/Pagination";
 
 const Home = () => {
+  const [activeTag, setActiveTag] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   return (
     <div>
-      <Tags></Tags>
-      <Posts page={page} setTotalPages={setTotalPages}></Posts>
+      <Tags activeTag={activeTag} setActiveTag={setActiveTag}></Tags>
+      <Posts page={page} activeTag={activeTag} setTotalPages={setTotalPages}></Posts>
       <Announcement></Announcement>
       <Pagination page={page} totalPages={totalPages} setPage={setPage}></Pagination>
     </div>

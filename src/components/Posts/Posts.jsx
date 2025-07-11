@@ -1,38 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
-import Pagination from "../../shared/Pagination/Pagination";
 import { FaThumbsUp, FaComment } from "react-icons/fa";
 import { Link } from "react-router";
+import Loader from "../../pages/Loader/Loader";
 
-const Posts = ({ page, setTotalPages }) => {
+const Posts = ({ page, activeTag, setTotalPages }) => {
   const axiosSecure = useAxiosSecure();
-  const [posts, setPosts] = useState([]);
   const limit = 5;
 
+  const { data: postsData, isLoading } = useQuery({
+    queryKey: ["posts", page, activeTag],
+    queryFn: async () => {
+      const tagQuery = activeTag ? `&tag=${activeTag}` : "";
+      const res = await axiosSecure.get(
+        `http://localhost:3000/Allposts?page=${page}&limit=${limit}${tagQuery}`
+      );
+      return res.data;
+    },
+    keepPreviousData: true,
+  });
+
   useEffect(() => {
-    axiosSecure
-      .get(`http://localhost:3000/Allposts?page=${page}&limit=${limit}`)
-      .then((res) => {
-        setPosts(res.data.posts);
-        setTotalPages(res.data.totalPages);
-      })
-      .catch((err) => {
-        console.error("Error fetching posts:", err);
-      });
-  }, [page]);
+    if (postsData?.totalPages) {
+      setTotalPages(postsData.totalPages);
+    }
+  }, [postsData, setTotalPages]);
+
+  if (isLoading) return <Loader></Loader>;
 
   return (
-    <>
-      {" "}
-      <section className="max-w-[1400px] mx-auto px-4 py-8">
-        <h2 className="text-3xl text-center my-11 font-bold ">All Posts</h2>
+    <section className="max-w-[1400px] mx-auto px-4 py-8">
+      <h2 className="text-3xl text-center my-11 font-bold ">All Posts</h2>
 
-        <div className="grid md:grid-cols-1 gap-6">
-          {posts.map((post) => (
-            <Link to={`postDetails/${post._id}`}><div
-              key={post._id}
-              className="bg-white p-4 rounded-md shadow-md border border-gray-300"
-            >
+      <div className="grid md:grid-cols-1 gap-6">
+        {postsData.posts.map((post) => (
+          <Link to={`postDetails/${post._id}`} key={post._id}>
+            <div className="bg-white p-4 rounded-md shadow-md border border-gray-300">
               <div className="flex items-center space-x-3 mb-5">
                 <img
                   src={post.authorImage}
@@ -47,7 +51,9 @@ const Posts = ({ page, setTotalPages }) => {
                 <span className=" bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium">
                   #{post.tag}
                 </span>
-                <span className="ml-2 mt-1 font-semibold">{new Date(post.postTime).toLocaleDateString()}</span>
+                <span className="ml-2 mt-1 font-semibold">
+                  {new Date(post.postTime).toLocaleDateString()}
+                </span>
               </div>
 
               <div className="flex justify-between text-sm font-medium text-gray-700 mt-5">
@@ -55,15 +61,15 @@ const Posts = ({ page, setTotalPages }) => {
                   <FaComment /> {post.comments ?? 0} Comments
                 </span>
                 <span className="flex items-center gap-1">
-                  <FaThumbsUp /> {post.upvote - post.downVote} Votes
+                  <FaThumbsUp /> {(post.upvote ?? 0) - (post.downVote ?? 0)}{" "}
+                  Votes
                 </span>
               </div>
-            </div></Link>
-          ))}
-        </div>
-      </section>
-      
-    </>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 };
 
