@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import Tags from "../../components/Tags/Tags"
 import Posts from "../../components/Posts/Posts"
-import Announcement from "../../components/Announcement/Announcement"
 import Pagination from "../../shared/Pagination/Pagination"
+import AllAnouncements from "../AllAnouncements/AllAnouncements";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -32,8 +32,8 @@ const Home = () => {
   return (
     <div>
       <Tags activeTag={activeTag} setActiveTag={handleTagChange} />
+      <AllAnouncements></AllAnouncements>
       <Posts page={page} activeTag={activeTag} setTotalPages={setTotalPages} />
-      <Announcement />
       <Pagination page={page} totalPages={totalPages} setPage={setPage} />
     </div>
   );
