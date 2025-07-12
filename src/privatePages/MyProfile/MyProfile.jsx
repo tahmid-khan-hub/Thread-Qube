@@ -88,7 +88,7 @@ const MyProfile = () => {
                 <div className="flex justify-between items-center mt-3 text-sm text-gray-500">
                   <span className="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium"># {post.tag}</span>
                   <span className="font-semibold">
-                    Votes: {post.upvote + post.downVote} |{" "}
+                    Votes: {(post.upvote ?? 0) + (post.downVote ?? 0)} |{" "}
                     {new Date(post.postTime).toLocaleDateString()}
                   </span>
                 </div>
