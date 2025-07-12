@@ -16,7 +16,7 @@ const AllAnouncements = () => {
   if (isLoading) return <Loader></Loader>;
 
   return (
-    <div className="max-w-[1400px] mx-auto px-4 py-8">
+    <div className="max-w-[1400px] mx-auto px-4 py-8 mt-12">
       <h2 className="text-3xl font-bold mb-6 text-center">
         Announcements
       </h2>

@@ -15,9 +15,9 @@ const Tags = ({ activeTag, setActiveTag }) => {
   ];
 
   return (
-    <section className="max-w-[1400px] mx-auto px-4 mt-8">
-      <h2 className="text-3xl font-bold mb-4">Browse by Tags</h2>
-      <div className="flex flex-wrap gap-3">
+    <section className="max-w-[1400px] mx-auto px-4 mt-12">
+      <h2 className="text-3xl text-center font-bold mb-4">Browse by Tags</h2>
+      <div className="flex justify-center items-center flex-wrap gap-3">
         {tags.map((tag) => (
           <button
             key={tag}
