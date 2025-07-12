@@ -13,11 +13,11 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
-      <li>
-        <NavLink>Membership</NavLink>
-      </li>
+      {user && <li>
+        <NavLink to="membership">Membership</NavLink>
+      </li>}
     </>
   );
   return (

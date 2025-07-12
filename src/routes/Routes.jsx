@@ -14,6 +14,7 @@ import AdminProfile from "../AdminPages/AdminProfile/AdminProfile";
 import ManageUsers from "../AdminPages/ManageUsers/ManageUsers";
 import Announcement from "../AdminPages/Announcement/Announcement";
 import PostDetails from "../pages/PostDetails/PostDetails";
+import MembershipCheckout from "../privatePages/MembershipCheckout/MembershipCheckout";
 
 const Routes = createBrowserRouter([
   {
@@ -35,6 +36,12 @@ const Routes = createBrowserRouter([
         {
           path: "postDetails/:id",
           element: <PostDetails></PostDetails>,
+        },
+        {
+          path: "membership",
+          element: <PrivateRoute>
+            <MembershipCheckout></MembershipCheckout>
+          </PrivateRoute>
         }
     ]
   },
