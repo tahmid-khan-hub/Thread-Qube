@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   FaThumbsUp,
   FaRegComments,
@@ -7,20 +7,24 @@ import {
 } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
+import Loader from "../Loader/Loader";
 
 const UserDashboardHome = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [stats, setStats] = useState({});
 
-  useEffect(() => {
-    if (user?.email) {
-      axiosSecure
-        .get(`http://localhost:3000/dashboard-stats?email=${user.email}`)
-        .then((res) => setStats(res.data));
-    }
-  }, [axiosSecure, user]);
+  const { data: stats = {}, isLoading } = useQuery({
+    queryKey: ["dashboardStats", user?.email],
+    enabled: !!user?.email,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`http://localhost:3000/dashboard-stats?email=${user.email}`);
+      return res.data;
+    },
+  });
+
+  if (isLoading) return <Loader></Loader>
 
   return (
     <div className="max-w-6xl mx-auto mt-10 px-4 min-h-screen">
@@ -59,12 +63,13 @@ const UserDashboardHome = () => {
           <p>Member Since</p>
         </div>
       </div>
+
       <p className="text-center text-gray-500 mt-6 mb-4 text-lg">
-          Want to manage your content or update your personal information? Use
-          the options below to view your profile or explore your posts.
-        </p>
+        Want to manage your content or update your personal information? Use
+        the options below to view your profile or explore your posts.
+      </p>
+
       <div className="mt-10 flex justify-center gap-6">
-        
         <Link to="/dashboard/dashboard/myProfile">
           <a className="bg-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-orange-600 transition">
             My Profile

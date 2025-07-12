@@ -57,10 +57,14 @@ const Routes = createBrowserRouter([
 
       // user
       {
-        path: "dashboard/dashboardHome",
+        index: true,
         element: <PrivateRoute>
           <UserDashboardHome></UserDashboardHome>
         </PrivateRoute>
+      },
+      {
+        path: "dashboardHome",
+        element: <PrivateRoute><UserDashboardHome /></PrivateRoute>
       },
       {
         path: "dashboard/addPost",

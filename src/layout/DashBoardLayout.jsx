@@ -109,7 +109,7 @@ const DashBoardLayout = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="dashboard/dashboardHome">
+                <NavLink to="/dashboard/dashboardHome">
                   <AiOutlineHome className="inline-block mr-2" >
                   </AiOutlineHome>
                   DashBoard Home
