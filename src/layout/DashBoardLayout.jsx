@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router";
 import brand from "../assets/logo.png";
 import useUserRole from "../hooks/useUserRole";
 import Loader from "../pages/Loader/Loader";
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome, AiOutlineHome } from "react-icons/ai";
 import {
   FaUserCircle,
   FaRegNewspaper,
@@ -106,6 +106,13 @@ const DashBoardLayout = () => {
                 <NavLink to="/">
                   <AiFillHome className="inline-block mr-2" />
                   Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="dashboard/dashboardHome">
+                  <AiOutlineHome className="inline-block mr-2" >
+                  </AiOutlineHome>
+                  DashBoard Home
                 </NavLink>
               </li>
               <li>

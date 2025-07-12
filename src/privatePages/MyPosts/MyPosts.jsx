@@ -50,7 +50,7 @@ const MyPosts = () => {
     }
   };
 
-  if (isLoading) <Loader></Loader>;
+  if (isLoading) return <Loader></Loader>;
 
   return (
     <div className="max-w-7xl mx-auto p-4 mt-10">
@@ -78,7 +78,7 @@ const MyPosts = () => {
                   <tr key={post._id} className="">
                     <td>{index + 1}</td>
                     <td>{post.title}</td>
-                    <td>{(post.upVote || 0) + (post.downVote || 0)}</td>
+                    <td>{(post.upvote || 0) + (post.downVote || 0)}</td>
                     <td>
                       <button className="btn btn-sm border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white">
                         Comment

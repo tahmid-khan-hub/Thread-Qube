@@ -15,6 +15,7 @@ import ManageUsers from "../AdminPages/ManageUsers/ManageUsers";
 import Announcement from "../AdminPages/Announcement/Announcement";
 import PostDetails from "../pages/PostDetails/PostDetails";
 import MembershipCheckout from "../privatePages/MembershipCheckout/MembershipCheckout";
+import UserDashboardHome from "../pages/UserDashboardHome/UserDashboardHome";
 
 const Routes = createBrowserRouter([
   {
@@ -55,6 +56,12 @@ const Routes = createBrowserRouter([
     children:[
 
       // user
+      {
+        path: "dashboard/dashboardHome",
+        element: <PrivateRoute>
+          <UserDashboardHome></UserDashboardHome>
+        </PrivateRoute>
+      },
       {
         path: "dashboard/addPost",
         element: <PrivateRoute>

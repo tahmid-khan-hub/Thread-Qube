@@ -86,10 +86,10 @@ const MyProfile = () => {
                   {post.description.slice(0, 100)}...
                 </p>
                 <div className="flex justify-between items-center mt-3 text-sm text-gray-500">
-                  <span className="font-semibold"># {post.tag}</span>
+                  <span className="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium"># {post.tag}</span>
                   <span className="font-semibold">
-                    Votes: {post.upVote + post.downVote} |{" "}
-                    {new Date(post.createdAt).toLocaleDateString()}
+                    Votes: {post.upvote + post.downVote} |{" "}
+                    {new Date(post.postTime).toLocaleDateString()}
                   </span>
                 </div>
               </div>
