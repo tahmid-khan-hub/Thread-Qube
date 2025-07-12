@@ -4,10 +4,12 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../pages/Loader/Loader";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const MyPosts = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const {
     data: myPosts = [],
@@ -80,7 +82,10 @@ const MyPosts = () => {
                     <td>{post.title}</td>
                     <td>{(post.upvote || 0) + (post.downVote || 0)}</td>
                     <td>
-                      <button className="btn btn-sm border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white">
+                      <button
+                        onClick={() => navigate(`/comments/${post._id}`)}
+                        className="btn btn-sm border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white"
+                      >
                         Comment
                       </button>
                     </td>

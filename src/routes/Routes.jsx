@@ -16,6 +16,7 @@ import Announcement from "../AdminPages/Announcement/Announcement";
 import PostDetails from "../pages/PostDetails/PostDetails";
 import MembershipCheckout from "../privatePages/MembershipCheckout/MembershipCheckout";
 import UserDashboardHome from "../pages/UserDashboardHome/UserDashboardHome";
+import CommentsPage from "../privatePages/CommentsPage/CommentsPage";
 
 const Routes = createBrowserRouter([
   {
@@ -43,7 +44,13 @@ const Routes = createBrowserRouter([
           element: <PrivateRoute>
             <MembershipCheckout></MembershipCheckout>
           </PrivateRoute>
-        }
+        },
+        {
+          path: "/comments/:postId",
+          element: <PrivateRoute>
+            <CommentsPage />
+            </PrivateRoute>
+        },
     ]
   },
 
