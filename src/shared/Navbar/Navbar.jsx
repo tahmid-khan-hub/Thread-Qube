@@ -2,6 +2,7 @@ import React from "react";
 import brand from "../../assets/logo.png";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import AnnouncementBell from "../../components/AnnoncementBell/AnnouncementBell";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -36,6 +37,7 @@ const Navbar = () => {
 
         {/* Right - Login and Dropdown for small screen */}
         <div className="navbar-end">
+          <AnnouncementBell></AnnouncementBell>
           {user ? (
             <div className="dropdown dropdown-end">
               <div
