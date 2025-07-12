@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { FaThumbsUp, FaComment } from "react-icons/fa";
@@ -9,12 +9,16 @@ const Posts = ({ page, activeTag, setTotalPages }) => {
   const axiosSecure = useAxiosSecure();
   const limit = 5;
 
+  // 1. Add sortBy state
+  const [sortBy, setSortBy] = useState("newest");
+
+  // 2. Fetch posts with sortBy param
   const { data: postsData, isLoading } = useQuery({
-    queryKey: ["posts", page, activeTag],
+    queryKey: ["posts", page, activeTag, sortBy],
     queryFn: async () => {
       const tagQuery = activeTag ? `&tag=${activeTag}` : "";
       const res = await axiosSecure.get(
-        `http://localhost:3000/Allposts?page=${page}&limit=${limit}${tagQuery}`
+        `http://localhost:3000/Allposts?page=${page}&limit=${limit}${tagQuery}&sort=${sortBy}`
       );
       return res.data;
     },
@@ -27,14 +31,25 @@ const Posts = ({ page, activeTag, setTotalPages }) => {
     }
   }, [postsData, setTotalPages]);
 
-  if (isLoading) return <Loader></Loader>;
+  if (isLoading) return <Loader />;
+
+  const posts = postsData?.posts ?? [];
 
   return (
     <section className="max-w-[1400px] mx-auto px-4 py-8">
-      <h2 className="text-3xl text-center my-11 font-bold ">All Posts</h2>
+      <h2 className="text-3xl text-center mt-11 mb-7 font-bold">All Posts</h2>
+
+      <div className="flex justify-end mb-11">
+        <button
+          onClick={() => setSortBy(sortBy === "newest" ? "popularity" : "newest")}
+          className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition"
+        >
+          {sortBy === "newest" ? "Sort by Popularity" : "Sort by Newest"}
+        </button>
+      </div>
 
       <div className="grid md:grid-cols-1 gap-6">
-        {postsData.posts.map((post) => (
+        {posts.map((post) => (
           <Link to={`postDetails/${post._id}`} key={post._id}>
             <div className="bg-white p-4 rounded-md shadow-md border border-gray-300">
               <div className="flex items-center space-x-3 mb-5">
@@ -48,7 +63,7 @@ const Posts = ({ page, activeTag, setTotalPages }) => {
               </div>
 
               <div className="flex flex-wrap gap-2 text-sm text-gray-600 mb-2">
-                <span className=" bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium">
+                <span className="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium">
                   #{post.tag}
                 </span>
                 <span className="ml-2 mt-1 font-semibold">
@@ -61,8 +76,7 @@ const Posts = ({ page, activeTag, setTotalPages }) => {
                   <FaComment /> {post.comments ?? 0} Comments
                 </span>
                 <span className="flex items-center gap-1">
-                  <FaThumbsUp /> {(post.upvote ?? 0) - (post.downVote ?? 0)}{" "}
-                  Votes
+                  <FaThumbsUp /> {(post.upvote ?? 0) - (post.downVote ?? 0)} Votes
                 </span>
               </div>
             </div>

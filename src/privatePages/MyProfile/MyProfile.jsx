@@ -36,8 +36,8 @@ const MyProfile = () => {
 
   const badgeImage =
     UserProfile.badge === "gold"
-      ? "https://cdn-icons-png.flaticon.com/512/2583/2583343.png"
-      : "https://cdn-icons-png.flaticon.com/512/2583/2583411.png";
+      ? "https://cdn-icons-png.flaticon.com/512/2583/2583441.png"
+      : "https://cdn-icons-png.flaticon.com/512/2583/2583441.png";
 
   if (postsLoading || userLoading) return <Loader></Loader>;
 
