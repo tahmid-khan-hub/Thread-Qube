@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../pages/Loader/Loader";
 import {PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer} from "recharts";
+import AdminTagManager from "../AdminTagManager/AdminTagManager";
 
 const COLORS = ["#FF8042", "#00C49F", "#FFBB28"];
 
@@ -87,6 +88,8 @@ const AdminProfile = () => {
           </PieChart>
         </ResponsiveContainer>
       </div>
+
+      <AdminTagManager></AdminTagManager>
     </div>
   );
 };

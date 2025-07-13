@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 const AddPost = () => {
   const { user } = useAuth();
@@ -19,22 +20,19 @@ const AddPost = () => {
     formState: { errors },
   } = useForm();
 
-  const tagOptions = [
-    { value: "education", label: "Education" },
-    { value: "travel", label: "Travel" },
-    { value: "tech", label: "Technology" },
-    { value: "persondev", label: "Personal-development" },
-    { value: "book", label: "Books" },
-    { value: "game", label: "Gaming" },
-    { value: "music", label: "Music" },
-    { value: "career", label: "Career" },
-    { value: "health", label: "Health" },
-    { value: "sports", label: "Sports" },
-  ];
+  const { data: tagOptions = [] } = useQuery({
+    queryKey: ["tags"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("http://localhost:3000/tags");
+      return res.data;
+    },
+  });
 
   useEffect(() => {
     const fetchUserPosts = async () => {
-      const res = await axiosSecure.get(`http://localhost:3000/Allposts/user?email=${user?.email}`);
+      const res = await axiosSecure.get(
+        `http://localhost:3000/Allposts/user?email=${user?.email}`
+      );
       setPostCount(res.data.length);
     };
     if (user?.email) fetchUserPosts();
@@ -54,7 +52,10 @@ const AddPost = () => {
       postTime: new Date(),
     };
 
-    const res = await axiosSecure.post("http://localhost:3000/Allposts", newPost);
+    const res = await axiosSecure.post(
+      "http://localhost:3000/Allposts",
+      newPost
+    );
     if (res.data.insertedId) {
       Swal.fire({
         icon: "success",
@@ -86,7 +87,9 @@ const AddPost = () => {
   return (
     <div className="min-h-screen">
       <div className="w-[96%] md:max-w-xl mx-auto mt-16 mb-12 p-4 border rounded shadow bg-gray-50">
-        <h2 className="text-3xl font-bold mb-4 text-black text-center">Add New Post</h2>
+        <h2 className="text-3xl font-bold mb-4 text-black text-center">
+          Add New Post
+        </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
           {/* Read-only fields */}
           <input
@@ -133,16 +136,13 @@ const AddPost = () => {
 
           {/* Tag dropdown */}
           <select
-            {...register("tag", { required: "Please select a tag" })}
-            className="select select-bordered w-full bg-gray-200 text-black"
-            defaultValue=""
+            {...register("tag")}
+            className="select select-bordered w-full"
           >
-            <option value="" disabled>
-              Select a Tag
-            </option>
+            <option value="">Select Tag</option>
             {tagOptions.map((tag) => (
-              <option className="" key={tag.value} value={tag.value}>
-                {tag.label}
+              <option key={tag._id} value={tag.name}>
+                {tag.name}
               </option>
             ))}
           </select>
@@ -150,7 +150,10 @@ const AddPost = () => {
             <p className="text-red-500 text-sm">{errors.tag.message}</p>
           )}
 
-          <button type="submit" className="w-full mt-8 btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white">
+          <button
+            type="submit"
+            className="w-full mt-8 btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white"
+          >
             Add Post
           </button>
         </form>
