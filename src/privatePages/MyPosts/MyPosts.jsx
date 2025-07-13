@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "../../pages/Loader/Loader";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { FaRegComment } from "react-icons/fa";
 
 const MyPosts = () => {
   const axiosSecure = useAxiosSecure();
@@ -82,20 +84,10 @@ const MyPosts = () => {
                     <td>{post.title}</td>
                     <td>{(post.upvote || 0) + (post.downVote || 0)}</td>
                     <td>
-                      <button
-                        onClick={() => navigate(`/comments/${post._id}`)}
-                        className="btn btn-sm border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white"
-                      >
-                        Comment
-                      </button>
+                      <FaRegComment size={25} onClick={() => navigate(`/comments/${post._id}`)} className="text-orange-500 ml-3"></FaRegComment>
                     </td>
                     <td>
-                      <button
-                        onClick={() => handleDelete(post._id)}
-                        className="btn btn-sm bg-red-500 text-white hover:bg-red-600"
-                      >
-                        Delete
-                      </button>
+                      <RiDeleteBin5Line size={25} className="text-red-500 ml-1" onClick={() => handleDelete(post._id)}></RiDeleteBin5Line>
                     </td>
                   </tr>
                 ))}
