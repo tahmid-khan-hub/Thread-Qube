@@ -42,7 +42,7 @@ const Reports = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="max-w-6xl mx-auto p-6 min-h-screen">
+    <div className="max-w-6xl mx-auto p-6 min-h-screen my-12">
       <h2 className="text-3xl font-bold text-center mb-8">Reported Comments</h2>
 
       {reports.length === 0 ? (

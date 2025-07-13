@@ -8,11 +8,8 @@ import Loader from "../../pages/Loader/Loader";
 const Posts = ({ page, activeTag, setTotalPages }) => {
   const axiosSecure = useAxiosSecure();
   const limit = 5;
-
-  // 1. Add sortBy state
   const [sortBy, setSortBy] = useState("newest");
 
-  // 2. Fetch posts with sortBy param
   const { data: postsData, isLoading } = useQuery({
     queryKey: ["posts", page, activeTag, sortBy],
     queryFn: async () => {
@@ -73,10 +70,11 @@ const Posts = ({ page, activeTag, setTotalPages }) => {
 
               <div className="flex justify-between text-sm font-medium text-gray-700 mt-5">
                 <span className="flex items-center gap-1">
-                  <FaComment /> {post.comments ?? 0} Comments
+                  <FaComment /> {post.commentsCount ?? 0} Comments
                 </span>
                 <span className="flex items-center gap-1">
-                  <FaThumbsUp /> {(post.upvote ?? 0) - (post.downVote ?? 0)} Votes
+                  <FaThumbsUp />
+                  {(post.upvote ?? 0) - (post.downVote ?? 0)} Votes
                 </span>
               </div>
             </div>
