@@ -19,6 +19,7 @@ import UserDashboardHome from "../pages/UserDashboardHome/UserDashboardHome";
 import CommentsPage from "../privatePages/CommentsPage/CommentsPage";
 import Reports from "../AdminPages/Reports/Reports";
 import DashBoardRedirect from "../layout/DashBoardRedirect";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const Routes = createBrowserRouter([
   {
@@ -128,6 +129,10 @@ const Routes = createBrowserRouter([
         </AdminRoute>
       }
     ]
+  },
+  {
+    path: "*",
+    element: <ErrorPage></ErrorPage>
   }
 ]);
 
