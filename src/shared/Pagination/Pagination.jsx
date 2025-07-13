@@ -9,7 +9,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-2 mt-6">
+    <div className="flex flex-wrap justify-center gap-2 mt-6 mb-12">
       {/* Previous Button */}
       <button
         className="w-10 h-10 rounded border text-sm font-medium disabled:opacity-50 hover:bg-gray-200"
