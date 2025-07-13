@@ -22,8 +22,8 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className=" bg-orange-100 ">
-      <div className="navbar max-w-[1400px] mx-auto px-3">
+    <div className=" bg-orange-100 sticky top-0 z-50">
+      <div className="navbar max-w-[1400px] mx-auto px-3 ">
         {/* Left - Brand */}
         <div className="navbar-start">
           <img className="w-8 mr-2" src={brand} alt="ThreadQube Logo" />
