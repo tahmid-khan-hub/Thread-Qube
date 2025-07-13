@@ -17,6 +17,7 @@ import PostDetails from "../pages/PostDetails/PostDetails";
 import MembershipCheckout from "../privatePages/MembershipCheckout/MembershipCheckout";
 import UserDashboardHome from "../pages/UserDashboardHome/UserDashboardHome";
 import CommentsPage from "../privatePages/CommentsPage/CommentsPage";
+import Reports from "../AdminPages/Reports/Reports";
 
 const Routes = createBrowserRouter([
   {
@@ -109,6 +110,12 @@ const Routes = createBrowserRouter([
         path: "dashboard/announcements",
         element: <AdminRoute>
           <Announcement></Announcement>
+        </AdminRoute>
+      },
+      {
+        path: "dashboard/reportedActivities",
+        element: <AdminRoute>
+          <Reports></Reports>
         </AdminRoute>
       }
     ]
