@@ -18,6 +18,7 @@ import MembershipCheckout from "../privatePages/MembershipCheckout/MembershipChe
 import UserDashboardHome from "../pages/UserDashboardHome/UserDashboardHome";
 import CommentsPage from "../privatePages/CommentsPage/CommentsPage";
 import Reports from "../AdminPages/Reports/Reports";
+import DashBoardRedirect from "../layout/DashBoardRedirect";
 
 const Routes = createBrowserRouter([
   {
@@ -67,12 +68,14 @@ const Routes = createBrowserRouter([
       {
         index: true,
         element: <PrivateRoute>
-          <UserDashboardHome></UserDashboardHome>
+          <DashBoardRedirect></DashBoardRedirect>
         </PrivateRoute>
       },
       {
         path: "dashboardHome",
-        element: <PrivateRoute><UserDashboardHome /></PrivateRoute>
+        element: <PrivateRoute>
+          <UserDashboardHome />
+          </PrivateRoute>
       },
       {
         path: "dashboard/addPost",
@@ -94,6 +97,12 @@ const Routes = createBrowserRouter([
       },
 
       // admin routes
+      {
+        path: "adminProfile",
+        element: <AdminRoute>
+          <AdminProfile></AdminProfile>
+        </AdminRoute>
+      },
       {
         path: "dashboard/adminProfile",
         element: <AdminRoute>
