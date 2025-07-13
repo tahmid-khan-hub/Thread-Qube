@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import Loader from "../../pages/Loader/Loader";
+import Pagination from "../../shared/Pagination/Pagination";
 
 const Reports = () => {
   const axiosSecure = useAxiosSecure();
+  const [page, setPage] = useState(1);
+  const limit = 10;
 
-  const { data: reports = [], isLoading, refetch } = useQuery({
-    queryKey: ["adminReports"],
+  const {
+    data = {},
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["adminReports", page],
     queryFn: async () => {
-      const res = await axiosSecure.get("/reports");
+      const res = await axiosSecure.get(`/reports?page=${page}&limit=${limit}`);
       return res.data;
     },
+    keepPreviousData: true,
   });
+
+  const reports = data.reports || [];
+  const totalReports = data.totalReports || 0;
+  const totalPages = data.totalPages || 1;
 
   const handleDeleteComment = async (commentId) => {
     const confirm = await Swal.fire({
@@ -48,45 +60,55 @@ const Reports = () => {
       {reports.length === 0 ? (
         <p className="text-center text-gray-500">No reports found.</p>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="table w-full border rounded shadow">
-            <thead className="bg-orange-100 text-orange-800">
-              <tr>
-                <th>#</th>
-                <th>Comment</th>
-                <th>User Email</th>
-                <th>Feedback</th>
-                <th>Reported At</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reports.map((report, index) => (
-                <tr key={report._id}>
-                  <td>{index + 1}</td>
-                  <td>{report.commentText || "N/A"}</td>
-                  <td>{report.userEmail}</td>
-                  <td>{report.feedback}</td>
-                  <td>{new Date(report.reportedAt).toLocaleString()}</td>
-                  <td className="flex gap-2">
-                    <button
-                      onClick={() => handleDeleteComment(report.commentId)}
-                      className="btn btn-xs bg-red-600 text-white"
-                    >
-                      Delete Comment
-                    </button>
-                    <button
-                      onClick={() => handleDismissReport(report._id)}
-                      className="btn btn-xs bg-gray-500 text-white"
-                    >
-                      Dismiss
-                    </button>
-                  </td>
+        <>
+          <div className="overflow-x-auto">
+            <table className="table w-full border rounded shadow">
+              <thead className="bg-orange-100 text-orange-800">
+                <tr>
+                  <th>#</th>
+                  <th>Comment</th>
+                  <th>User Email</th>
+                  <th>Feedback</th>
+                  <th>Reported At</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {reports.map((report, index) => (
+                  <tr key={report._id}>
+                    <td>{(page - 1) * limit + index + 1}</td>
+                    <td>{report.commentText || "N/A"}</td>
+                    <td>{report.userEmail}</td>
+                    <td>{report.feedback}</td>
+                    <td>{new Date(report.reportedAt).toLocaleString()}</td>
+                    <td className="flex gap-2 ">
+                      <button
+                        onClick={() => handleDeleteComment(report.commentId)}
+                        className="btn btn-xs bg-red-600 text-white"
+                      >
+                        Delete Comment
+                      </button>
+                      <button
+                        onClick={() => handleDismissReport(report._id)}
+                        className="btn btn-xs bg-gray-500 text-white"
+                      >
+                        Dismiss
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination info and controls */}
+          <div className="mt-4 text-sm text-center text-gray-600">
+            Showing {(page - 1) * limit + 1} –{" "}
+            {Math.min(page * limit, totalReports)} of {totalReports} reports
+          </div>
+
+          <Pagination page={page} totalPages={totalPages} setPage={setPage} />
+        </>
       )}
     </div>
   );

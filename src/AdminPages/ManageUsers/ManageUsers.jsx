@@ -3,6 +3,7 @@ import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Pagination from "../../shared/Pagination/Pagination";
+import Loader from "../../pages/Loader/Loader";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -51,7 +52,7 @@ const ManageUsers = () => {
     }
   };
 
-  if (isLoading) return <div className="text-center mt-10">Loading users...</div>;
+  if (isLoading) return <Loader></Loader>;
 
   return (
     <div className="p-6">
