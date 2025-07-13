@@ -3,8 +3,8 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../pages/Loader/Loader";
-// import bronze from "../../assets/bronze.png"
-// import gold from "../../assets/gold.jpg"
+import bronze from "../../assets/bronze.png"
+import gold from "../../assets/gold.jpg"
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -36,8 +36,8 @@ const MyProfile = () => {
 
   const badgeImage =
     UserProfile.badge === "gold"
-      ? "https://cdn-icons-png.flaticon.com/512/2583/2583441.png"
-      : "https://cdn-icons-png.flaticon.com/512/2583/2583441.png";
+      ? gold
+      : bronze;
 
   if (postsLoading || userLoading) return <Loader></Loader>;
 
@@ -57,7 +57,7 @@ const MyProfile = () => {
         <div className="flex justify-center items-center gap-3 mt-2 text-sm text-gray-600 flex-wrap">
           <span>{user?.email}</span>
           <span className="flex items-center gap-1">
-            <img src={badgeImage} alt="Badge" className="w-5 h-5" />
+            <img src={badgeImage} alt="Badge" className="w-5 h-5 object-cover" />
             <span className="capitalize text-orange-600 font-medium">
               {UserProfile.badge} badge
             </span>

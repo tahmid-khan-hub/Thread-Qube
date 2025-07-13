@@ -44,7 +44,7 @@ const Login = () => {
           <form onSubmit={handleSubmit(onsubmit)} className="fieldset">
             {/* email */}
             <label className="label">Email</label>
-            <input type="email" className="input" placeholder="Enter your email" {...register("email", {
+            <input type="email" className="input" required placeholder="Enter your email" {...register("email", {
                   required: "Email is required",
                   pattern: {
                     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -56,7 +56,7 @@ const Login = () => {
             )}
             {/* password */}
             <label className="label">Password</label>
-            <input type="password" className="input" placeholder="Enter your password" {...register("password", {
+            <input type="password" required className="input" placeholder="Enter your password" {...register("password", {
                   required: "Password is required",
                   minLength: {
                     value: 6,

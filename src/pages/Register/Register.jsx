@@ -74,6 +74,7 @@ const Register = () => {
               type="text"
               className="input"
               placeholder="Enter your name"
+              required
               {...register("name", { required: "Name is required" })}
             />
             {errors.name && (
@@ -86,17 +87,12 @@ const Register = () => {
               type="text"
               className="input"
               placeholder="Enter your photoURL"
+              required
               {...register("photoURL", {
-                // pattern: {
-                //   value:
-                //     /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg|webp))/i,
-                //   message: "Please enter a valid image URL",
-                // },
+                
               })}
             />
-            {/* {errors.photoURL && (
-              <p className="text-red-500 text-sm mt-1">{errors.photoURL.message}</p>
-            )} */}
+            
 
             {/* Email */}
             <label className="label">Email</label>
@@ -104,6 +100,7 @@ const Register = () => {
               type="email"
               className="input"
               placeholder="Enter your email"
+              required
               {...register("email", {
                 required: "Email is required",
                 pattern: {
@@ -124,6 +121,7 @@ const Register = () => {
               type="password"
               className="input"
               placeholder="Enter your password"
+              required
               {...register("password", {
                 required: "Password is required",
                 minLength: {
