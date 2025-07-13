@@ -23,7 +23,7 @@ const Tags = ({ activeTag, setActiveTag }) => {
             onClick={() => setActiveTag(tag.name)}
             className={`px-4 py-2 rounded-full border text-sm font-medium cursor-pointer
               ${
-                activeTag === tag.name
+                activeTag?.toLowerCase() === tag.name.toLowerCase()
                   ? "bg-orange-500 text-white border-orange-500"
                   : "bg-gray-100 text-gray-800 border-gray-300 hover:bg-orange-100"
               }`}

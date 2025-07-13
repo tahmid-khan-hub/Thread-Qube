@@ -1,24 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Home from "../components/Home/Home";
-import Navbar from "../shared/Navbar/Navbar"
-import Footer from "../shared/Footer/Footer"
-import Banner from "../components/Banner/Banner"
+import Navbar from "../shared/Navbar/Navbar";
+import Footer from "../shared/Footer/Footer";
+import Banner from "../components/Banner/Banner";
 import { Outlet, useLocation } from "react-router";
 
 const HomeLayout = () => {
   const location = useLocation();
-  const home = location.pathname === '/'
+  const isHome = location.pathname === "/";
+
+  const [activeTag, setActiveTag] = useState("");
+
   return (
     <div>
-      <Navbar></Navbar>
-      {
-        home && <Banner></Banner>
-      }
-      
+      <Navbar />
+      {isHome && <Banner setActiveTag={setActiveTag} />} 
       <div className="w-[97%] md:max-w-[1400px] mx-auto">
-        <Outlet></Outlet>
+        <Outlet context={{ activeTag, setActiveTag }} /> 
       </div>
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 };
