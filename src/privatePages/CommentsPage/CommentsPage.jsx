@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Loader from "../../pages/Loader/Loader";
+import Pagination from "../../shared/Pagination/Pagination";
 
 const feedbackOptions = [
   "This comment is offensive",
@@ -18,18 +19,23 @@ const CommentsPage = () => {
 
   const [feedbackMap, setFeedbackMap] = useState({});
   const [reportedMap, setReportedMap] = useState({});
-  const [selectedComment, setSelectedComment] = useState(""); // ✅ For modal content
+  const [modalComment, setModalComment] = useState("");
+  const [page, setPage] = useState(1);
+  const limit = 10;
 
-  // ✅ Fetch comments
-  const { data: comments = [], isLoading } = useQuery({
-    queryKey: ["comments", postId],
+  const { data = {}, isLoading} = useQuery({
+    queryKey: ["comments", postId, page],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/comments/${postId}`);
+      const res = await axiosSecure.get(`/comments/${postId}?page=${page}&limit=${limit}`);
       return res.data;
     },
+    keepPreviousData: true,
   });
 
-  // ✅ Check already reported comments
+  const comments = data.comments || [];
+  const totalPages = data.totalPages || 1;
+  const totalComments = data.totalComments || 0;
+
   useEffect(() => {
     const fetchReportedComments = async () => {
       try {
@@ -69,11 +75,16 @@ const CommentsPage = () => {
     }
   };
 
+  const handleReadMore = (text) => {
+    setModalComment(text);
+    document.getElementById("comment_modal").showModal();
+  };
+
   if (isLoading) return <Loader />;
 
   return (
     <>
-      <div className="max-w-[1400px] mx-auto ">
+      <div className="max-w-[1400px] mx-auto">
         <button
           onClick={() => navigate(-1)}
           className="btn bg-orange-500 text-white mt-5 ml-2"
@@ -104,18 +115,15 @@ const CommentsPage = () => {
               <tbody>
                 {comments.map((comment, idx) => (
                   <tr key={comment._id}>
-                    <td>{idx + 1}</td>
+                    <td>{(page - 1) * limit + idx + 1}</td>
                     <td>{comment.userEmail}</td>
-
                     <td>
                       {comment.commentText.length > 20 ? (
                         <>
                           {comment.commentText.slice(0, 20)}...
                           <button
-                            onClick={() =>
-                              setSelectedComment(comment.commentText)
-                            }
-                            className="text-orange-500 underline ml-1"
+                            onClick={() => handleReadMore(comment.commentText)}
+                            className="text-blue-500 underline ml-1"
                           >
                             Read More
                           </button>
@@ -124,7 +132,6 @@ const CommentsPage = () => {
                         comment.commentText
                       )}
                     </td>
-
                     <td>
                       <select
                         value={feedbackMap[comment._id] || ""}
@@ -142,7 +149,6 @@ const CommentsPage = () => {
                         ))}
                       </select>
                     </td>
-
                     <td>
                       <button
                         className="btn btn-sm bg-red-500 text-white disabled:opacity-50"
@@ -158,26 +164,25 @@ const CommentsPage = () => {
                 ))}
               </tbody>
             </table>
+
+            {/* Pagination */}
+            <div className="mt-4 text-center text-sm text-gray-600">
+              Showing {(page - 1) * limit + 1} –{" "}
+              {Math.min(page * limit, totalComments)} of {totalComments} comments
+            </div>
+             <Pagination page={page} totalPages={totalPages} setPage={setPage} />
           </div>
         )}
       </div>
 
       {/* Modal */}
-      <dialog id="read_more_modal" className="modal" open={!!selectedComment}>
-        <div className="modal-box max-h-[90vh] overflow-y-auto">
+      <dialog id="comment_modal" className="modal">
+        <div className="modal-box max-w-2xl max-h-[90vh] overflow-auto">
           <h3 className="font-bold text-lg mb-4">Full Comment</h3>
-          <p className="text-gray-800 whitespace-pre-wrap break-words">
-            {selectedComment}
-          </p>
-
+          <p className="text-gray-700 whitespace-pre-wrap">{modalComment}</p>
           <div className="modal-action">
             <form method="dialog">
-              <button
-                onClick={() => setSelectedComment("")}
-                className="btn bg-orange-500 text-white"
-              >
-                Close
-              </button>
+              <button className="btn bg-orange-500 text-white">Close</button>
             </form>
           </div>
         </div>
