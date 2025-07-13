@@ -37,7 +37,7 @@ const Announcement = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-24 p-6 border-gray-400 bg-gray-100 rounded shadow">
+    <div className="max-w-6xl mx-auto mt-24 p-6 border-gray-400 bg-gray-100 rounded shadow">
       <h2 className="text-3xl text-black font-bold mb-6 text-center">Post Announcement</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Author Name */}

@@ -43,7 +43,7 @@ const ManageUsers = () => {
     <div className="p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Manage Users</h1>
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
+        <table className="table table-zebra max-w-6xl mx-auto">
           <thead className="bg-orange-100 text-black">
             <tr>
               <th>#</th>

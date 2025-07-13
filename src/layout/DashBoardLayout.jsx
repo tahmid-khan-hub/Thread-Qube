@@ -68,71 +68,90 @@ const DashBoardLayout = () => {
           {role === "admin" ? (
             <>
               {/* Admin links */}
-              <li>
-                <NavLink to="/">
-                  <AiFillHome className="inline-block mr-2" />
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="dashboard/adminProfile">
-                  <FaUserShield className="inline-block mr-2" />
-                  Admin Profile
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="dashboard/manageUsers">
-                  <FaUsersCog className="inline-block mr-2" />
-                  Manage Users
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="dashboard/reportedActivities">
-                  <MdReportProblem className="inline-block mr-2" />
-                  Reported Activities
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="dashboard/announcements">
-                  <MdCampaign className="inline-block mr-2" />
-                  Announcement
-                </NavLink>
-              </li>
+              <NavLink to="/">
+                <li>
+                  <a>
+                    <AiFillHome className="inline-block mr-2" />
+                    Home
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink to="dashboard/adminProfile">
+                <li>
+                  <a>
+                    <FaUserShield className="inline-block mr-2" />
+                    Admin Profile
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink to="dashboard/manageUsers">
+                <li>
+                  <a>
+                    <FaUsersCog className="inline-block mr-2" />
+                    Manage Users
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink to="dashboard/reportedActivities">
+                <li>
+                  <a>
+                    <MdReportProblem className="inline-block mr-2" />
+                    Reported Activities
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink to="dashboard/announcements">
+                <li>
+                  <a>
+                    <MdCampaign className="inline-block mr-2" />
+                    Announcement
+                  </a>
+                </li>
+              </NavLink>
             </>
           ) : (
             <>
               {/* User links */}
-              <li>
-                <NavLink to="/">
-                  <AiFillHome className="inline-block mr-2" />
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/dashboard/dashboardHome">
-                  <AiOutlineHome className="inline-block mr-2" >
-                  </AiOutlineHome>
-                  DashBoard Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="dashboard/myProfile">
-                  <FaUserCircle className="inline-block mr-2" />
-                  My Profile
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="dashboard/addPost">
-                  <MdPostAdd className="inline-block mr-2" />
-                  Add Post
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="dashboard/myPosts">
-                  <FaRegNewspaper className="inline-block mr-2" />
-                  My Posts
-                </NavLink>
-              </li>
+              <NavLink to="/">
+                <li>
+                  <a>
+                    <AiFillHome className="inline-block mr-2" />
+                    Home
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink to="/dashboard/dashboardHome">
+                <li>
+                  <a>
+                    <AiOutlineHome className="inline-block mr-2" />
+                    Dashboard Home
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink to="dashboard/myProfile">
+                <li>
+                  <a>
+                    <FaUserCircle className="inline-block mr-2" />
+                    My Profile
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink to="dashboard/addPost">
+                <li>
+                  <a>
+                    <MdPostAdd className="inline-block mr-2" />
+                    Add Post
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink to="dashboard/myPosts">
+                <li>
+                  <a>
+                    <FaRegNewspaper className="inline-block mr-2" />
+                    My Posts
+                  </a>
+                </li>
+              </NavLink>
             </>
           )}
         </ul>
