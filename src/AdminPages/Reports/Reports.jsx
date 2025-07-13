@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import Loader from "../../pages/Loader/Loader";
 import Pagination from "../../shared/Pagination/Pagination";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { RxCross2 } from "react-icons/rx";
 
 const Reports = () => {
   const axiosSecure = useAxiosSecure();
@@ -77,23 +79,14 @@ const Reports = () => {
                 {reports.map((report, index) => (
                   <tr key={report._id}>
                     <td>{(page - 1) * limit + index + 1}</td>
-                    <td>{report.commentText || "N/A"}</td>
+                    <td>{report.commentText.length > 7 ? report.commentText.slice(0, 7) + "...." : report.commentText}</td>
                     <td>{report.userEmail}</td>
                     <td>{report.feedback}</td>
                     <td>{new Date(report.reportedAt).toLocaleString()}</td>
                     <td className="flex gap-2 ">
-                      <button
-                        onClick={() => handleDeleteComment(report.commentId)}
-                        className="btn btn-xs bg-red-600 text-white"
-                      >
-                        Delete Comment
-                      </button>
-                      <button
-                        onClick={() => handleDismissReport(report._id)}
-                        className="btn btn-xs bg-gray-500 text-white"
-                      >
-                        Dismiss
-                      </button>
+                      <RiDeleteBin5Line size={25} className="text-red-500 ml-1" onClick={() => handleDeleteComment(report.commentId)}></RiDeleteBin5Line>
+                      
+                      <RxCross2 size={25} onClick={() => handleDismissReport(report._id)} className="ml-3"></RxCross2>
                     </td>
                   </tr>
                 ))}
