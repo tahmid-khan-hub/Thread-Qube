@@ -3,6 +3,7 @@ import brand from "../../assets/logo.png";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import AnnouncementBell from "../../components/AnnoncementBell/AnnouncementBell";
+import './Navbar.css'
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -13,12 +14,14 @@ const Navbar = () => {
   };
   const links = (
     <>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      {user && <li>
-        <NavLink to="membership">Membership</NavLink>
-      </li>}
+      
+      <NavLink to="/">
+        <li><a>Home</a></li>
+      </NavLink>
+      {user && <NavLink to="membership">
+        <li><a>Membership</a></li>
+      </NavLink>}
+      
     </>
   );
   return (

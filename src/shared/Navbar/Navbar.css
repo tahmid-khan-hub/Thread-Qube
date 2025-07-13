@@ -1,0 +1,15 @@
+a.active {
+  background: linear-gradient(to right, #ef7706, #fa9a1b); 
+  color: white;
+  font-weight: 500;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 13px;
+  box-shadow: 0 1px 6px rgba(240, 147, 26, 0.25);
+  transition: all 0.2s ease;
+}
+
+a.active:hover {
+  transform: scale(1.03);
+  box-shadow: 0 3px 10px rgba(240, 147, 26, 0.25);
+}
