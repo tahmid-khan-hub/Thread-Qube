@@ -17,7 +17,7 @@ const MembershipCheckout = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `http://localhost:3000/users?email=${user.email}`
+        `/users?email=${user.email}`
       );
       return res.data;
     },

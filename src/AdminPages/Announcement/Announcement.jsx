@@ -25,7 +25,7 @@ const Announcement = () => {
     };
 
     try {
-      const res = await axiosSecure.post("http://localhost:3000/announcements", announcement);
+      const res = await axiosSecure.post("/announcements", announcement);
       if (res.data.insertedId) {
         Swal.fire("Success!", "Announcement posted!", "success");
         reset();

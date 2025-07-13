@@ -19,7 +19,7 @@ const UserDashboardHome = () => {
     queryKey: ["dashboardStats", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(`http://localhost:3000/dashboard-stats?email=${user.email}`);
+      const res = await axiosSecure.get(`/dashboard-stats?email=${user.email}`);
       return res.data;
     },
   });

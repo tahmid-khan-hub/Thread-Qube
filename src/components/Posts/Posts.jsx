@@ -15,7 +15,7 @@ const Posts = ({ page, activeTag, setTotalPages }) => {
     queryFn: async () => {
       const tagQuery = activeTag ? `&tag=${activeTag}` : "";
       const res = await axiosSecure.get(
-        `http://localhost:3000/Allposts?page=${page}&limit=${limit}${tagQuery}&sort=${sortBy}`
+        `/Allposts?page=${page}&limit=${limit}${tagQuery}&sort=${sortBy}`
       );
       return res.data;
     },

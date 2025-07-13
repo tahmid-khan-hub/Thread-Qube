@@ -23,7 +23,7 @@ const AddPost = () => {
   const { data: tagOptions = [] } = useQuery({
     queryKey: ["tags"],
     queryFn: async () => {
-      const res = await axiosSecure.get("http://localhost:3000/tags");
+      const res = await axiosSecure.get("/tags");
       return res.data;
     },
   });
@@ -31,7 +31,7 @@ const AddPost = () => {
   useEffect(() => {
     const fetchUserPosts = async () => {
       const res = await axiosSecure.get(
-        `http://localhost:3000/Allposts/user?email=${user?.email}`
+        `/Allposts/user?email=${user?.email}`
       );
       setPostCount(res.data.length);
     };
@@ -53,7 +53,7 @@ const AddPost = () => {
     };
 
     const res = await axiosSecure.post(
-      "http://localhost:3000/Allposts",
+      "/Allposts",
       newPost
     );
     if (res.data.insertedId) {

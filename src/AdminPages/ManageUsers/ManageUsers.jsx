@@ -9,7 +9,7 @@ const ManageUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["AllUsers"],
     queryFn: async () => {
-      const res = await axiosSecure.get("http://localhost:3000/users/all");
+      const res = await axiosSecure.get("/users/all");
       return res.data;
     },
   });
@@ -27,7 +27,7 @@ const ManageUsers = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await axiosSecure.patch(`http://localhost:3000/users/admin/${id}`);
+        const res = await axiosSecure.patch(`/users/admin/${id}`);
         if (res.data.modifiedCount > 0) {
           Swal.fire("Success!", "User is now an admin.", "success");
           refetch();

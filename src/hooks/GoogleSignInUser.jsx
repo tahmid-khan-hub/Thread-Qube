@@ -25,7 +25,7 @@ const GoogleSignInUser = () => {
         createdAt: new Date(),
       };
 
-      await axiosSecure.post("http://localhost:3000/users", userData); 
+      await axiosSecure.post("/users", userData); 
 
       navigate(location.state ? location.state : "/");
       Swal.fire({

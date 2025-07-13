@@ -22,7 +22,7 @@ const MyPosts = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `http://localhost:3000/Allposts/user?email=${user?.email}`
+        `/Allposts/user?email=${user?.email}`
       );
       return res.data;
     },
@@ -42,7 +42,7 @@ const MyPosts = () => {
     if (result.isConfirmed) {
       try {
         const res = await axiosSecure.delete(
-          `http://localhost:3000/Allposts/${id}`
+          `/Allposts/${id}`
         );
         if (res.data.deletedCount > 0) {
           Swal.fire("Deleted!", "Your post has been deleted.", "success");

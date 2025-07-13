@@ -22,7 +22,7 @@ const CommentsPage = () => {
   const { data: comments = [], isLoading } = useQuery({
     queryKey: ["comments", postId],
     queryFn: async () => {
-      const res = await axiosSecure.get(`http://localhost:3000/comments/${postId}`);
+      const res = await axiosSecure.get(`/comments/${postId}`);
       return res.data;
     },
   });
@@ -31,7 +31,7 @@ const CommentsPage = () => {
   useEffect(() => {
     const fetchReportedComments = async () => {
       try {
-        const res = await axiosSecure.get(`http://localhost:3000/reports/${postId}`);
+        const res = await axiosSecure.get(`/reports/${postId}`);
         const reportedIds = res.data; 
         const map = {};
         reportedIds.forEach((id) => (map[id] = true));
@@ -53,7 +53,7 @@ const CommentsPage = () => {
       const feedback = feedbackMap[commentId];
       if (!feedback) return;
 
-      const res = await axiosSecure.post(`http://localhost:3000/reports`, {
+      const res = await axiosSecure.post(`/reports`, {
         postId,
         commentId,
         feedback,

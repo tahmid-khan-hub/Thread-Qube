@@ -17,7 +17,7 @@ const PaymentForm = () => {
 
   useEffect(() => {
     axiosSecure
-      .post("http://localhost:3000/create-payment-intent", {
+      .post("/create-payment-intent", {
         email: user.email,
         amount: 500,
       })
@@ -52,7 +52,7 @@ const PaymentForm = () => {
       setLoading(false);
     } else if (paymentIntent.status === "succeeded") {
       await axiosSecure.patch(
-        `http://localhost:3000/users/badge/${user.email}`,
+        `/users/badge/${user.email}`,
         {
           badge: "gold",
         }

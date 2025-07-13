@@ -10,7 +10,7 @@ const Reports = () => {
   const { data: reports = [], isLoading, refetch } = useQuery({
     queryKey: ["adminReports"],
     queryFn: async () => {
-      const res = await axiosSecure.get("http://localhost:3000/reports");
+      const res = await axiosSecure.get("/reports");
       return res.data;
     },
   });
@@ -26,15 +26,15 @@ const Reports = () => {
     });
 
     if (confirm.isConfirmed) {
-      await axiosSecure.delete(`http://localhost:3000/comments/${commentId}`);
-      await axiosSecure.delete(`http://localhost:3000/reports/byComment/${commentId}`);
+      await axiosSecure.delete(`/comments/${commentId}`);
+      await axiosSecure.delete(`/reports/byComment/${commentId}`);
       Swal.fire("Deleted", "Comment has been removed.", "success");
       refetch();
     }
   };
 
   const handleDismissReport = async (reportId) => {
-    await axiosSecure.delete(`http://localhost:3000/reports/${reportId}`);
+    await axiosSecure.delete(`/reports/${reportId}`);
     Swal.fire("Dismissed", "Report has been removed.", "info");
     refetch();
   };

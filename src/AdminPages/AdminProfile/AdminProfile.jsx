@@ -15,7 +15,7 @@ const AdminProfile = () => {
   const { data: stats = {}, isLoading } = useQuery({
     queryKey: ["adminStats"],
     queryFn: async () => {
-      const res = axiosSecure.get("http://localhost:3000/admin/stats");
+      const res = axiosSecure.get("/admin/stats");
       return (await res).data;
     },
     enabled: !!user?.email,

@@ -26,7 +26,7 @@ const PostDetails = () => {
   const { data: postData, isLoading } = useQuery({
     queryKey: ["post", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`http://localhost:3000/Allposts/${id}`);
+      const res = await axiosSecure.get(`/Allposts/${id}`);
       return res.data;
     },
   });
@@ -35,7 +35,7 @@ const PostDetails = () => {
     if (!user) return Swal.fire("Please log in to upvote");
 
     try {
-      await axiosSecure.patch(`http://localhost:3000/Allposts/${id}/vote`, {
+      await axiosSecure.patch(`/Allposts/${id}/vote`, {
         voteType: "upvote",
       });
       Swal.fire("Upvoted!", "", "success");
@@ -50,7 +50,7 @@ const PostDetails = () => {
     if (!user) return Swal.fire("Please log in to downvote");
 
     try {
-      await axiosSecure.patch(`http://localhost:3000/Allposts/${id}/vote`, {
+      await axiosSecure.patch(`/Allposts/${id}/vote`, {
         voteType: "downvote",
       });
       Swal.fire("Downvoted!", "", "success");

@@ -10,7 +10,7 @@ const AnnouncementBell = () => {
   const { data: announcements = [], isLoading } = useQuery({
     queryKey: ["announcements"],
     queryFn: async () => {
-      const res = await axiosSecure.get("http://localhost:3000/announcements");
+      const res = await axiosSecure.get("/announcements");
       return res.data;
     },
   });

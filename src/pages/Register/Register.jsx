@@ -43,7 +43,7 @@ const Register = () => {
         createdAt: new Date(),
       };
 
-      await axiosSecure.post("http://localhost:3000/users", userInfo);
+      await axiosSecure.post("/users", userInfo);
 
       Swal.fire({
         icon: "success",

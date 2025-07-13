@@ -24,7 +24,7 @@ const GItHubSignInUser = () => {
         createdAt: new Date(),
       };
 
-      await axiosSecure.post("http://localhost:3000/users", userData);
+      await axiosSecure.post("/users", userData);
       Swal.fire({
         position: "top-end",
         icon: "success",

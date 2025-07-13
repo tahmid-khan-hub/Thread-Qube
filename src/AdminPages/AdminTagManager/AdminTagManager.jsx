@@ -10,7 +10,7 @@ const AdminTagManager = () => {
   const { data: tags = [], refetch } = useQuery({
     queryKey: ["tags"],
     queryFn: async () => {
-      const res = await axiosSecure.get("http://localhost:3000/tags");
+      const res = await axiosSecure.get("/tags");
       return res.data;
     },
   });
@@ -20,7 +20,7 @@ const AdminTagManager = () => {
     if (!tagName) return;
 
     try {
-      const res = await axiosSecure.post("http://localhost:3000/tags", {
+      const res = await axiosSecure.post("/tags", {
         name: tagName,
       });
       if (res.data.insertedId) {

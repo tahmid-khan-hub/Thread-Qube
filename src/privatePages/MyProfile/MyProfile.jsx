@@ -15,7 +15,7 @@ const MyProfile = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `http://localhost:3000/users?email=${user.email}`
+        `/users?email=${user.email}`
       );
       return res.data;
     },
@@ -26,7 +26,7 @@ const MyProfile = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `http://localhost:3000/Allposts/user?email=${user.email}`
+        `/Allposts/user?email=${user.email}`
       );
       return res.data.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)

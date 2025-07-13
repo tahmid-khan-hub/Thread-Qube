@@ -8,7 +8,7 @@ const Tags = ({ activeTag, setActiveTag }) => {
   const { data: tags = [] } = useQuery({
     queryKey: ["tags"],
     queryFn: async () => {
-      const res = await axiosSecure.get("http://localhost:3000/tags");
+      const res = await axiosSecure.get("/tags");
       return res.data;
     },
   });

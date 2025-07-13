@@ -16,7 +16,7 @@ const CommentsSection = ({ postId }) => {
     queryKey: ["comments", postId],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `http://localhost:3000/comments?postId=${postId}`
+        `/comments?postId=${postId}`
       );
       return res.data;
     },
@@ -26,7 +26,7 @@ const CommentsSection = ({ postId }) => {
   const addCommentMutation = useMutation({
     mutationFn: async (commentData) => {
       const res = await axiosSecure.post(
-        `http://localhost:3000/comments`,
+        `/comments`,
         commentData
       );
       return res.data;
@@ -34,7 +34,7 @@ const CommentsSection = ({ postId }) => {
     onSuccess: async() => {
       queryClient.invalidateQueries(["comments", postId]);
 
-      await axiosSecure.patch(`http://localhost:3000/Allposts/${postId}/comment`);
+      await axiosSecure.patch(`/Allposts/${postId}/comment`);
 
       Swal.fire({
         icon: "success",
