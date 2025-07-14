@@ -4,9 +4,13 @@ import { Link, NavLink } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import AnnouncementBell from "../../components/AnnoncementBell/AnnouncementBell";
 import './Navbar.css'
+import useUserRole from "../../hooks/useUserRole";
+import Loader from "../../pages/Loader/Loader";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const { role, roleLoading } = useUserRole();
+  if (roleLoading) return <Loader></Loader>;
   const handleLogOut = () => {
     logOut()
       .then((res) => console.log(res))
@@ -18,7 +22,7 @@ const Navbar = () => {
       <NavLink to="/">
         <li><a>Home</a></li>
       </NavLink>
-      {user && <NavLink to="membership">
+      {( user && role === "user") && <NavLink to="membership">
         <li><a>Membership</a></li>
       </NavLink>}
       

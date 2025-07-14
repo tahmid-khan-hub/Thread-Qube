@@ -26,13 +26,15 @@ const MyProfile = () => {
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/Allposts/user?email=${user.email}`
+        `/Allposts/user/recent?email=${user.email}`
       );
       return res.data.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
     },
   });
+
+  console.log(myPosts);
 
   const badgeImage =
     UserProfile.badge === "gold"
