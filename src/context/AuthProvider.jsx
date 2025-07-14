@@ -14,26 +14,32 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
 
   const signIn = (email, password) => {
+    setLoading(true)
     return signInWithEmailAndPassword(auth, email, password);
   }
 
   const signUp = (email, password) => {
+    setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password)
   }
 
   const GoogleSign = () => {
+    setLoading(true)
     return signInWithPopup(auth, googleProvider);
   }
 
   const GitHubSign = () => {
+    setLoading(true)
     return signInWithPopup(auth, githubProvider);
   }
 
   const updateUserProfile = (profile) => {
+    setLoading(true)
     return updateProfile(auth.currentUser, profile);
   };
 
   const logOut = () => {
+    setLoading(true)
     return signOut(auth)
   }
 

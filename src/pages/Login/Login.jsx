@@ -12,7 +12,6 @@ const Login = () => {
     const {signIn} = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
     const [showIcon, setShowIcon] = useState(false);
     useEffect(()=>{
       document.title = "ThreadQube | Login"
@@ -33,7 +32,7 @@ const Login = () => {
                 timer: 1500,
                 showConfirmButton: false,
             });
-            navigate(from, { replace: true });
+            navigate(`${location.state ? location.state : "/"}`);
         }
         catch(err){
             Swal.fire({

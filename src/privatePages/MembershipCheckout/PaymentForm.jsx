@@ -59,7 +59,7 @@ const PaymentForm = () => {
       );
       Swal.fire("Success", "Membership upgraded to Gold!", "success").then(
         () => {
-          navigate("/dashboard/myProfile");
+          navigate("dashboard/dashboard/myProfile");
         }
       );
     }

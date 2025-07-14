@@ -1,14 +1,13 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/UseAxiosSecure";
+import axios from "axios";
 
 const Tags = ({ activeTag, setActiveTag }) => {
-  const axiosSecure = useAxiosSecure();
 
   const { data: tags = [] } = useQuery({
     queryKey: ["tags"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/tags");
+      const res = await axios.get("http://localhost:3000/Alltags");
       return res.data;
     },
   });
