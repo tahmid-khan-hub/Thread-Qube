@@ -20,6 +20,7 @@ import CommentsPage from "../privatePages/CommentsPage/CommentsPage";
 import Reports from "../AdminPages/Reports/Reports";
 import DashBoardRedirect from "../layout/DashBoardRedirect";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Forbidden from "../pages/Forbidden/Forbidden";
 
 const Routes = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const Routes = createBrowserRouter([
           element: <PrivateRoute>
             <CommentsPage />
             </PrivateRoute>
+        },
+        {
+          path: "forbidden",
+          element: <Forbidden></Forbidden>,
         },
     ]
   },
