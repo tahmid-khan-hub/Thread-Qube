@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -8,12 +8,19 @@ import app from "../../firebase/firebase.config";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import GItHubSignInUser from "../../hooks/GItHubSignInUser";
 import GoogleSignInUser from "../../hooks/GoogleSignInUser";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import PageLoading from "../Loader/PageLoading";
 
 const Register = () => {
   const auth = getAuth(app);
   const { signUp, updateUserProfile } = useAuth();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+  const [showIcon, setShowIcon] = useState(false);
+  useEffect(()=>{
+    document.title = "ThreadQube | Register"
+    window.scrollTo(0,0);
+  },[])
 
   const GoogleSignIn = GoogleSignInUser();
   const GitHubSignIn = GItHubSignInUser();
@@ -63,7 +70,7 @@ const Register = () => {
   };
 
   return (
-    <div className="hero min-h-screen">
+    <PageLoading><div className="hero min-h-screen">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-xl border border-gray-400 my-16">
         <div className="card-body">
           <h1 className="text-3xl text-center mb-5 font-bold">Register now!</h1>
@@ -117,19 +124,23 @@ const Register = () => {
 
             {/* Password */}
             <label className="label">Password</label>
-            <input
-              type="password"
-              className="input"
-              placeholder="Enter your password"
-              required
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters",
-                },
-              })}
-            />
+            <div className="relative flex">
+              <input
+                type={showIcon ? "text" : "password"}
+                required
+                className="input"
+                placeholder="Enter your password"
+                {...register("password", {
+                  required: "Password is required",
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
+                    message:
+                      "Password must be at least 8 characters, include uppercase, lowercase, number, and special character",
+                  },
+                })}
+/>
+            <span onClick={()=> setShowIcon(!showIcon)} className="absolute right-7 top-3 cursor-pointer">{showIcon ? <FaEyeSlash size={20} /> : <FaEye size={20} />}</span>
+            </div>
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">
                 {errors.password.message}
@@ -165,7 +176,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-    </div>
+    </div></PageLoading>
   );
 };
 

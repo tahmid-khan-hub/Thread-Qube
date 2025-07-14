@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth"
 import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import GoogleSignInUser from "../../hooks/GoogleSignInUser";
 import GItHubSignInUser from "../../hooks/GItHubSignInUser";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import PageLoading from "../Loader/PageLoading";
 
 const Login = () => {
     const {signIn} = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+    const [showIcon, setShowIcon] = useState(false);
+    useEffect(()=>{
+      document.title = "ThreadQube | Login"
+      window.scrollTo(0,0);
+    },[])
 
     const GoogleSignIn = GoogleSignInUser();
     const GitHubSignIn = GItHubSignInUser();
@@ -37,7 +44,7 @@ const Login = () => {
         }
     }
   return (
-    <div className="hero min-h-screen">
+    <PageLoading><div className="hero min-h-screen">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-xl border border-gray-400 my-12">
         <div className="card-body">
           <h1 className="text-3xl text-center mb-5 font-bold">Join Us now!</h1>
@@ -56,13 +63,16 @@ const Login = () => {
             )}
             {/* password */}
             <label className="label">Password</label>
-            <input type="password" required className="input" placeholder="Enter your password" {...register("password", {
+            <div className="relative flex">
+              <input  type={showIcon ? "text":"password"} required className="input" placeholder="Enter your password" {...register("password", {
                   required: "Password is required",
                   minLength: {
                     value: 6,
                     message: "Password must be at least 6 characters",
                   },
                 })}/>
+                <span onClick={()=> setShowIcon(!showIcon)} className="absolute right-7 top-3 cursor-pointer">{showIcon ? <FaEyeSlash size={20} /> : <FaEye size={20} />}</span>
+            </div>
             {errors.password && (
                 <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
             )}
@@ -97,7 +107,7 @@ const Login = () => {
             </form>
         </div>
       </div>
-    </div>
+    </div></PageLoading>
   );
 };
 
