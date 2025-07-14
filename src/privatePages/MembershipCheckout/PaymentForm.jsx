@@ -4,6 +4,8 @@ import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import Lottie from "lottie-react";
+import membershipLottie from "../../assets/lotties/membership.json";
 
 const PaymentForm = () => {
   const { user } = useAuth();
@@ -51,31 +53,40 @@ const PaymentForm = () => {
       Swal.fire("Error", confirmError.message, "error");
       setLoading(false);
     } else if (paymentIntent.status === "succeeded") {
-      await axiosSecure.patch(
-        `/users/badge/${user.email}`,
-        {
-          badge: "gold",
-        }
-      );
+      await axiosSecure.patch(`/users/badge/${user.email}`, {
+        badge: "gold",
+      });
       Swal.fire("Success", "Membership upgraded to Gold!", "success").then(
         () => {
-          navigate("dashboard/dashboard/myProfile");
+          navigate("/");
         }
       );
     }
     setLoading(false);
   };
   return (
-    <div className="min-h-screen mt-44"><form onSubmit={handleSubmit} className="space-y-4 bg-gray-50 p-6 py-11 px-7 rounded-xl shadow-md w-full max-w-md mx-auto border border-gray-600">
-      <CardElement className="p-2 border border-gray-600 rounded"/>
-      <button
-        className="btn mt-4 bg-orange-500 text-white w-full"
-        type="submit"
-        disabled={!stripe || loading}
+    <div className="min-h-screen mt-32">
+      <div className="flex flex-col items-center mb-6">
+        <Lottie animationData={membershipLottie} className="w-40 h-40" />
+        <h2 className="text-2xl font-semibold text-center mt-4">
+          Become a Premium Member
+        </h2>
+      </div>
+
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4 bg-gray-50 p-6 py-11 px-7 rounded-xl shadow-md w-full max-w-md mx-auto border border-gray-600"
       >
-        {loading ? "Processing..." : "Pay & Become a Member"}
-      </button>
-    </form></div>
+        <CardElement className="p-2 border border-gray-600 rounded" />
+        <button
+          className="btn mt-4 bg-orange-500 text-white w-full"
+          type="submit"
+          disabled={!stripe || loading}
+        >
+          {loading ? "Processing..." : "Pay & Become a Member"}
+        </button>
+      </form>
+    </div>
   );
 };
 
