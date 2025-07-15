@@ -29,10 +29,12 @@ const MembershipCheckout = () => {
   if (User?.badge === "gold") {
     return (
       <Animation><div data-aos="fade-up" className="min-h-screen flex flex-col items-center justify-center">
-        <div className="text-center mt-6">
+        <div className="text-center -mt-46">
+          <img className="w-46 mx-auto" src="https://i.ibb.co/DHqDN3hn/image.png" alt="membershp" />
           <h2 className="text-2xl font-semibold text-orange-600">
             🎉 You're already a Gold Member!
           </h2>
+          <p className="mt-1">Now you can post more than 5 posts.</p>
         </div>
       </div></Animation>
     );
