@@ -22,6 +22,7 @@ import DashBoardRedirect from "../layout/DashBoardRedirect";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Forbidden from "../pages/Forbidden/Forbidden";
 import About from "../pages/About/About";
+import FaQ from "../pages/FaQ/FaQ";
 
 const Routes = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const Routes = createBrowserRouter([
         {
           path: "about",
           element: <About></About>
+        },
+        {
+          path: "faq",
+          element: <FaQ></FaQ>
         }
     ]
   },
