@@ -43,7 +43,7 @@ const AdminTagManager = () => {
           value={tagName}
           onChange={(e) => setTagName(e.target.value)}
         />
-        <button type="submit" className="btn bg-orange-500 text-white">
+        <button type="submit" className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white">
           Add Tag
         </button>
       </form>

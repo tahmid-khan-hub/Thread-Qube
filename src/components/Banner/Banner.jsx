@@ -36,7 +36,7 @@ const Banner = ({ setActiveTag }) => {
           />
           <button
             type="submit"
-            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2"
+            className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white"
           >
             Search
           </button>

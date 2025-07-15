@@ -87,7 +87,7 @@ const Login = () => {
               <a className="link link-hover">Forgot password?</a>
             </div>
 
-            <button className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] text-white mt-5">Join Us</button>
+            <button className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white mt-5">Join Us</button>
             <div className="divider">OR</div>
 
             {/* Google */}

@@ -78,7 +78,7 @@ const Announcement = () => {
           <p className="text-red-500 text-sm">Description is required</p>
         )}
 
-        <button className="btn w-full bg-orange-500 text-white mt-5">Submit</button>
+        <button className="btn w-full bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white mt-5">Submit</button>
       </form>
     </div></Animation>
   );

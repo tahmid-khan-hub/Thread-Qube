@@ -23,7 +23,7 @@ const Tags = ({ activeTag, setActiveTag }) => {
             className={`px-4 py-2 rounded-full border text-sm font-medium cursor-pointer
               ${
                 activeTag?.toLowerCase() === tag.name.toLowerCase()
-                  ? "bg-orange-500 text-white border-orange-500"
+                  ? "bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white"
                   : "bg-gray-100 text-gray-800 border-gray-300 hover:bg-orange-100"
               }`}
           >

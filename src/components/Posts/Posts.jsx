@@ -41,7 +41,7 @@ const Posts = ({ page, activeTag, setTotalPages }) => {
           onClick={() =>
             setSortBy(sortBy === "newest" ? "popularity" : "newest")
           }
-          className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition"
+          className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white"
         >
           {sortBy === "newest" ? "Sort by Popularity" : "Sort by Newest"}
         </button>

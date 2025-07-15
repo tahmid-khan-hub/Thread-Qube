@@ -26,7 +26,7 @@ const Pagination = ({ page, totalPages, setPage }) => {
           onClick={() => setPage(pg)}
           className={`w-10 h-10 rounded border text-sm font-medium ${
             pg === page
-              ? 'bg-orange-500 text-white'
+              ? ' bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white'
               : 'hover:bg-gray-100 text-gray-700'
           }`}
         >

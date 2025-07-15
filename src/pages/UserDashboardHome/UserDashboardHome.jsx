@@ -76,12 +76,12 @@ const UserDashboardHome = () => {
 
       <div className="mt-10 flex justify-center gap-6">
         <Link to="/dashboard/dashboard/myProfile">
-          <a className="bg-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-orange-600 transition">
+          <a className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white">
             My Profile
           </a>
         </Link>
         <Link to="/dashboard/dashboard/myPosts">
-          <a className="bg-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-orange-600 transition">
+          <a className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white ">
             My Posts
           </a>
         </Link>

@@ -74,7 +74,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <button onClick={handleLogOut} className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white mt-5 text-[15px]">
+                  <button onClick={handleLogOut} className=" btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white mt-5 text-[15px]">
                     Log Out
                   </button>
                 </li>
@@ -83,7 +83,7 @@ const Navbar = () => {
           ) : (
             <Link
               to="/login"
-              className="btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white ml-2"
+              className="btn border  bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white ml-2"
             >
               Join Us
             </Link>

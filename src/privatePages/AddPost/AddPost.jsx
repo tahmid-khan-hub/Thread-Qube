@@ -143,7 +143,7 @@ const AddPost = () => {
           {/* Tag dropdown */}
           <select
             {...register("tag")}
-            className="select select-bordered w-full"
+            className="select select-bordered w-full bg-gray-200 text-black"
           >
             <option value="">Select Tag</option>
             {tagOptions.map((tag) => (
@@ -158,7 +158,7 @@ const AddPost = () => {
 
           <button
             type="submit"
-            className="w-full mt-8 btn border border-orange-800 bg-orange-400 hover:bg-orange-600 text-white"
+            className="w-full mt-8 btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white"
           >
             Add Post
           </button>
