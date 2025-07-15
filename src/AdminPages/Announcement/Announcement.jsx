@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import Animation from "../../hooks/Animation";
 
 const Announcement = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  useEffect(()=>{
+    document.title = "ThreadQube | Announcement"
+    window.scrollTo(0,0);
+  },[])
 
   const {
     register,
@@ -37,8 +42,8 @@ const Announcement = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto mt-24 p-6 border-gray-400 bg-gray-100 rounded shadow">
-      <h2 className="text-3xl text-black font-bold mb-6 text-center">Post Announcement</h2>
+    <Animation><div data-aos="fade-up" className="max-w-6xl mx-auto mt-24 p-6 border-gray-400 bg-gray-100 rounded shadow">
+      <h2 className="text-3xl text-black font-bold mb-9 text-center">Post Announcement</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Author Name */}
         <input
@@ -75,7 +80,7 @@ const Announcement = () => {
 
         <button className="btn w-full bg-orange-500 text-white mt-5">Submit</button>
       </form>
-    </div>
+    </div></Animation>
   );
 };
 

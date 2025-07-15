@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
@@ -9,6 +9,10 @@ const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const [page, setPage] = useState(1);
   const limit = 10;
+  useEffect(()=>{
+    document.title = "ThreadQube | Manage Users"
+    window.scrollTo(0,0);
+  },[])
 
   const {
     data = {},
@@ -56,7 +60,7 @@ const ManageUsers = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">Manage Users</h1>
+      <h1 className="text-3xl font-bold text-center mb-6 mt-12">Manage Users</h1>
 
       <div className="overflow-x-auto">
         <table className="table table-zebra max-w-6xl mx-auto">

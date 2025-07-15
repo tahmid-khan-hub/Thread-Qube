@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
@@ -11,6 +11,10 @@ const Reports = () => {
   const axiosSecure = useAxiosSecure();
   const [page, setPage] = useState(1);
   const limit = 10;
+  useEffect(()=>{
+    document.title = "ThreadQube | Reported Activities"
+    window.scrollTo(0,0);
+  },[])
 
   const {
     data = {},
