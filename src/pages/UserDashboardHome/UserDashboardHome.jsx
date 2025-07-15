@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FaThumbsUp,
   FaRegComments,
@@ -10,8 +10,13 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import Loader from "../Loader/Loader";
+import Animation from "../../hooks/Animation"
 
 const UserDashboardHome = () => {
+  useEffect(()=>{
+    document.title = "ThreadQube | DashBoard"
+    window.scrollTo(0,0)
+  },[])
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
@@ -37,7 +42,7 @@ const UserDashboardHome = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <Animation><div data-aos="fade-up" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="bg-orange-100 rounded-lg p-6 text-center shadow">
           <FaClipboardList className="text-3xl mx-auto text-orange-500" />
           <h2 className="text-xl font-bold mt-2">{stats.totalPosts || 0}</h2>
@@ -62,7 +67,7 @@ const UserDashboardHome = () => {
           </h2>
           <p>Member Since</p>
         </div>
-      </div>
+      </div></Animation>
 
       <p className="text-center text-gray-500 mt-6 mb-4 text-lg">
         Want to manage your content or update your personal information? Use

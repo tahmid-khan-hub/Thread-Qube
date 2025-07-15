@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
+import Animation from "../../hooks/Animation";
 
 const AddPost = () => {
   const { user } = useAuth();
@@ -37,6 +38,11 @@ const AddPost = () => {
     };
     if (user?.email) fetchUserPosts();
   }, [user, axiosSecure]);
+
+  useEffect(() => {
+    document.title = "ThreadQube | AddPost";
+    window.scrollTo(0, 0);
+  }, []);
 
   const onSubmit = async (data) => {
     const newPost = {
@@ -85,9 +91,9 @@ const AddPost = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <Animation><div data-aos="fade-up" className="min-h-screen">
       <div className="w-[96%] md:max-w-xl mx-auto mt-16 mb-12 p-4 border rounded shadow bg-gray-50">
-        <h2 className="text-3xl font-bold mb-4 text-black text-center">
+        <h2 className="text-3xl font-bold mb-8 text-black text-center">
           Add New Post
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
@@ -158,7 +164,7 @@ const AddPost = () => {
           </button>
         </form>
       </div>
-    </div>
+    </div></Animation>
   );
 };
 

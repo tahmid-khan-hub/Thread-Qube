@@ -2,6 +2,7 @@ import React from "react";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import Loader from "../../pages/Loader/Loader";
 import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 
 const AllAnouncements = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,11 +18,13 @@ const AllAnouncements = () => {
 
   return (
     <div className="max-w-[1400px] mx-auto px-4 py-8 mt-12">
-      <h2 className="text-3xl font-bold mb-6 text-center">
-        Announcements
-      </h2>
-      
-      <div className="grid md:grid-cols-2 gap-6">
+      <h2 className="text-3xl font-bold mb-6 text-center">Announcements</h2>
+
+      <motion.div
+        animate={{ y: [0, -4, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="grid md:grid-cols-2 gap-6"
+      >
         {announcements.map((announcement) => (
           <div
             key={announcement._id}
@@ -40,8 +43,7 @@ const AllAnouncements = () => {
             </p>
           </div>
         ))}
-      </div>
-      
+      </motion.div>
     </div>
   );
 };

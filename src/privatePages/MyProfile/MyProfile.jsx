@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../pages/Loader/Loader";
-import bronze from "../../assets/bronze.png"
-import gold from "../../assets/gold.jpg"
+import bronze from "../../assets/bronze.png";
+import gold from "../../assets/gold.jpg";
+import Animation from "../../hooks/Animation";
 
 const MyProfile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  useEffect(() => {
+    document.title = "ThreadQube | MyProfile";
+    window.scrollTo(0, 0);
+  }, []);
 
   const { data: UserProfile = {}, isLoading: userLoading } = useQuery({
     queryKey: ["userInfo", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/users?email=${user.email}`
-      );
+      const res = await axiosSecure.get(`/users?email=${user.email}`);
       return res.data;
     },
   });
@@ -36,17 +39,14 @@ const MyProfile = () => {
 
   console.log(myPosts);
 
-  const badgeImage =
-    UserProfile.badge === "gold"
-      ? gold
-      : bronze;
+  const badgeImage = UserProfile.badge === "gold" ? gold : bronze;
 
   if (postsLoading || userLoading) return <Loader></Loader>;
 
   return (
     <div className=" mt-10 px-4">
       {/* Profile Card */}
-      <div className="max-w-3xl mx-auto bg-white border border-gray-400 rounded-lg shadow p-6">
+      <Animation><div data-aos="fade-up" className="max-w-3xl mx-auto bg-white border border-gray-400 rounded-lg shadow p-6">
         <img
           src={user?.photoURL}
           alt="Profile"
@@ -59,13 +59,17 @@ const MyProfile = () => {
         <div className="flex justify-center items-center gap-3 mt-2 text-sm text-gray-600 flex-wrap">
           <span>{user?.email}</span>
           <span className="flex items-center gap-1">
-            <img src={badgeImage} alt="Badge" className="w-5 h-5 object-cover" />
+            <img
+              src={badgeImage}
+              alt="Badge"
+              className="w-5 h-5 object-cover"
+            />
             <span className="capitalize text-orange-600 font-medium">
               {UserProfile.badge} badge
             </span>
           </span>
         </div>
-      </div>
+      </div></Animation>
 
       {/* Recent Posts */}
       <div className="mt-10 max-w-5xl mx-auto">
@@ -73,7 +77,7 @@ const MyProfile = () => {
           Recent Posts
         </h2>
         {myPosts.length === 0 ? (
-          <p className="text-gray-500">You haven't posted anything yet.</p>
+          <p className="text-gray-500 text-center">You haven't posted anything yet.</p>
         ) : (
           <div className="space-y-7 mb-7 max-w-5xl mx-auto">
             {myPosts.slice(0, 3).map((post) => (
@@ -88,7 +92,9 @@ const MyProfile = () => {
                   {post.description.slice(0, 100)}...
                 </p>
                 <div className="flex justify-between items-center mt-3 text-sm text-gray-500">
-                  <span className="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium"># {post.tag}</span>
+                  <span className="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium">
+                    # {post.tag}
+                  </span>
                   <span className="font-semibold">
                     Votes: {(post.upvote ?? 0) + (post.downVote ?? 0)} |{" "}
                     {new Date(post.postTime).toLocaleDateString()}

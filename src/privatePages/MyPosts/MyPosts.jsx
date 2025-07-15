@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
@@ -13,6 +13,10 @@ const MyPosts = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
+  useEffect(() => {
+    document.title = "ThreadQube | MyPosts";
+    window.scrollTo(0, 0);
+  }, []);
 
   const [page, setPage] = useState(1);
   const limit = 5;

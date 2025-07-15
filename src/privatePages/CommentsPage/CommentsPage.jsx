@@ -51,6 +51,11 @@ const CommentsPage = () => {
     fetchReportedComments();
   }, [postId, axiosSecure]);
 
+  useEffect(() => {
+    document.title = "ThreadQube | Comments";
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleFeedbackChange = (commentId, value) => {
     setFeedbackMap((prev) => ({ ...prev, [commentId]: value }));
   };
