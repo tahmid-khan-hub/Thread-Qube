@@ -8,6 +8,8 @@ import GItHubSignInUser from "../../hooks/GItHubSignInUser";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import PageLoading from "../Loader/PageLoading";
 import Animation from "../../hooks/Animation";
+import Lottie from "lottie-react";
+import LoginLottie from "../../assets/lotties/Login.json"
 
 const Login = () => {
     const {signIn} = useAuth();
@@ -48,10 +50,14 @@ const Login = () => {
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-xl border border-gray-400 my-12">
         <div className="card-body">
           <h1 className="text-3xl text-center mb-5 font-bold">Join Us now!</h1>
+           {/* Lottie Animation */}
+            <div className="w-40 mx-auto mb-4">
+              <Lottie animationData={LoginLottie} loop={true} />
+            </div>
           <form onSubmit={handleSubmit(onsubmit)} className="fieldset">
             {/* email */}
             <label className="label">Email</label>
-            <input type="email" className="input" required placeholder="Enter your email" {...register("email", {
+            <input type="email" className="input w-full" required placeholder="Enter your email" {...register("email", {
                   required: "Email is required",
                   pattern: {
                     value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -64,14 +70,14 @@ const Login = () => {
             {/* password */}
             <label className="label">Password</label>
             <div className="relative flex">
-              <input  type={showIcon ? "text":"password"} required className="input" placeholder="Enter your password" {...register("password", {
+              <input  type={showIcon ? "text":"password"} required className="input w-full" placeholder="Enter your password" {...register("password", {
                   required: "Password is required",
                   minLength: {
                     value: 6,
                     message: "Password must be at least 6 characters",
                   },
                 })}/>
-                <span onClick={()=> setShowIcon(!showIcon)} className="absolute right-7 top-3 cursor-pointer">{showIcon ? <FaEyeSlash size={20} /> : <FaEye size={20} />}</span>
+                <span onClick={()=> setShowIcon(!showIcon)} className="absolute right-4 top-3 cursor-pointer">{showIcon ? <FaEyeSlash size={20} /> : <FaEye size={20} />}</span>
             </div>
             {errors.password && (
                 <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
@@ -81,7 +87,7 @@ const Login = () => {
               <a className="link link-hover">Forgot password?</a>
             </div>
 
-            <button className="btn mt-5">Join Us</button>
+            <button className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] text-white mt-5">Join Us</button>
             <div className="divider">OR</div>
 
             {/* Google */}
@@ -97,7 +103,7 @@ const Login = () => {
             </button>
 
              {/* Register Link */}
-            <div className="text-sm font-medium text-black mt-5 mb-5">
+            <div className="text-sm font-medium mt-5 mb-5">
                 Not registered?{" "}
                 <Link to="/register" className="text-orange-600 hover:underline">
                     Create account

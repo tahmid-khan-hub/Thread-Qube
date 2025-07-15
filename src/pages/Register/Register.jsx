@@ -11,6 +11,8 @@ import GoogleSignInUser from "../../hooks/GoogleSignInUser";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import PageLoading from "../Loader/PageLoading";
 import Animation from "../../hooks/Animation";
+import Lottie from "lottie-react";
+import RegisterLottie from "../../assets/lotties/register.json"
 
 const Register = () => {
   const auth = getAuth(app);
@@ -75,12 +77,16 @@ const Register = () => {
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-xl border border-gray-400 my-16">
         <div className="card-body">
           <h1 className="text-3xl text-center mb-5 font-bold">Register now!</h1>
+          {/* Lottie Animation */}
+          <div className="w-40 mx-auto mb-4">
+            <Lottie animationData={RegisterLottie} loop={true} />
+          </div>
           <form onSubmit={handleSubmit(onSubmit)} className="fieldset">
             {/* Name */}
             <label className="label">Name</label>
             <input
               type="text"
-              className="input"
+              className="input w-full"
               placeholder="Enter your name"
               required
               {...register("name", { required: "Name is required" })}
@@ -93,7 +99,7 @@ const Register = () => {
             <label className="label">PhotoURL</label>
             <input
               type="text"
-              className="input"
+              className="input w-full"
               placeholder="Enter your photoURL"
               required
               {...register("photoURL", {
@@ -106,7 +112,7 @@ const Register = () => {
             <label className="label">Email</label>
             <input
               type="email"
-              className="input"
+              className="input w-full"
               placeholder="Enter your email"
               required
               {...register("email", {
@@ -129,7 +135,7 @@ const Register = () => {
               <input
                 type={showIcon ? "text" : "password"}
                 required
-                className="input"
+                className="input w-full"
                 placeholder="Enter your password"
                 {...register("password", {
                   required: "Password is required",
@@ -140,7 +146,7 @@ const Register = () => {
                   },
                 })}
 />
-            <span onClick={()=> setShowIcon(!showIcon)} className="absolute right-7 top-3 cursor-pointer">{showIcon ? <FaEyeSlash size={20} /> : <FaEye size={20} />}</span>
+            <span onClick={()=> setShowIcon(!showIcon)} className="absolute right-4 top-3 cursor-pointer">{showIcon ? <FaEyeSlash size={20} /> : <FaEye size={20} />}</span>
             </div>
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">
@@ -152,7 +158,7 @@ const Register = () => {
               <a className="link link-hover">Forgot password?</a>
             </div>
 
-            <button className="btn mt-5">Register</button>
+            <button className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] text-white mt-5">Register</button>
             <div className="divider">OR</div>
 
             {/* Google */}
@@ -168,7 +174,7 @@ const Register = () => {
             </button>
 
             {/* Login Link */}
-            <div className="text-sm font-medium text-black mt-5 mb-5">
+            <div className="text-sm font-medium mt-5 mb-5">
               Already Have Account?{" "}
               <Link to="/login" className="text-orange-600 hover:underline">
                 Join Us Here
