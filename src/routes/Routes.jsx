@@ -21,6 +21,7 @@ import Reports from "../AdminPages/Reports/Reports";
 import DashBoardRedirect from "../layout/DashBoardRedirect";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Forbidden from "../pages/Forbidden/Forbidden";
+import About from "../pages/About/About";
 
 const Routes = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const Routes = createBrowserRouter([
           path: "forbidden",
           element: <Forbidden></Forbidden>,
         },
+        {
+          path: "about",
+          element: <About></About>
+        }
     ]
   },
 

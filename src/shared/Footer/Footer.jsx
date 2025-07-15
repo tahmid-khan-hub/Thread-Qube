@@ -1,5 +1,6 @@
 import React from "react";
 import brand from "../../assets/logo.png";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
@@ -14,7 +15,7 @@ const Footer = () => {
 
         {/* Center: Links */}
         <ul className="flex flex-wrap items-center mb-4 md:mb-0 text-sm font-medium text-black mr-5">
-          <li><a href="/about" className="mr-6 hover:underline">About</a></li>
+          <Link to="/about"><li><a className="mr-6 hover:underline">About</a></li></Link>
           <li><a href="/privacy" className="mr-6 hover:underline">Privacy Policy</a></li>
           <li><a href="/terms" className="mr-6 hover:underline">Terms</a></li>
           <li><a href="/contact" className="hover:underline">Contact</a></li>

@@ -18,14 +18,15 @@ const Navbar = () => {
   };
   const links = (
     <>
-      
       <NavLink to="/">
         <li><a>Home</a></li>
       </NavLink>
       {( user && role === "user") && <NavLink to="membership">
         <li><a>Membership</a></li>
       </NavLink>}
-      
+      <NavLink to="about">
+        <li><a>About</a></li>
+      </NavLink>
     </>
   );
   return (
