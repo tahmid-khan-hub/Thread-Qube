@@ -1,14 +1,16 @@
 import { loadStripe } from "@stripe/stripe-js";
-import React from "react";
+import React, { useEffect } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "./PaymentForm";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import Loader from "../../pages/Loader/Loader";
+import Animation from "../../hooks/Animation";
 
 
 const MembershipCheckout = () => {
+  useEffect(()=>{document.title = "ThreadQube | Membership"},[])
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const stripePromise = loadStripe(import.meta.env.VITE_payment_Key);
@@ -26,13 +28,13 @@ const MembershipCheckout = () => {
 
   if (User?.badge === "gold") {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
+      <Animation><div data-aos="fade-up" className="min-h-screen flex flex-col items-center justify-center">
         <div className="text-center mt-6">
           <h2 className="text-2xl font-semibold text-orange-600">
             🎉 You're already a Gold Member!
           </h2>
         </div>
-      </div>
+      </div></Animation>
     );
   }
 

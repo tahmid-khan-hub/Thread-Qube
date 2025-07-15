@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router";
 
 import Tags from "../../components/Tags/Tags";
@@ -7,6 +7,7 @@ import Pagination from "../../shared/Pagination/Pagination";
 import AllAnouncements from "../AllAnouncements/AllAnouncements";
 
 const Home = () => {
+  useEffect(()=>{document.title = "ThreadQube | Home"},[])
   const { activeTag, setActiveTag } = useOutletContext();
 
   const [page, setPage] = useState(1);
