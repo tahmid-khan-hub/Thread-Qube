@@ -69,7 +69,7 @@ const PaymentForm = () => {
       <div className="flex flex-col items-center mb-6">
         <Lottie animationData={membershipLottie} className="w-40 h-40" />
         <h2 className="text-2xl font-semibold text-center mt-4">
-          Become a Premium Member
+          Become a Gold Member
         </h2>
       </div>
 
@@ -79,7 +79,7 @@ const PaymentForm = () => {
       >
         <CardElement className="p-2 border border-gray-600 rounded" />
         <button
-          className="btn mt-4 bg-orange-500 text-white w-full"
+          className="btn mt-4 bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white w-full"
           type="submit"
           disabled={!stripe || loading}
         >

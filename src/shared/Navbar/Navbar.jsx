@@ -83,7 +83,7 @@ const Navbar = () => {
           ) : (
             <Link
               to="/login"
-              className="btn border  bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white ml-2"
+              className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white ml-2"
             >
               Join Us
             </Link>
