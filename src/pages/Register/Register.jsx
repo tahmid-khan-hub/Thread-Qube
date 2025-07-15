@@ -10,6 +10,7 @@ import GItHubSignInUser from "../../hooks/GItHubSignInUser";
 import GoogleSignInUser from "../../hooks/GoogleSignInUser";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import PageLoading from "../Loader/PageLoading";
+import Animation from "../../hooks/Animation";
 
 const Register = () => {
   const auth = getAuth(app);
@@ -70,7 +71,7 @@ const Register = () => {
   };
 
   return (
-    <PageLoading><div className="hero min-h-screen">
+    <Animation><PageLoading><div data-aos="fade-up" className="hero min-h-screen">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-xl border border-gray-400 my-16">
         <div className="card-body">
           <h1 className="text-3xl text-center mb-5 font-bold">Register now!</h1>
@@ -176,7 +177,7 @@ const Register = () => {
           </form>
         </div>
       </div>
-    </div></PageLoading>
+    </div></PageLoading></Animation>
   );
 };
 

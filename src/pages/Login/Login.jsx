@@ -7,6 +7,7 @@ import GoogleSignInUser from "../../hooks/GoogleSignInUser";
 import GItHubSignInUser from "../../hooks/GItHubSignInUser";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import PageLoading from "../Loader/PageLoading";
+import Animation from "../../hooks/Animation";
 
 const Login = () => {
     const {signIn} = useAuth();
@@ -43,7 +44,7 @@ const Login = () => {
         }
     }
   return (
-    <PageLoading><div className="hero min-h-screen">
+    <Animation><PageLoading><div data-aos="fade-up" className="hero min-h-screen">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-xl border border-gray-400 my-12">
         <div className="card-body">
           <h1 className="text-3xl text-center mb-5 font-bold">Join Us now!</h1>
@@ -106,7 +107,7 @@ const Login = () => {
             </form>
         </div>
       </div>
-    </div></PageLoading>
+    </div></PageLoading></Animation>
   );
 };
 
