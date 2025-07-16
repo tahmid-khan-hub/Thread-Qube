@@ -1,12 +1,70 @@
-# React + Vite
+# 💬 ThreadQube
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 📝 Project Overview  
+**ThreadQube** is a modern, feature-rich forum platform built using the MERN stack, providing a space for users to engage in meaningful conversations through posts and comments. With role-based dashboards, premium memberships, and admin moderation tools, ThreadQube is designed to foster healthy, community-driven discussions.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🛠 Tech Stack & Dependencies  
+- **React 19** – Robust frontend framework for building dynamic UIs  
+- **Tailwind CSS 4** – Utility-first CSS framework for responsive, clean design  
+- **React Router 7** – Declarative routing for navigating the app  
+- **Axios** – Simplified HTTP client for communicating with backend APIs  
+- **Firebase** – Authentication and accessToken handling  
+- **Framer Motion** – Page transitions and smooth animations  
+- **AOS (Animate On Scroll)** – Scroll-triggered UI animations  
+- **SweetAlert2** – Custom alerts and confirmation modals  
+- **React Icons** – Rich set of UI-friendly icons  
+- **Stripe** – Payment gateway for Gold Membership upgrade  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### ✨ Key Features  
+- **🧑‍💼 Role-Based Dashboards**  
+  Separate dashboards for users and admins, with features based on role privileges  
+
+- **📝 Post Management**  
+  Users can create new posts and manage (edit/delete) their existing ones  
+
+- **👤 User Profile**  
+  View profile and membership status (editing not supported)  
+
+- **📢 Admin Announcements**  
+  Admins can create and manage platform-wide announcements  
+
+- **👥 User Management (Admin)**  
+  Admins can view, promote, or manage user roles and take moderation actions  
+
+- **🚩 Report Handling**  
+  Users can report inappropriate comments; admins can review and take action  
+
+- **💳 Gold Membership**  
+  Users can upgrade to Gold Membership via secure Stripe payment integration  
+
+---
+
+### 🖥️ How to Run Locally  
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/threadqube-client.git
+   cd threadqube-client
+
+   
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up Firebase**  
+   Create a `firebase.config.js` file inside the `src` folder with your Firebase credentials.
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+---
+
+### 🔗 Live Link  
+- 🌐 [Live Site](https://threadqube.netlify.app)
