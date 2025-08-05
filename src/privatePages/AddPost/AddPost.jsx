@@ -142,6 +142,7 @@ const AddPost = () => {
 
           {/* Tag dropdown */}
           <select
+            required
             {...register("tag")}
             className="select select-bordered w-full bg-gray-200 text-black"
           >

@@ -32,7 +32,7 @@ const UserDashboardHome = () => {
   if (isLoading) return <Loader></Loader>
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 px-4 min-h-screen">
+    <div className="mx-auto mt-10 px-4 min-h-screen">
       <div className="text-center mb-8">
         <h1 className="text-3xl mt-12 font-bold">
           Welcome back, {user?.displayName}!

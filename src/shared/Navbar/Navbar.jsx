@@ -82,9 +82,9 @@ const Navbar = () => {
                 </li>
                 {
                   role === "admin" ? <li className="text-center mb-2 font-semibold">
-                    Role: Admin
+                    Admin
                   </li>: <li className="text-center mb-2 font-semibold">
-                    Role: User
+                    User
                   </li>
                 }
                 <li className="text-center text-gray-600">
