@@ -1,7 +1,8 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router";
+import { Link, NavLink, Outlet } from "react-router";
 import brand from "../assets/logo.png";
 import useUserRole from "../hooks/useUserRole";
+import useAuth from "../hooks/useAuth";
 import Loader from "../pages/Loader/Loader";
 import { AiFillHome, AiOutlineHome } from "react-icons/ai";
 import {
@@ -10,17 +11,28 @@ import {
   FaUserShield,
   FaUsersCog,
 } from "react-icons/fa";
-import { MdPostAdd, MdReportProblem, MdCampaign } from "react-icons/md";
+import { MdPostAdd, MdReportProblem, MdCampaign, MdLogout } from "react-icons/md";
+import Animation from "../hooks/Animation";
 
 const DashBoardLayout = () => {
   const { role, roleLoading } = useUserRole();
-  if (roleLoading) return <Loader></Loader>;
+  const { user, logOut } = useAuth(); 
+
+  if (roleLoading) return <Loader />;
+
+  const handleLogOut = () => {
+    logOut()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="drawer lg:drawer-open max-w-[1500px] mx-auto">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
+        {/* Navbar for mobile */}
         <div className="navbar sticky top-0 z-50 bg-base-100 w-full lg:hidden">
-          <div className="flex-none ">
+          <div className="flex-none">
             <label
               htmlFor="my-drawer-2"
               aria-label="open sidebar"
@@ -41,34 +53,64 @@ const DashBoardLayout = () => {
               </svg>
             </label>
           </div>
+
+          {/* user display name & photo beside logo */}
           <div className="mx-2 flex-1 mb-1 lg:hidden">
-            <div className="flex">
+            <div className="flex items-center">
               <img className="w-8 mr-1" src={brand} alt="ThreadQube Logo" />
-              <a className=" text-xl mt-1 font-semibold ">ThreadQube</a>
+              <span className="text-xl mt-1 font-semibold">ThreadQube</span>
+              {user && (
+                <div className="flex items-center ml-auto">
+                  <img
+                    src={user.photoURL}
+                    alt="User"
+                    className="w-8 h-8 rounded-full object-cover ml-2"
+                  />
+                  <span className="ml-2 hidden sm:inline">
+                    {user.displayName}
+                  </span>
+                </div>
+              )}
+              
             </div>
           </div>
         </div>
-        {/* Page content here */}
-        <Outlet></Outlet>
+
+        {/* Page content */}
+        <Outlet />
       </div>
-      <div className="drawer-side border-r border-orange-500">
+
+      {/* Sidebar */}
+      <Animation><div data-aos="fade-right" className="drawer-side border-r border-orange-500">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
         <ul className="menu text-base-content min-h-full w-80 p-4">
-          {/* Sidebar content here */}
-          {/* logo */}
-          <div className="flex ml-2 mb-4">
+          {/* Logo */}
+          <div className="flex items-center ml-2 mb-4">
             <img className="w-8 mr-1" src={brand} alt="ThreadQube Logo" />
-            <a className=" text-xl mt-1 font-semibold">ThreadQube</a>
+            <span className="text-xl font-semibold">ThreadQube</span>
           </div>
 
+          {/* user photo & name in sidebar */}
+          {user && (
+            <div className="hidden lg:flex flex-col items-center gap-2 p-2 rounded-lg mb-4 mt-5">
+              <img
+                src={user.photoURL}
+                alt="User"
+                className="w-24 h-24 rounded-full object-cover border"
+              />
+              <span className="font-semibold text-xl mt-2">{user.displayName}</span>
+              <span className="font-medium text-gray-500 ">{user.email}</span>
+            </div>
+          )}
+
+          {/* Links */}
           {role === "admin" ? (
             <>
-              {/* Admin links */}
-              <NavLink to="/">
+              <NavLink className="font-semibold mb-3" to="/">
                 <li>
                   <a>
                     <AiFillHome className="inline-block mr-2" />
@@ -76,7 +118,7 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink to="dashboard/adminProfile">
+              <NavLink className="font-semibold mb-3" to="dashboard/adminProfile">
                 <li>
                   <a>
                     <FaUserShield className="inline-block mr-2" />
@@ -84,7 +126,7 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink to="dashboard/manageUsers">
+              <NavLink className="font-semibold mb-3" to="dashboard/manageUsers">
                 <li>
                   <a>
                     <FaUsersCog className="inline-block mr-2" />
@@ -92,7 +134,7 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink to="dashboard/reportedActivities">
+              <NavLink className="font-semibold mb-3" to="dashboard/reportedActivities">
                 <li>
                   <a>
                     <MdReportProblem className="inline-block mr-2" />
@@ -100,7 +142,7 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink to="dashboard/announcements">
+              <NavLink className="font-semibold mb-3" to="dashboard/announcements">
                 <li>
                   <a>
                     <MdCampaign className="inline-block mr-2" />
@@ -108,11 +150,18 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
+              <NavLink className="font-semibold" onClick={handleLogOut}>
+                <li>
+                  <a>
+                    <MdLogout className="inline-block mr-2" />
+                    Log Out
+                  </a>
+                </li>
+              </NavLink>
             </>
           ) : (
             <>
-              {/* User links */}
-              <NavLink to="/">
+              <NavLink className="font-semibold mb-3" to="/">
                 <li>
                   <a>
                     <AiFillHome className="inline-block mr-2" />
@@ -120,7 +169,7 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink to="/dashboard/dashboardHome">
+              <NavLink className="font-semibold mb-3" to="/dashboard/dashboardHome">
                 <li>
                   <a>
                     <AiOutlineHome className="inline-block mr-2" />
@@ -128,7 +177,7 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink to="dashboard/myProfile">
+              <NavLink className="font-semibold mb-3" to="dashboard/myProfile">
                 <li>
                   <a>
                     <FaUserCircle className="inline-block mr-2" />
@@ -136,7 +185,7 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink to="dashboard/addPost">
+              <NavLink className="font-semibold mb-3" to="dashboard/addPost">
                 <li>
                   <a>
                     <MdPostAdd className="inline-block mr-2" />
@@ -144,7 +193,7 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink to="dashboard/myPosts">
+              <NavLink className="font-semibold mb-3" to="dashboard/myPosts">
                 <li>
                   <a>
                     <FaRegNewspaper className="inline-block mr-2" />
@@ -152,10 +201,18 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
+              <Link className="font-semibold" onClick={handleLogOut}>
+                <li>
+                  <a>
+                    <MdLogout className="inline-block mr-2" />
+                    Log Out
+                  </a>
+                </li>
+              </Link>
             </>
           )}
         </ul>
-      </div>
+      </div></Animation>
     </div>
   );
 };
