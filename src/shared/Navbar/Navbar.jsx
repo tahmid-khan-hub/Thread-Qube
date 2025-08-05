@@ -18,16 +18,19 @@ const Navbar = () => {
   };
   const links = (
     <>
-      <NavLink to="/">
+      <NavLink to="/" className="font-semibold">
         <li><a>Home</a></li>
       </NavLink>
-      {( user && role === "user") && <NavLink to="membership">
+      <NavLink to="/dashboard" className="font-semibold">
+        <li><a>Dashboard</a></li>
+      </NavLink>
+      {( user && role === "user") && <NavLink to="membership" className="font-semibold">
         <li><a>Membership</a></li>
       </NavLink>}
-      <NavLink to="about">
+      <NavLink to="about" className="font-semibold">
         <li><a>About</a></li>
       </NavLink>
-      <NavLink to="faq">
+      <NavLink to="faq" className="font-semibold">
         <li><a>FaQ</a></li>
       </NavLink>
     </>
@@ -67,18 +70,28 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                className="mt-3 z-[1] p-2 px-4 mx-auto shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
               >
-                <li className="text-center text-lg px-2 py-1 mb-4 font-semibold text-orange-500 cursor-default">
+                <li>
+                  <div className="mx-auto">
+                    <img src={user.photoURL} className="w-16 rounded-full ring-2 ring-orange-500 ring-offset-2 my-2" alt="user profile" />
+                  </div>
+                </li>
+                <li className="text-center text-lg px-2 py-1 font-semibold text-orange-500 cursor-default">
                   {user?.displayName}
                 </li>
-                <li>
-                  <Link to="/dashboard" className="text-sm">
-                    Dashboard
-                  </Link>
+                {
+                  role === "admin" ? <li className="text-center mb-2 font-semibold">
+                    Role: Admin
+                  </li>: <li>
+
+                  </li>
+                }
+                <li className="text-center text-gray-600">
+                  {user.email}
                 </li>
                 <li>
-                  <button onClick={handleLogOut} className=" btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white mt-5 text-[15px]">
+                  <button onClick={handleLogOut} className=" btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white mt-5 text-[15px] mb-2">
                     Log Out
                   </button>
                 </li>
