@@ -21,9 +21,9 @@ const Navbar = () => {
       <NavLink to="/" className="font-semibold">
         <li><a>Home</a></li>
       </NavLink>
-      <NavLink to="/dashboard" className="font-semibold">
+      {user && <NavLink to="/dashboard" className="font-semibold">
         <li><a>Dashboard</a></li>
-      </NavLink>
+      </NavLink>}
       {( user && role === "user") && <NavLink to="membership" className="font-semibold">
         <li><a>Membership</a></li>
       </NavLink>}
@@ -36,8 +36,8 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className=" bg-orange-100 sticky top-0 z-50">
-      <div className="navbar max-w-[1400px] mx-auto px-3 ">
+    <div className="navbar bg-orange-100 sticky top-0 z-50">
+      <div className=" max-w-[1400px] w-[96%] mx-auto flex justify-between items-center px-0 lg:px-3">
         {/* Left - Brand */}
         <div className="navbar-start">
           <img className="w-8 mr-2" src={brand} alt="ThreadQube Logo" />
@@ -74,7 +74,7 @@ const Navbar = () => {
               >
                 <li>
                   <div className="mx-auto">
-                    <img src={user.photoURL} className="w-16 rounded-full ring-2 ring-orange-500 ring-offset-2 my-2" alt="user profile" />
+                    <img src={user.photoURL} className="w-11 h-11 rounded-full object-cover ring-2 ring-orange-500 ring-offset-2 my-2" alt="user profile" />
                   </div>
                 </li>
                 <li className="text-center text-lg px-2 py-1 font-semibold text-orange-500 cursor-default">
@@ -83,15 +83,15 @@ const Navbar = () => {
                 {
                   role === "admin" ? <li className="text-center mb-2 font-semibold">
                     Role: Admin
-                  </li>: <li>
-
+                  </li>: <li className="text-center mb-2 font-semibold">
+                    Role: User
                   </li>
                 }
                 <li className="text-center text-gray-600">
                   {user.email}
                 </li>
                 <li>
-                  <button onClick={handleLogOut} className=" btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white mt-5 text-[15px] mb-2">
+                  <button onClick={handleLogOut} className=" btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white mt-5 text-[15px] mb-2 mr-1">
                     Log Out
                   </button>
                 </li>
