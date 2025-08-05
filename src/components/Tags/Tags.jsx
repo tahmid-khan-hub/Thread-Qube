@@ -7,7 +7,7 @@ const Tags = ({ activeTag, setActiveTag }) => {
   const { data: tags = [] } = useQuery({
     queryKey: ["tags"],
     queryFn: async () => {
-      const res = await axios.get("https://thread-qube-server.vercel.app/Alltags");
+      const res = await axios.get("http://localhost:3000/Alltags");
       return res.data;
     },
   });

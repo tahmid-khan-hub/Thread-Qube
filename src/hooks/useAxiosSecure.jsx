@@ -6,7 +6,7 @@ const useAxiosSecure = () => {
   const {user, logOut} = useAuth();
   const navigate = useNavigate();
   const axiosSecure = axios.create({
-    baseURL: "https://thread-qube-server.vercel.app",
+    baseURL: "http://localhost:3000",
   });
 
   axiosSecure.interceptors.request.use(
