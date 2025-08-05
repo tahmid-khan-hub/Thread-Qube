@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
 import Loader from "../Loader/Loader";
 import Animation from "../../hooks/Animation"
+import UserDataChart from "./UserDataChart";
 
 const UserDashboardHome = () => {
   useEffect(()=>{
@@ -69,12 +70,15 @@ const UserDashboardHome = () => {
         </div>
       </div></Animation>
 
-      <p className="text-center text-gray-500 mt-6 mb-4 text-lg">
+      {/* data chart */}
+      <UserDataChart stats={stats}></UserDataChart>
+
+      <p className="text-center text-gray-500 mt-12 mb-2 text-lg">
         Want to manage your content or update your personal information? Use
         the options below to view your profile or explore your posts.
       </p>
 
-      <div className="mt-10 flex justify-center gap-6">
+      <div className="mt-3 mb-7 flex justify-center gap-6">
         <Link to="/dashboard/dashboard/myProfile">
           <a className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white">
             My Profile
