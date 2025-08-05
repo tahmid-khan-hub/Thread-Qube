@@ -4,10 +4,12 @@ import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../pages/Loader/Loader";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaRegComment } from "react-icons/fa";
 import Pagination from "../../shared/Pagination/Pagination";
+import Lottie from "lottie-react";
+import noPostLottie from "../../assets/lotties/Empty State.json"
 
 const MyPosts = () => {
   const axiosSecure = useAxiosSecure();
@@ -69,14 +71,30 @@ const MyPosts = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-4 mt-10">
-      <h1 className="text-3xl font-bold text-center mb-6">My Posts</h1>
+      
 
       {myPosts.length === 0 ? (
-        <p className="text-center text-gray-500">
+        <div className="flex flex-col items-center h-screen">
+          <h1 className="text-3xl font-bold text-center mb-6">My Posts</h1>
+          <div className="w-72 h-72">
+            <Lottie animationData={noPostLottie} loop />
+          </div>
+          <p className="text-center text-gray-500 -mt-9">
           You haven’t added any posts yet.
-        </p>
+          </p>
+          <p className="text-center text-gray-500">
+            To add a post, visit{" "}
+            <Link
+              to="/dashboard/dashboard/addPost"
+              className="text-orange-500 font-semibold"
+            >
+              Add Post
+            </Link>
+          </p>
+        </div>
       ) : (
         <div className="min-h-screen">
+          <h1 className="text-3xl font-bold text-center mb-6">My Posts</h1>
           <div className="overflow-x-auto">
             <table className="table w-full border rounded-lg shadow">
               <thead className="bg-orange-100 text-orange-800">
