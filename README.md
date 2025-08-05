@@ -47,8 +47,8 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/threadqube-client.git
-   cd threadqube-client
+   https://github.com/tahmid-khan-hub/Thread-Qube.git
+   cd Thread-Qube
 
    
 2. **Install dependencies**
