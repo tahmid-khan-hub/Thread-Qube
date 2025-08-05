@@ -38,7 +38,7 @@ const PostDetails = () => {
       await axiosSecure.patch(`/Allposts/${id}/vote`, {
         voteType: "upvote",
       });
-      Swal.fire("Upvoted!", "", "success");
+      Swal.fire("Upvote added successfully!", "", "success");
       queryClient.invalidateQueries(["post", id]);
     } catch (err) {
       console.error(err);
@@ -53,7 +53,7 @@ const PostDetails = () => {
       await axiosSecure.patch(`/Allposts/${id}/vote`, {
         voteType: "downvote",
       });
-      Swal.fire("Downvoted!", "", "success");
+      Swal.fire("Downvote added successfully!", "", "success");
       queryClient.invalidateQueries(["post", id]);
     } catch (err) {
       console.error(err);
@@ -85,7 +85,7 @@ const PostDetails = () => {
   } = postData;
 
   return (
-    <div className="max-w-[1400px] mx-auto min-h-screen mt-20 py-10">
+    <div className="max-w-[1400px] mx-auto min-h-screen mt-20 py-10 px-4">
       <div className="border-gray-600 rounded-lg shadow-md p-6 bg-gray-50 space-y-5">
         <h1 className="text-3xl font-bold text-orange-600">{title}</h1>
 
@@ -116,13 +116,13 @@ const PostDetails = () => {
 
         <div className="flex items-center gap-6 text-sm font-medium text-gray-600 mt-4">
           <div className="flex items-center gap-1">
-            <FaThumbsUp size={21} onClick={handleUpvote} />
+            <FaThumbsUp size={21} className="hover:text-orange-400" onClick={handleUpvote} />
             <span className="text-green-600 text-2xl ml-1 font-semibold">
               {upvote || 0}
             </span>
           </div>
           <div className="flex items-center gap-1">
-            <FaThumbsDown size={21} className="mt-1" onClick={handleDownvote} />
+            <FaThumbsDown size={21} className="mt-1 hover:text-orange-400" onClick={handleDownvote} />
             <span className="text-red-600 text-2xl ml-1 font-semibold">
               {downVote || 0}
             </span>
