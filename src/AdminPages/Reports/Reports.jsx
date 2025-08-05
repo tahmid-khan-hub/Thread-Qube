@@ -6,6 +6,8 @@ import Loader from "../../pages/Loader/Loader";
 import Pagination from "../../shared/Pagination/Pagination";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
+import Lottie from "lottie-react";
+import noReportLottie from "../../assets/lotties/Data Extraction.json"
 
 const Reports = () => {
   const axiosSecure = useAxiosSecure();
@@ -61,13 +63,21 @@ const Reports = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6 min-h-screen my-12">
-      <h2 className="text-3xl font-bold text-center mb-8">Reported Comments</h2>
 
       {reports.length === 0 ? (
-        <p className="text-center text-gray-500">No reports found.</p>
+        <div className="flex flex-col items-center h-screen">
+          <h2 className="text-3xl font-bold text-center mb-8">Reported Comments</h2>
+          <div className="w-72 h-72">
+            <Lottie animationData={noReportLottie} loop />
+          </div>
+          <p className="text-center text-gray-500 ">
+          No Issues to Address at the Moment.
+          </p>
+        </div>
       ) : (
         <>
           <div className="overflow-x-auto">
+            <h2 className="text-3xl font-bold text-center mb-8">Reported Comments</h2>
             <table className="table w-full border rounded shadow">
               <thead className="bg-orange-100 text-orange-800">
                 <tr>
