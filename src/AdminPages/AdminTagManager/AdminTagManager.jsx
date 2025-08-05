@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useAxiosSecure from "../../hooks/UseAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 

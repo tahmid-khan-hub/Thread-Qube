@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../hooks/UseAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Loader from "../../pages/Loader/Loader";
 import Pagination from "../../shared/Pagination/Pagination";
 import { RiDeleteBin5Line } from "react-icons/ri";

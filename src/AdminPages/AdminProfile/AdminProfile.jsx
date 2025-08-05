@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/UseAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../pages/Loader/Loader";
 import {PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer} from "recharts";
