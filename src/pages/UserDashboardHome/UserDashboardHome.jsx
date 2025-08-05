@@ -12,6 +12,7 @@ import { Link } from "react-router";
 import Loader from "../Loader/Loader";
 import Animation from "../../hooks/Animation"
 import UserDataChart from "./UserDataChart";
+import StatCard from "../../hooks/StatCard";
 
 const UserDashboardHome = () => {
   useEffect(()=>{
@@ -43,31 +44,47 @@ const UserDashboardHome = () => {
         </p>
       </div>
 
-      <Animation><div data-aos="fade-up" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-orange-100 rounded-lg p-6 text-center shadow">
-          <FaClipboardList className="text-3xl mx-auto text-orange-500" />
-          <h2 className="text-xl font-bold mt-2">{stats.totalPosts || 0}</h2>
-          <p>Total Posts</p>
-        </div>
-        <div className="bg-orange-100 rounded-lg p-6 text-center shadow">
-          <FaThumbsUp className="text-3xl mx-auto text-orange-500" />
-          <h2 className="text-xl font-bold mt-2">{stats.totalLikes || 0}</h2>
-          <p>Total Likes</p>
-        </div>
-        <div className="bg-orange-100 rounded-lg p-6 text-center shadow">
-          <FaRegComments className="text-3xl mx-auto text-orange-500" />
-          <h2 className="text-xl font-bold mt-2">{stats.totalComments || 0}</h2>
-          <p>Comments Made</p>
-        </div>
-        <div className="bg-orange-100 rounded-lg p-6 text-center shadow">
-          <FaCalendarAlt className="text-3xl mx-auto text-orange-500" />
-          <h2 className="text-xl font-bold mt-2">
-            {stats.memberSince
-              ? new Date(stats.memberSince).toLocaleDateString()
-              : "--"}
-          </h2>
-          <p>Member Since</p>
-        </div>
+      <Animation><div data-aos="fade-up" className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        
+        {/* user total posts */}
+        <StatCard
+        icon={FaClipboardList}
+        value={stats.totalPosts || 0}
+        label="Total Posts"
+        gradientFrom="#ef7706"
+        gradientTo="#ffc66e"
+        ></StatCard>
+
+        {/* user total likes */}
+        <StatCard
+        icon={FaThumbsUp}
+        value={stats.totalLikes || 0}
+        label="Total Likes"
+        gradientFrom="#ef7706"
+        gradientTo="#ffc66e"
+        ></StatCard>
+        
+        {/* user total comments */}
+        <StatCard
+        icon={FaRegComments}
+        value={stats.totalComments || 0}
+        label="Comments Made"
+        gradientFrom="#ef7706"
+        gradientTo="#ffc66e"
+        ></StatCard>
+        
+        {/* user joined date */}
+        <StatCard
+        icon={FaCalendarAlt}
+        value={
+          stats.memberSince
+            ? new Date(stats.memberSince).toLocaleDateString()
+            : "--"
+        }
+        label="Member Since"
+        gradientFrom="#ef7706"
+        gradientTo="#ffc66e"
+        ></StatCard>
       </div></Animation>
 
       {/* data chart */}
