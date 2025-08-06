@@ -23,6 +23,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Forbidden from "../pages/Forbidden/Forbidden";
 import About from "../pages/About/About";
 import FaQ from "../pages/FaQ/FaQ";
+import FeedBack from "../privatePages/Feedback/FeedBack";
 
 const Routes = createBrowserRouter([
   {
@@ -109,6 +110,12 @@ const Routes = createBrowserRouter([
         path: "dashboard/myProfile",
         element: <PrivateRoute>
           <MyProfile></MyProfile>
+        </PrivateRoute>
+      },
+      {
+        path: "dashboard/feedback",
+        element: <PrivateRoute>
+          <FeedBack></FeedBack>
         </PrivateRoute>
       },
 

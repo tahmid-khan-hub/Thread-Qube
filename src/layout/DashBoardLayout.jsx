@@ -11,7 +11,7 @@ import {
   FaUserShield,
   FaUsersCog,
 } from "react-icons/fa";
-import { MdPostAdd, MdReportProblem, MdCampaign, MdLogout } from "react-icons/md";
+import { MdPostAdd, MdReportProblem, MdCampaign, MdLogout, MdFeedback } from "react-icons/md";
 import Animation from "../hooks/Animation";
 
 const DashBoardLayout = () => {
@@ -198,6 +198,14 @@ const DashBoardLayout = () => {
                   <a>
                     <FaRegNewspaper className="inline-block mr-2" />
                     My Posts
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink className="font-semibold mb-3" to="dashboard/feedback">
+                <li>
+                  <a>
+                    <MdFeedback className="inline-block mr-2" />
+                    Feedback
                   </a>
                 </li>
               </NavLink>
