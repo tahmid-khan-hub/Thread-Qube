@@ -6,6 +6,10 @@ import Loader from "../../pages/Loader/Loader";
 import {PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer} from "recharts";
 import AdminTagManager from "../AdminTagManager/AdminTagManager";
 import Animation from "../../hooks/Animation";
+import StatCard from "../../hooks/StatCard";
+import { FaClipboardList } from "react-icons/fa";
+import { FaComments } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 
 const COLORS = ["#FF8042", "#00C49F", "#FFBB28"];
 
@@ -35,39 +39,56 @@ const AdminProfile = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 mt-16 min-h-screen">
-      <div>
-        <h2 className="text-3xl font-bold mb-8 text-center">Admin Profile</h2>
+    <div className="px-4 mt-16 min-h-screen">
 
-      <div className="flex flex-col md:flex-row items-center gap-10 mb-10">
-        <Animation><img
-          data-aos="fade-up"
-          src={user?.photoURL}
-          alt="Admin"
-          className="w-40 h-40 object-cover rounded-full border-4 border-orange-400"
-        /></Animation>
-        <Animation><div data-aos="fade-left" className="space-y-2 text-lg">
-          <p>
-            <span className="font-semibold">Name:</span> {user?.displayName}
-          </p>
-          <p>
-            <span className="font-semibold">Email:</span> {user?.email}
-          </p>
-          <p>
-            <span className="font-semibold">Total Posts:</span>{" "}
-            {stats.totalPosts}
-          </p>
-          <p>
-            <span className="font-semibold">Total Comments:</span>{" "}
-            {stats.totalComments}
-          </p>
-          <p>
-            <span className="font-semibold">Total Users:</span>{" "}
-            {stats.totalUsers}
-          </p>
-        </div></Animation>
+      <h2 className="text-3xl font-bold mb-16 text-center">Admin Profile</h2>
+      {/* profile */}
+      <div>
+        <div className="flex flex-col items-center gap-10 mb-10">
+          <Animation><img
+            data-aos="fade-up"
+            src={user?.photoURL}
+            alt="Admin"
+            className="w-40 h-40 object-cover rounded-full border-4 border-orange-400"
+          /></Animation>
+          <Animation><div data-aos="fade-left" className="space-y-2 text-lg">
+            <p className="text-center">
+              <span className="font-bold">Name:</span> {user?.displayName}
+            </p>
+            <p className="text-center">
+              <span className="font-bold">Email:</span> {user?.email}
+            </p>
+            
+          </div></Animation>
+        </div>
       </div>
-      </div>
+
+      {/* stats card */}
+      <Animation><div data-aos="fade-up" className="grid grid-cols-2 md:grid-cols-3 gap-5 max-w-3xl mx-auto mt-24">
+        <StatCard
+        icon={FaClipboardList}
+        value={stats.totalPosts || 0}
+        label="Total Posts"
+        gradientFrom="#ef7706"
+        gradientTo="#ffc66e"
+        ></StatCard>
+
+        <StatCard
+        icon={FaComments}
+        value={stats.totalComments || 0}
+        label="Total Comments"
+        gradientFrom="#ef7706"
+        gradientTo="#ffc66e"
+        ></StatCard>
+
+        <StatCard
+        icon={FaUsers}
+        value={stats.totalUsers || 0}
+        label="Total Users"
+        gradientFrom="#ef7706"
+        gradientTo="#ffc66e"
+        ></StatCard>
+      </div></Animation>
 
       <h3 className="text-3xl font-semibold mb-4 mt-24 text-center">
         Site Overview (Pie Chart)

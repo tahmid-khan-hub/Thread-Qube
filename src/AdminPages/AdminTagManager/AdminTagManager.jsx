@@ -33,8 +33,11 @@ const AdminTagManager = () => {
     }
   };
   return (
-    <div className="my-12">
-      <h2 className="text-xl font-bold mb-3">Manage Tags</h2>
+    <div className="my-12 mt-16">
+
+      <h2 className="text-3xl text-center font-semibold mb-11">Manage Tags</h2>
+
+      <div className="max-w-xl mx-auto flex flex-col justify-center">
       <form onSubmit={handleAddTag} className="flex gap-2 mb-5">
         <input
           type="text"
@@ -46,7 +49,7 @@ const AdminTagManager = () => {
         <button type="submit" className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white">
           Add Tag
         </button>
-      </form>
+      </form></div>
 
       <div className="max-w-xl mx-auto flex flex-wrap gap-2">
         {tags.map((tag) => (
