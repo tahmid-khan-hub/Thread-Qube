@@ -23,6 +23,7 @@ const FeedBack = () => {
         photo: user?.photoURL || null,
         userId: user?.uid || user?.email,
         createdAt: new Date().toISOString(),
+        response: false,
         rating: parseInt(data.rating),
       };
 
