@@ -150,14 +150,14 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink className="font-semibold" onClick={handleLogOut}>
+              <Link className="font-semibold" onClick={handleLogOut}>
                 <li>
                   <a>
                     <MdLogout className="inline-block mr-2" />
                     Log Out
                   </a>
                 </li>
-              </NavLink>
+              </Link>
             </>
           ) : (
             <>
