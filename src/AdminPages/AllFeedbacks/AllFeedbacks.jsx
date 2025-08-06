@@ -8,7 +8,7 @@ const AllFeedbacks = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  const [selectedFeedback, setSelectedFeedback] = useState(null); 
+  const [selectedFeedback, setSelectedFeedback] = useState(null);
 
   // Fetch all feedbacks
   const { data: feedbacks = [], isLoading } = useQuery({
@@ -106,7 +106,7 @@ const AllFeedbacks = () => {
                     : fb.message}
                   {fb.message.length > 20 && (
                     <button
-                      className="text-blue-500 underline ml-2"
+                      className="text-orange-500 underline ml-2"
                       onClick={() => setSelectedFeedback(fb)}
                     >
                       View More
@@ -140,16 +140,28 @@ const AllFeedbacks = () => {
 
       {/* Modal */}
       {selectedFeedback && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-5 rounded-lg max-w-lg w-full">
-            <h3 className="text-lg font-bold mb-3">Full Feedback</h3>
-            <p className="mb-4">{selectedFeedback.message}</p>
+        <div
+          className="fixed inset-0 backdrop-blur-sm flex justify-center items-center z-50"
+          onClick={() => setSelectedFeedback(null)}
+        >
+          <div
+            className="bg-white border border-gray-200 shadow-2xl rounded-xl p-6 max-w-lg w-full mx-4 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button Top-Right */}
             <button
               onClick={() => setSelectedFeedback(null)}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+              className="absolute top-3 right-3 text-gray-500 hover:text-red-500"
+              title="Close"
             >
-              Close
+              <MdClose size={22} />
             </button>
+
+            {/* Modal Content */}
+            <h3 className="text-xl font-semibold mb-4">Full Feedback</h3>
+            <div className="max-h-60 overflow-y-auto text-gray-700 whitespace-pre-wrap mb-5">
+              {selectedFeedback.message}
+            </div>
           </div>
         </div>
       )}
