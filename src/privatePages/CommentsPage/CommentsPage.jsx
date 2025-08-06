@@ -92,7 +92,7 @@ const CommentsPage = () => {
       <div className="max-w-[1400px] mx-auto">
         <button
           onClick={() => navigate(-1)}
-          className="btn bg-orange-500 text-white mt-5 ml-2"
+          className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white mt-5 ml-2"
         >
           Back
         </button>
