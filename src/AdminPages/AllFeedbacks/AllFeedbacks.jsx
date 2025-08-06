@@ -3,11 +3,11 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { MdClose, MdCheck } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
+import Loader from "../../pages/Loader/Loader";
 
 const AllFeedbacks = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
-
   const [selectedFeedback, setSelectedFeedback] = useState(null);
 
   // Fetch all feedbacks
@@ -43,7 +43,6 @@ const AllFeedbacks = () => {
     },
   });
 
-  // Delete handler
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -60,21 +59,20 @@ const AllFeedbacks = () => {
     });
   };
 
-  // Respond handler
   const handleRespond = (id) => {
     patchMutation.mutate(id);
   };
 
   if (isLoading) {
-    return <p className="text-center mt-10">Loading feedbacks...</p>;
+    return <Loader />;
   }
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-5 text-center">All Feedbacks</h2>
+      <h2 className="text-3xl font-bold mt-16 mb-10 text-center">All Feedbacks</h2>
 
-      {/* Responsive table */}
-      <div className="overflow-x-auto shadow-lg rounded-lg border border-gray-200">
+      {/* Table */}
+      <div className="overflow-x-auto shadow-md rounded-lg border border-gray-200 max-w-6xl mx-auto">
         <table className="min-w-full text-sm text-left">
           <thead className="bg-gray-100 text-gray-700">
             <tr>
@@ -88,49 +86,44 @@ const AllFeedbacks = () => {
           </thead>
           <tbody>
             {feedbacks.map((fb, index) => (
-              <tr key={fb._id} className="border-b hover:bg-gray-50">
-                <td className="px-4 py-3">{index + 1}</td>
-                <td className="px-4 py-3 flex items-center gap-2">
-                  <img
-                    src={fb.photo || "https://via.placeholder.com/40"}
-                    alt="User"
-                    className="w-8 h-8 rounded-full object-cover"
-                  />
-                  {fb.name}
+              <tr key={fb._id} className="border-b">
+                <td className="px-4 py-3 align-middle">{index + 1}</td>
+                <td className="px-4 py-3 align-middle">
+                  <div className="flex items-center gap-2">{fb.name}</div>
                 </td>
-                <td className="px-4 py-3">{fb.category}</td>
-                <td className="px-4 py-3">{fb.rating} ⭐</td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-3 align-middle">{fb.category}</td>
+                <td className="px-4 py-3 align-middle">{fb.rating} ⭐</td>
+
+                <td
+                  className="px-4 py-3 align-middle cursor-pointer text-orange-600 hover:underline" 
+                  onClick={() => setSelectedFeedback(fb)} 
+                  title="Click to view full feedback"
+                >
                   {fb.message.length > 20
                     ? `${fb.message.slice(0, 20)}...`
                     : fb.message}
-                  {fb.message.length > 20 && (
-                    <button
-                      className="text-orange-500 underline ml-2"
-                      onClick={() => setSelectedFeedback(fb)}
-                    >
-                      View More
-                    </button>
-                  )}
                 </td>
-                <td className="px-4 py-3 flex gap-2">
-                  <button
-                    onClick={() => handleRespond(fb._id)}
-                    disabled={fb.response}
-                    className={`p-2 rounded ${
-                      fb.response
-                        ? "bg-green-200 cursor-not-allowed"
-                        : "bg-green-500 hover:bg-green-600 text-white"
-                    }`}
-                  >
-                    <MdCheck size={18} />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(fb._id)}
-                    className="p-2 rounded bg-red-500 hover:bg-red-600 text-white"
-                  >
-                    <MdClose size={18} />
-                  </button>
+
+                <td className="px-4 py-3 align-middle">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleRespond(fb._id)}
+                      disabled={fb.response}
+                      className={`p-2 rounded ${
+                        fb.response
+                          ? "bg-green-200 cursor-not-allowed"
+                          : "bg-green-500 hover:bg-green-600 text-white"
+                      }`}
+                    >
+                      <MdCheck size={18} />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(fb._id)}
+                      className="p-2 rounded bg-red-500 hover:bg-red-600 text-white"
+                    >
+                      <MdClose size={18} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -148,7 +141,6 @@ const AllFeedbacks = () => {
             className="bg-white border border-gray-200 shadow-2xl rounded-xl p-6 max-w-lg w-full mx-4 relative"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button Top-Right */}
             <button
               onClick={() => setSelectedFeedback(null)}
               className="absolute top-3 right-3 text-gray-500 hover:text-red-500"
@@ -157,7 +149,6 @@ const AllFeedbacks = () => {
               <MdClose size={22} />
             </button>
 
-            {/* Modal Content */}
             <h3 className="text-xl font-semibold mb-4">Full Feedback</h3>
             <div className="max-h-60 overflow-y-auto text-gray-700 whitespace-pre-wrap mb-5">
               {selectedFeedback.message}
