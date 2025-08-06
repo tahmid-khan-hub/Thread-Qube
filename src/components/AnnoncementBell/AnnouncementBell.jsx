@@ -1,18 +1,20 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { FaBell } from "react-icons/fa";
+import React, { useState } from "react";
+import { MdNotificationsNone, MdClose } from "react-icons/md";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import useUserRole from "../../hooks/useUserRole";
+import Loader from "../../pages/Loader/Loader";
 
 
-const AnnouncementBell = () => {
+const NotificationBell = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [open, setOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const queryClient = useQueryClient();
+  const { role, roleLoading } = useUserRole();
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Fetch announcements
-  const { data: announcements = [], isLoading: loadingAnnouncements } = useQuery({
+  const { data: announcements = [], isLoading: announcementLoading } = useQuery({
     queryKey: ["announcements"],
     queryFn: async () => {
       const res = await axiosSecure.get("/announcements");
@@ -20,92 +22,84 @@ const AnnouncementBell = () => {
     },
   });
 
-  // Fetch feedback
-  const { data: feedbacks = [], isLoading: loadingFeedbacks } = useQuery({
-    queryKey: ["feedbacks", user?.uid],
-    enabled: !!user?.uid, // Only fetch if user.uid exists
+  const { data: feedbacks = [], isLoading: feedbackLoading } = useQuery({
+    queryKey: ["feedback"],
     queryFn: async () => {
       const res = await axiosSecure.get("/feedback");
       return res.data;
     },
   });
 
-  // Combine and filter feedback + announcements
-  const combinedItems = React.useMemo(() => {
-    if (loadingAnnouncements || loadingFeedbacks) return [];
+  const feedbackMutation = useMutation({
+    mutationFn: async (id) => {
+      return await axiosSecure.patch(`/feedback/${id}/read`, { read: true });
+    },
+    onSuccess: () => queryClient.invalidateQueries(["feedback"]),
+  });
 
-    // Filter feedback for current user and response === true
-    const filteredFeedbacks = feedbacks.filter(
-      (fb) => fb.userId === user?.uid && fb.response === true
-    );
+  const announcementMutation = useMutation({
+    mutationFn: async (id) => {
+      return await axiosSecure.patch(`/announcements/${id}/read`, { read: true });
+    },
+    onSuccess: () => queryClient.invalidateQueries(["announcements"]),
+  });
 
-    // Map them into a common shape
-    const mappedFeedbacks = filteredFeedbacks.map((fb) => ({
-      type: "feedback",
-      id: fb._id,
-      content: fb.message,
-    }));
+  if (roleLoading || announcementLoading || feedbackLoading) return <Loader />;
 
-    const mappedAnnouncements = announcements.map((ann) => ({
-      type: "announcement",
-      id: ann._id,
-      content: ann.title,
-    }));
+  const userFeedbacks = feedbacks.filter(
+    (item) => item.userId === user?.uid && item.response === true && !item.read
+  );
 
-    // Combine both arrays
-    return [...mappedAnnouncements, ...mappedFeedbacks];
-  }, [announcements, feedbacks, user?.uid, loadingAnnouncements, loadingFeedbacks]);
+  const unreadAnnouncements = announcements.filter((item) => !item.read);
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const combinedNotifications = [...userFeedbacks, ...unreadAnnouncements];
+
+  const handleDismiss = (item) => {
+    if (item.message) {
+      // Feedback
+      feedbackMutation.mutate(item._id);
+    } else {
+      // Announcement
+      announcementMutation.mutate(item._id);
+    }
+  };
 
   return (
-    <div className="relative" ref={dropdownRef}>
-      <div
-        onClick={() => setOpen((prev) => !prev)}
-        className="cursor-pointer"
-      >
-        <FaBell className="text-2xl text-gray-600 mr-5" />
-        {combinedItems.length > 0 && (
-          <span className="absolute -top-2 right-0.5 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-            {combinedItems.length}
-          </span>
-        )}
-      </div>
+    <>
+      {role === "admin" || role === "user" ? (
+        <div className="relative">
+          <button onClick={() => setIsOpen(!isOpen)} className="text-2xl">
+            <MdNotificationsNone />
+          </button>
 
-      {open && (
-        <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg z-20 p-3 max-h-96 overflow-y-auto border border-gray-200">
-          <h3 className="font-bold text-lg mb-2 text-orange-600">
-            Notifications
-          </h3>
-          {combinedItems.length === 0 ? (
-            <p className="text-gray-500">No new notifications</p>
-          ) : (
-            <ul className="space-y-2">
-              {combinedItems.map((item) => (
-                <li
-                  key={item.id}
-                  className={`text-sm text-gray-700 border-b pb-1 ${
-                    item.type === "feedback" ? "" : ""
-                  }`}
-                >
-                  {item.content}
-                </li>
-              ))}
-            </ul>
+          {isOpen && (
+            <div className="absolute right-0 mt-2 w-64 bg-white border rounded shadow-lg z-50">
+              {role === "admin" ? (
+                <div className="p-4 text-center text-gray-500">No notifications</div>
+              ) : combinedNotifications.length === 0 ? (
+                <div className="p-4 text-center text-gray-500">No notifications</div>
+              ) : (
+                combinedNotifications.map((item) => (
+                  <div
+                    key={item._id}
+                    className="flex justify-between items-center px-4 py-2 border-b text-sm hover:bg-gray-50"
+                  >
+                    <span>{item.message || item.title}</span>
+                    <button
+                      className="text-red-500 hover:text-red-700"
+                      onClick={() => handleDismiss(item)}
+                    >
+                      <MdClose />
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
           )}
         </div>
-      )}
-    </div>
+      ) : null}
+    </>
   );
 };
 
-export default AnnouncementBell;
+export default NotificationBell;
