@@ -150,6 +150,14 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
+              <NavLink className="font-semibold mb-3" to="dashboard/allFeedbacks">
+                <li>
+                  <a>
+                    <MdFeedback className="inline-block mr-2" />
+                    All Feedback
+                  </a>
+                </li>
+              </NavLink>
               <Link className="font-semibold" onClick={handleLogOut}>
                 <li>
                   <a>

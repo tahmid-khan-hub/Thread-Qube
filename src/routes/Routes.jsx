@@ -24,6 +24,7 @@ import Forbidden from "../pages/Forbidden/Forbidden";
 import About from "../pages/About/About";
 import FaQ from "../pages/FaQ/FaQ";
 import FeedBack from "../privatePages/Feedback/FeedBack";
+import AllFeedbacks from "../AdminPages/AllFeedbacks/AllFeedbacks";
 
 const Routes = createBrowserRouter([
   {
@@ -148,6 +149,12 @@ const Routes = createBrowserRouter([
         path: "dashboard/reportedActivities",
         element: <AdminRoute>
           <Reports></Reports>
+        </AdminRoute>
+      },
+      {
+        path: "dashboard/allFeedbacks",
+        element: <AdminRoute>
+          <AllFeedbacks></AllFeedbacks>
         </AdminRoute>
       }
     ]
