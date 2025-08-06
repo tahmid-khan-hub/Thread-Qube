@@ -51,7 +51,7 @@ const FeedBack = () => {
 
       {/* User Info Display */}
       {user && (
-        <div className="flex items-center gap-3 mb-5 bg-base-200 p-3 rounded-lg">
+        <div data-aos="fade-down" className="flex items-center gap-3 mb-5 bg-base-200 p-3 rounded-lg">
           <img
             src={user?.photoURL}
             alt="User Avatar"
@@ -128,8 +128,7 @@ const FeedBack = () => {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full mt-5 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl 
-            focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          className="w-full mt-5 btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white"
         >
           {isPending ? "Submitting..." : "Submit"}
         </button>
