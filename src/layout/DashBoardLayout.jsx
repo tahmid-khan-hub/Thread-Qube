@@ -12,6 +12,7 @@ import {
   FaUsersCog,
 } from "react-icons/fa";
 import { MdPostAdd, MdReportProblem, MdCampaign, MdLogout, MdFeedback } from "react-icons/md";
+import { IoIosSettings } from "react-icons/io";
 import Animation from "../hooks/Animation";
 
 const DashBoardLayout = () => {
@@ -204,7 +205,7 @@ const DashBoardLayout = () => {
               <NavLink className="font-semibold mb-3" to="dashboard/myPosts">
                 <li>
                   <a>
-                    <FaRegNewspaper className="inline-block mr-2" />
+                    <FaRegNewspaper className="inline-block mr-2 " />
                     My Posts
                   </a>
                 </li>
@@ -212,15 +213,23 @@ const DashBoardLayout = () => {
               <NavLink className="font-semibold mb-3" to="dashboard/feedback">
                 <li>
                   <a>
-                    <MdFeedback className="inline-block mr-2" />
+                    <MdFeedback className="inline-block mr-2 mt-0.5" />
                     Feedback
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink className="font-semibold mb-3" to="dashboard/userSettings">
+                <li>
+                  <a>
+                    <IoIosSettings className="inline-block mr-2 mt-0.5" />
+                    Settings
                   </a>
                 </li>
               </NavLink>
               <Link className="font-semibold" onClick={handleLogOut}>
                 <li>
                   <a>
-                    <MdLogout className="inline-block mr-2" />
+                    <MdLogout className="inline-block mr-2 mt-0.5" />
                     Log Out
                   </a>
                 </li>

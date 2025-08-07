@@ -25,6 +25,7 @@ import About from "../pages/About/About";
 import FaQ from "../pages/FaQ/FaQ";
 import FeedBack from "../privatePages/Feedback/FeedBack";
 import AllFeedbacks from "../AdminPages/AllFeedbacks/AllFeedbacks";
+import UserSettingsPage from "../privatePages/UserSettingsPage/UserSettingsPage";
 
 const Routes = createBrowserRouter([
   {
@@ -117,6 +118,12 @@ const Routes = createBrowserRouter([
         path: "dashboard/feedback",
         element: <PrivateRoute>
           <FeedBack></FeedBack>
+        </PrivateRoute>
+      },
+      {
+        path: "dashboard/userSettings",
+        element: <PrivateRoute>
+          <UserSettingsPage></UserSettingsPage>
         </PrivateRoute>
       },
 
