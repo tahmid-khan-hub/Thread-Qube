@@ -159,6 +159,14 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
+              <NavLink className="font-semibold mb-3" to="dashboard/adminSettings">
+                <li>
+                  <a>
+                    <MdAdminPanelSettings  className="inline-block mr-2" />
+                    Settings
+                  </a>
+                </li>
+              </NavLink>
               <Link className="font-semibold" onClick={handleLogOut}>
                 <li>
                   <a>

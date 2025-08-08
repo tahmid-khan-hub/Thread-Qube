@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../Loader/Loader";
 
 const Privacy = () => {
+
+  useEffect(()=>{
+    document.title = "ThreadQube | Privacy & Policy"
+    window.scrollTo(0,0);
+  },[])
   const axiosSecure = useAxiosSecure();
 
   const { data, isLoading } = useQuery({
