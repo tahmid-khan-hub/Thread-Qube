@@ -27,6 +27,7 @@ import FeedBack from "../privatePages/Feedback/FeedBack";
 import AllFeedbacks from "../AdminPages/AllFeedbacks/AllFeedbacks";
 import UserSettingsPage from "../privatePages/UserSettingsPage/UserSettingsPage";
 import Terms from "../pages/Terms/Terms"
+import Privacy from "../pages/Privacy/Privacy";
 
 const Routes = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const Routes = createBrowserRouter([
         {
           path: "terms",
           element: <Terms></Terms>
+        },
+        {
+          path: "privacy",
+          element: <Privacy></Privacy>
         },
         {
           path: "postDetails/:id",
