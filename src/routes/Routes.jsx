@@ -183,7 +183,7 @@ const Routes = createBrowserRouter([
         </AdminRoute>
       },
       {
-        path: "dashboard/editPage/:id",
+        path: "/dashboard/dashboard/editPage/:id",
         element: <AdminRoute>
           <EditPage></EditPage>
         </AdminRoute>

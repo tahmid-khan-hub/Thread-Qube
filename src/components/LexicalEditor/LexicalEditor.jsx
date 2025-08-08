@@ -1,4 +1,3 @@
-// components/LexicalEditor.jsx
 import React from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -7,13 +6,12 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $getRoot, $getSelection } from "lexical";
 
 function onError(error) {
   console.error("Lexical error:", error);
 }
 
-// Optional onChange handler to lift state
+// Plugin to lift state on editor changes
 function MyOnChangePlugin({ onChange }) {
   const [editor] = useLexicalComposerContext();
 
@@ -40,12 +38,16 @@ const LexicalEditor = ({ initialContent, onChange }) => {
 
   return (
     <LexicalComposer initialConfig={editorConfig}>
-      <div className="border p-4 rounded shadow bg-white min-h-[200px]">
+      <div className="w-full border border-gray-300 rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-orange-500 bg-white relative">
         <RichTextPlugin
           contentEditable={
-            <ContentEditable className="outline-none min-h-[150px]" />
+            <ContentEditable className="w-full p-4 min-h-[200px] text-base text-gray-800 outline-none" />
           }
-          placeholder={<p className="text-gray-400">Write something...</p>}
+          placeholder={
+            <div className="absolute top-4 left-4 text-gray-400 pointer-events-none">
+              Write something...
+            </div>
+          }
           ErrorBoundary={LexicalErrorBoundary}
         />
         <HistoryPlugin />

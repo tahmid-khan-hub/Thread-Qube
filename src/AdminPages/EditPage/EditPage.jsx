@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import LexicalEditor from "../../components/LexicalEditor/LexicalEditor"
+import LexicalEditor from "../../components/LexicalEditor/LexicalEditor";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import Loader from "../../pages/Loader/Loader";
@@ -12,7 +12,11 @@ const EditPage = () => {
   const queryClient = useQueryClient();
   const [editorContent, setEditorContent] = useState(null);
 
-  const { data: pageData, isLoading } = useQuery({
+  useEffect(() => {
+    document.title = "ThreadQube | Edit Terms and Policy";
+  }, []);
+
+  const { data: pageData = {}, isLoading } = useQuery({
     queryKey: ["page", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/staticPages/${id}`);
@@ -29,6 +33,8 @@ const EditPage = () => {
     },
     enabled: !!id,
   });
+
+  console.log(pageData);
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -62,8 +68,10 @@ const EditPage = () => {
   if (isLoading) return <Loader></Loader>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Edit: {pageData?.title}</h1>
+    <div className=" p-6">
+      <h1 className="text-3xl text-center font-bold mt-5 mb-7">
+        Update: {pageData?.title}
+      </h1>
       <form onSubmit={handleSubmit}>
         <LexicalEditor
           initialContent={editorContent}
@@ -71,9 +79,9 @@ const EditPage = () => {
         />
         <button
           type="submit"
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+          className="mt-8 w-full btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white"
         >
-          Update Page
+          Update
         </button>
       </form>
     </div>
