@@ -11,7 +11,7 @@ import {
   FaUserShield,
   FaUsersCog,
 } from "react-icons/fa";
-import { MdPostAdd, MdReportProblem, MdCampaign, MdLogout, MdFeedback } from "react-icons/md";
+import { MdPostAdd, MdReportProblem, MdCampaign, MdLogout, MdFeedback, MdAdminPanelSettings } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import Animation from "../hooks/Animation";
 
@@ -82,7 +82,7 @@ const DashBoardLayout = () => {
       </div>
 
       {/* Sidebar */}
-      <Animation><div data-aos="fade-right" className="drawer-side border-r border-orange-500">
+      <Animation><div data-aos="fade-right" className="drawer-side border-r border-r-orange-500">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"
