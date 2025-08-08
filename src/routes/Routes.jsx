@@ -28,6 +28,8 @@ import AllFeedbacks from "../AdminPages/AllFeedbacks/AllFeedbacks";
 import UserSettingsPage from "../privatePages/UserSettingsPage/UserSettingsPage";
 import Terms from "../pages/Terms/Terms"
 import Privacy from "../pages/Privacy/Privacy";
+import AdminSettings from "../AdminPages/AdminSettings/AdminSettings";
+import EditPage from "../AdminPages/EditPage/EditPage";
 
 const Routes = createBrowserRouter([
   {
@@ -172,6 +174,18 @@ const Routes = createBrowserRouter([
         path: "dashboard/allFeedbacks",
         element: <AdminRoute>
           <AllFeedbacks></AllFeedbacks>
+        </AdminRoute>
+      },
+      {
+        path: "dashboard/adminSettings",
+        element: <AdminRoute>
+          <AdminSettings></AdminSettings>
+        </AdminRoute>
+      },
+      {
+        path: "editPage",
+        element: <AdminRoute>
+          <EditPage></EditPage>
         </AdminRoute>
       }
     ]
