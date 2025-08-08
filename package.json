@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lexical/react": "^0.34.0",
+    "@lexical/rich-text": "^0.34.0",
     "@stripe/react-stripe-js": "^3.7.0",
     "@stripe/stripe-js": "^7.4.0",
     "@tailwindcss/vite": "^4.1.11",
@@ -19,6 +21,7 @@
     "firebase": "^11.10.0",
     "flowbite": "^3.1.2",
     "framer-motion": "^12.23.5",
+    "lexical": "^0.34.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
