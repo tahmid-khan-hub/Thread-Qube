@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
@@ -9,6 +9,29 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 
 function onError(error) {
   console.error("Lexical error:", error);
+}
+
+// Component to initialize editor state once
+function InitializeEditor({ initialContent }) {
+  const [editor] = useLexicalComposerContext();
+  const initialized = useRef(false);
+
+  useEffect(() => {
+    if (!initialContent) return;
+    if (initialized.current) return; // initialize only once
+    initialized.current = true;
+
+    editor.update(() => {
+      try {
+        const editorState = editor.parseEditorState(initialContent);
+        editor.setEditorState(editorState);
+      } catch {
+        editor.setEditorState(editor.parseEditorState("{}"));
+      }
+    });
+  }, [editor, initialContent]);
+
+  return null;
 }
 
 // Plugin to lift state on editor changes
@@ -38,6 +61,7 @@ const LexicalEditor = ({ initialContent, onChange }) => {
 
   return (
     <LexicalComposer initialConfig={editorConfig}>
+      <InitializeEditor initialContent={initialContent} />
       <div className="w-full border border-gray-300 rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-orange-500 bg-white relative">
         <RichTextPlugin
           contentEditable={
@@ -45,7 +69,7 @@ const LexicalEditor = ({ initialContent, onChange }) => {
           }
           placeholder={
             <div className="absolute top-4 left-4 text-gray-400 pointer-events-none">
-              Write something...
+              Write something here...
             </div>
           }
           ErrorBoundary={LexicalErrorBoundary}
