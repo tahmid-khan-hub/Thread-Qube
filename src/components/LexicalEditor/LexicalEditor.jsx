@@ -6,35 +6,39 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $generateHtmlFromNodes } from "@lexical/html";
 
 function onError(error) {
   console.error("Lexical error:", error);
 }
 
-// Component to initialize editor state once
-function InitializeEditor({ initialContent }) {
+function InitializeEditor({ initialJSON }) {
   const [editor] = useLexicalComposerContext();
   const initialized = useRef(false);
 
   useEffect(() => {
-    if (!initialContent) return;
-    if (initialized.current) return; // initialize only once
+    if (!initialJSON || initialized.current) return;
     initialized.current = true;
 
+    let parsed;
+    try {
+      parsed = typeof initialJSON === "string"
+        ? JSON.parse(initialJSON)
+        : initialJSON;
+    } catch {
+      console.error("Invalid editor JSON");
+      return;
+    }
+
     editor.update(() => {
-      try {
-        const editorState = editor.parseEditorState(initialContent);
-        editor.setEditorState(editorState);
-      } catch {
-        editor.setEditorState(editor.parseEditorState("{}"));
-      }
+      const editorState = editor.parseEditorState(parsed);
+      editor.setEditorState(editorState);
     });
-  }, [editor, initialContent]);
+  }, [editor, initialJSON]);
 
   return null;
 }
 
-// Plugin to lift state on editor changes
 function MyOnChangePlugin({ onChange }) {
   const [editor] = useLexicalComposerContext();
 
@@ -43,14 +47,18 @@ function MyOnChangePlugin({ onChange }) {
       onChange={() => {
         editor.update(() => {
           const editorStateJSON = editor.getEditorState().toJSON();
-          onChange(editorStateJSON);
+          const html = $generateHtmlFromNodes(editor);
+          onChange({
+            json: editorStateJSON,
+            html
+          });
         });
       }}
     />
   );
 }
 
-const LexicalEditor = ({ initialContent, onChange }) => {
+const LexicalEditor = ({ initialJSON, onChange }) => {
   const editorConfig = {
     namespace: "Editor",
     theme: {
@@ -61,7 +69,7 @@ const LexicalEditor = ({ initialContent, onChange }) => {
 
   return (
     <LexicalComposer initialConfig={editorConfig}>
-      <InitializeEditor initialContent={initialContent} />
+      <InitializeEditor initialJSON={initialJSON} />
       <div className="w-full border border-gray-300 rounded-lg shadow-sm focus-within:ring-2 focus-within:ring-orange-500 bg-white relative">
         <RichTextPlugin
           contentEditable={
