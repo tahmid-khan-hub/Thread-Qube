@@ -30,6 +30,7 @@ import Terms from "../pages/Terms/Terms"
 import Privacy from "../pages/Privacy/Privacy";
 import AdminSettings from "../AdminPages/AdminSettings/AdminSettings";
 import EditPage from "../AdminPages/EditPage/EditPage";
+import UserRoute from "../router/UserRoute";
 
 const Routes = createBrowserRouter([
   {
@@ -104,39 +105,39 @@ const Routes = createBrowserRouter([
       },
       {
         path: "dashboardHome",
-        element: <PrivateRoute>
+        element: <UserRoute>
           <UserDashboardHome />
-          </PrivateRoute>
+          </UserRoute>
       },
       {
         path: "dashboard/addPost",
-        element: <PrivateRoute>
+        element: <UserRoute>
           <AddPost></AddPost>
-        </PrivateRoute>
+        </UserRoute>
       },
       {
         path: "dashboard/myPosts",
-        element: <PrivateRoute>
+        element: <UserRoute>
           <MyPosts></MyPosts>
-        </PrivateRoute>
+        </UserRoute>
       },
       {
         path: "dashboard/myProfile",
-        element: <PrivateRoute>
+        element: <UserRoute>
           <MyProfile></MyProfile>
-        </PrivateRoute>
+        </UserRoute>
       },
       {
         path: "dashboard/feedback",
-        element: <PrivateRoute>
+        element: <UserRoute>
           <FeedBack></FeedBack>
-        </PrivateRoute>
+        </UserRoute>
       },
       {
         path: "dashboard/userSettings",
-        element: <PrivateRoute>
+        element: <UserRoute>
           <UserSettingsPage></UserSettingsPage>
-        </PrivateRoute>
+        </UserRoute>
       },
 
       // admin routes
