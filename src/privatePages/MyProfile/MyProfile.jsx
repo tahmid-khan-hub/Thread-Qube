@@ -6,6 +6,8 @@ import Loader from "../../pages/Loader/Loader";
 import bronze from "../../assets/bronze.png";
 import gold from "../../assets/gold.jpg";
 import Animation from "../../hooks/Animation";
+import Lottie from "lottie-react";
+import DataSearchingLottie from "../../assets/lotties/Searching.json"
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -77,7 +79,15 @@ const MyProfile = () => {
           Recent Posts
         </h2>
         {myPosts.length === 0 ? (
-          <p className="text-gray-500 text-center">You haven't posted anything yet.</p>
+          <div className="flex flex-col ">
+          <div className="w-72 h-72 mx-auto">
+            <Lottie animationData={DataSearchingLottie} loop />
+          </div>
+          <p className="text-center text-gray-500 -mt-12">
+          No recent posts found.
+          </p>
+          
+        </div>
         ) : (
           <div className="space-y-7 mb-7 max-w-5xl mx-auto">
             {myPosts.slice(0, 3).map((post) => (

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Animation from "../../hooks/Animation";
 
 const faqData = [
   {
@@ -49,7 +50,8 @@ const FaQ = () => {
 
         <div className="space-y-6">
           {faqData.map((faq, index) => (
-            <div
+            <Animation><div
+              data-aos="fade-up"
               key={index}
               className="border rounded-lg shadow-sm transition-all duration-200"
             >
@@ -67,7 +69,7 @@ const FaQ = () => {
                   {faq.answer}
                 </div>
               )}
-            </div>
+            </div></Animation>
           ))}
         </div>
       </div>
