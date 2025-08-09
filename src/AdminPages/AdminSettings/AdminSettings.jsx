@@ -7,6 +7,7 @@ import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Animation from "../../hooks/Animation";
 import PageSettings from "./PageSettings";
+import SocialSettings from "./SocialSettings";
 
 const AdminSettings = () => {
   const { user, updateUserProfile, updateUserPassword } = useAuth();
@@ -89,7 +90,7 @@ const AdminSettings = () => {
           <h2 className="text-3xl font-bold mt-5 text-center">Settings</h2>
 
           {/* Account Info Section */}
-          <div  className="bg-base-200 rounded-xl p-6 shadow">
+          <div className="bg-base-200 rounded-xl p-6 shadow">
             <h3 className="text-xl font-semibold mb-4">Account Information</h3>
             <p className="text-sm text-gray-500 mb-4">
               {dbUser?.createdAt ? (
@@ -168,13 +169,18 @@ const AdminSettings = () => {
                 type="submit"
                 className="w-full btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white mt-5 text-[15px]"
               >
-                Save Chnages
+                Save Changes
               </button>
             </form>
           </div>
         </div>
       </Animation>
+
+      {/* where admin can update pages like terms and privacy */}
       <PageSettings></PageSettings>
+
+      {/* where admin can update social links of website like facebook, twitter etc */}
+      <SocialSettings></SocialSettings>
     </>
   );
 };

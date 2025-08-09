@@ -9,16 +9,16 @@ const Footer = () => {
   const axiosSecure = useAxiosSecure();
 
   const { data, isLoading } = useQuery({
-    queryKey: ["terms"],
+    queryKey: ["social"],
     queryFn: async () => {
       const res = await axiosSecure.get("/staticPages/social");
       return res.data;
     },
   });
 
-  const facebookLink = data.facebook;
-  const twitterLink = data.twitter;
-  const linkedinLink = data.linkedin;
+  const facebookLink = data?.facebook;
+  const twitterLink = data?.twitter;
+  const linkedinLink = data?.linkedin;
 
   if(isLoading) return <Loader></Loader>;
 
