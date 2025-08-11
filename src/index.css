@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
+:root {
+  --ff-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+body {
+  font-family: var(--ff-sans);
+}
