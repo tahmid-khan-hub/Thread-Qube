@@ -8,22 +8,25 @@ import Swal from "sweetalert2";
 const SocialSettings = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { register, handleSubmit, refetch } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["social"],
     queryFn: async () => {
       const res = await axiosSecure.get("/staticPages/social");
       return res.data;
     },
+    onSuccess: (data) => {
+        reset(data); 
+    }
   });
 
   console.log(data);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (formData) => {
     try {
-      await axiosSecure.patch("/staticPages/social", data);
-      refetch();
+      await axiosSecure.patch("/staticPages/socialLinks", formData);
+      await refetch();
       Swal.fire("Updated!", "Social links updated successfully.", "success");
     } catch (error) {
       console.error(error);
@@ -46,7 +49,7 @@ const SocialSettings = () => {
             <label className="font-semibold">FaceBook</label>
             <input
               {...register("facebook", { required: true })}
-              value={data?.facebook || ""}
+              defaultValue={data?.facebook || ""}
               className="input input-bordered w-full mt-1"
             />
           </div>
@@ -55,7 +58,7 @@ const SocialSettings = () => {
             <label className="font-semibold">Twitter</label>
             <input
               {...register("twitter", { required: true })}
-              value={data?.twitter || ""}
+              defaultValue={data?.twitter || ""}
               className="input input-bordered w-full mt-1"
             />
           </div>
@@ -64,7 +67,7 @@ const SocialSettings = () => {
             <label className="font-semibold">LinkedIn</label>
             <input
               {...register("linkedin", { required: true })}
-              value={data?.linkedin || ""}
+              defaultValue={data?.linkedin || ""}
               className="input input-bordered w-full mt-1"
             />
           </div>
