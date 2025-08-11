@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Pagination from "../../shared/Pagination/Pagination";
 import Loader from "../../pages/Loader/Loader";
+import { RiAdminFill, RiMedalFill } from "react-icons/ri";
+import { FaUserPlus } from "react-icons/fa";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -81,23 +83,20 @@ const ManageUsers = () => {
                 <td>{u.email}</td>
                 <td>
                   {u.role === "admin" ? (
-                    <span className="btn btn-sm bg-green-600 text-white font-bold">Admin</span>
+                    <RiAdminFill size={21} className="text-green-600 ml-7.5"/>
                   ) : (
-                    <button
-                      onClick={() => handleMakeAdmin(u._id)}
-                      className="btn btn-sm bg-orange-500 text-white hover:bg-orange-600"
-                    >
-                      Make Admin
-                    </button>
+                    <FaUserPlus onClick={() => handleMakeAdmin(u._id)} size={22} className="text-orange-500 hover:text-orange-600 ml-8"/>
                   )}
                 </td>
-                <td>
-                  {u.badge === "gold" ? (
-                    <span className="btn btn-sm bg-amber-400 badge-success">Member</span>
-                  ) : (
-                    <span className="btn btn-sm bg-[#CD7F32] text-white badge-warning">Not a Member</span>
-                  )}
-                </td>
+                {u.role !== "admin" &&
+                  <td>
+                    {u.badge === "gold" ? (
+                      <RiMedalFill size={21} className="text-amber-400 ml-8"/>
+                    ) : (
+                      <RiMedalFill size={21} className="text-[#CD7F32] ml-8"/>
+                    )}
+                  </td>
+                }
               </tr>
             ))}
           </tbody>
