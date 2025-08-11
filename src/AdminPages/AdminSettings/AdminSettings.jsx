@@ -8,6 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import Animation from "../../hooks/Animation";
 import PageSettings from "./PageSettings";
 import SocialSettings from "./SocialSettings";
+import Loader from "../../pages/Loader/Loader";
 
 const AdminSettings = () => {
   const { user, updateUserProfile, updateUserPassword } = useAuth();
@@ -34,7 +35,7 @@ const AdminSettings = () => {
     }
   }, [user, reset]);
 
-  const { data: dbUser = {}, refetch } = useQuery({
+  const { data: dbUser = {}, refetch, isLoading } = useQuery({
     queryKey: ["dbUser", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users?email=${user.email}`);
@@ -83,6 +84,8 @@ const AdminSettings = () => {
       }
     }
   };
+
+  if(isLoading) return <Loader></Loader>;
   return (
     <>
       <Animation>
