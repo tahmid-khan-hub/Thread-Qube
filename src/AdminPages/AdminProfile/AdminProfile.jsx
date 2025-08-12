@@ -40,31 +40,10 @@ const AdminProfile = () => {
 
   return (
     <div className="px-4 mt-16 min-h-screen">
-
-      <h2 className="text-3xl font-bold mb-16 text-center">Admin Profile</h2>
-      {/* profile */}
-      <div>
-        <div className="flex flex-col items-center gap-10 mb-10">
-          <Animation><img
-            data-aos="fade-up"
-            src={user?.photoURL}
-            alt="Admin"
-            className="w-40 h-40 object-cover rounded-full border-4 border-orange-400"
-          /></Animation>
-          <Animation><div data-aos="fade-left" className="space-y-2 text-lg">
-            <p className="text-center">
-              <span className="font-bold">Name:</span> {user?.displayName}
-            </p>
-            <p className="text-center">
-              <span className="font-bold">Email:</span> {user?.email}
-            </p>
-            
-          </div></Animation>
-        </div>
-      </div>
+      <h2 className="text-3xl font-bold text-center">Dashboard</h2>
 
       {/* stats card */}
-      <Animation><div data-aos="fade-up" className="grid grid-cols-2 md:grid-cols-3 gap-5 max-w-3xl mx-auto mt-24">
+      <Animation><div data-aos="fade-up" className="grid grid-cols-2 md:grid-cols-3 gap-5 max-w-3xl mx-auto mt-12">
         <StatCard
         icon={FaClipboardList}
         value={stats.totalPosts || 0}

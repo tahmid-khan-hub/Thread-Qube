@@ -119,11 +119,11 @@ const DashBoardLayout = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink className="font-semibold mb-3" to="dashboard/adminProfile">
+              <NavLink className="font-semibold mb-3" to="dashboard/adminDashboard">
                 <li>
                   <a>
-                    <FaUserShield className="inline-block mr-2" />
-                    Admin Profile
+                    <AiOutlineHome className="inline-block mr-2" />
+                    Dashboard
                   </a>
                 </li>
               </NavLink>

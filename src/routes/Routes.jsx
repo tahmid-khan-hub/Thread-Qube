@@ -142,13 +142,13 @@ const Routes = createBrowserRouter([
 
       // admin routes
       {
-        path: "adminProfile",
+        path: "adminDashboard",
         element: <AdminRoute>
           <AdminProfile></AdminProfile>
         </AdminRoute>
       },
       {
-        path: "dashboard/adminProfile",
+        path: "dashboard/adminDashboard",
         element: <AdminRoute>
           <AdminProfile></AdminProfile>
         </AdminRoute>

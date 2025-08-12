@@ -10,7 +10,7 @@ const DashBoardRedirect = () => {
   useEffect(() => {
     if (!roleLoading) {
       if (role === "admin") {
-        navigate("/dashboard/adminProfile");
+        navigate("/dashboard/dashboard/adminDashboard");
       } else {
         navigate("/dashboard/dashboardHome");
       }
