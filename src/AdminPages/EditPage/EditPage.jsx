@@ -5,6 +5,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
+import Loader from "../../pages/Loader/Loader";
 
 const EditPage = () => {
   const { id } = useParams(); 
@@ -69,11 +70,11 @@ const EditPage = () => {
     updateMutation.mutate(formValues);
   };
 
-  if (isLoading) return <div className="p-6">Loading page...</div>;
+  if (isLoading) return <Loader></Loader>;
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Edit Terms & Conditions</h1>
+    <div className="p-4">
+      <h1 className="text-3xl text-center font-bold mb-4 mt-8">Update Terms & Conditions</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Title */}
@@ -81,7 +82,7 @@ const EditPage = () => {
           <label className="block font-medium mb-1">Title</label>
           <input
             {...register("title")}
-            className="border rounded w-full p-2"
+            className="border border-gray-300 bg-base-200 rounded w-full p-2"
             placeholder="Page title"
           />
         </div>
@@ -92,7 +93,7 @@ const EditPage = () => {
           <textarea
             {...register("description")}
             rows={5}
-            className="border rounded w-full p-2"
+            className="border border-gray-300 bg-base-200 rounded w-full p-2"
             placeholder="Short description shown on top"
           />
         </div>
@@ -101,18 +102,18 @@ const EditPage = () => {
         {Array.from({ length: 10 }).map((_, i) => {
           const num = i + 1;
           return (
-            <div key={num} className="border p-3 rounded">
-              <label className="block font-medium mb-1">Term {num} (Title)</label>
+            <div key={num} className="border border-gray-300 bg-base-200 p-3 rounded">
+              <label className="block font-medium mb-1">Section {num} (Title)</label>
               <input
                 {...register(`t${num}_title`)}
-                className="border rounded w-full p-2 mb-2"
+                className="border border-gray-300 bg-base-200 rounded w-full p-2 mb-2"
                 placeholder={`Section ${num} title`}
               />
-              <label className="block font-medium mb-1">Term {num} (Content)</label>
+              <label className="block font-medium mb-1">Section {num} (Content)</label>
               <textarea
                 {...register(`t${num}`)}
                 rows={3}
-                className="border rounded w-full p-2"
+                className="border border-gray-300 bg-base-200 rounded w-full p-2"
                 placeholder={`Section ${num} content`}
               />
             </div>
@@ -120,11 +121,11 @@ const EditPage = () => {
         })}
 
         {/* actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mb-3">
           <button
             type="submit"
             disabled={updateMutation.isLoading}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white"
           >
             {updateMutation.isLoading ? "Saving..." : "Save Changes"}
           </button>
@@ -132,9 +133,9 @@ const EditPage = () => {
           <button
             type="button"
             onClick={() => reset(mapPageToForm(pageData))}
-            className="px-3 py-2 border rounded"
+            className="btn border border-orange-500 bg-white"
           >
-            Reset to server values
+            Reset
           </button>
 
           <div className="ml-auto text-sm text-gray-600">
