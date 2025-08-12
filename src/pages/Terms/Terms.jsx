@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../Loader/Loader";
-import { $generateHtmlFromNodes } from "@lexical/html";
-import { createEditor } from "lexical";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 
 const Terms = () => {
   const axiosSecure = useAxiosSecure();
-  const [htmlContent, setHtmlContent] = useState("");
 
   useEffect(() => {
     document.title = "ThreadQube | Terms & Conditions";
@@ -22,40 +19,44 @@ const Terms = () => {
     },
   });
 
-  useEffect(() => {
-    if (!data?.content) return;
-
-    let parsed;
-    try {
-      parsed = typeof data.content === "string"
-        ? JSON.parse(data.content)
-        : data.content;
-    } catch (err) {
-      console.error("Invalid editor state JSON", err);
-      return;
-    }
-
-    const editor = createEditor();
-    editor.update(() => {
-      const editorState = editor.parseEditorState(parsed);
-      editor.setEditorState(editorState);
-      const html = $generateHtmlFromNodes(editor);
-      setHtmlContent(html);
-    });
-  }, [data]);
-
   if (isLoading) return <Loader />;
+  console.log(data);
 
   return (
-    <div className="max-w-[1500px] mx-auto px-2 py-10">
-      <h1 className="text-3xl font-bold mb-6">Terms and Conditions</h1>
-      <div
-        className="prose prose-sm max-w-none"
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-      />
-      <p className="text-sm text-gray-600 mt-10">
-        Last updated: {data?.lastUpdated ? new Date(data.lastUpdated).toLocaleDateString() : ""}
-      </p>
+    <div className="max-w-[1500px] mx-auto px-4 py-10 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">{data.title}</h1>
+      <p>{data.description}</p>
+
+      {/* All Terms and Conditions */}
+      <h3 className="text-xl mt-5 font-semibold">{data.t1_title}</h3>
+      <p className="mt-2">{data.t1}</p>
+
+      <h3 className="text-xl mt-5 font-semibold">{data.t2_title}</h3>
+      <p className="mt-2">{data.t2}</p>
+
+      <h3 className="text-xl mt-5 font-semibold">{data.t3_title}</h3>
+      <p className="mt-2">{data.t3}</p>
+
+      <h3 className="text-xl mt-5 font-semibold">{data.t4_title}</h3>
+      <p className="mt-2">{data.t4}</p>
+
+      <h3 className="text-xl mt-5 font-semibold">{data.t5_title}</h3>
+      <p className="mt-2">{data.t5}</p>
+
+      <h3 className="text-xl mt-5 font-semibold">{data.t6_title}</h3>
+      <p className="mt-2">{data.t6}</p>
+
+      <h3 className="text-xl mt-5 font-semibold">{data.t7_title}</h3>
+      <p className="mt-2">{data.t7}</p>
+
+      <h3 className="text-xl mt-5 font-semibold">{data.t8_title}</h3>
+      <p className="mt-2">{data.t8}</p>
+
+      <h3 className="text-xl mt-5 font-semibold">{data.t9_title}</h3>
+      <p className="mt-2">{data.t9}</p>
+      
+      <h3 className="text-xl mt-5 font-semibold">{data.t10_title}</h3>
+      <p className="mt-2">{data.t10}</p>
     </div>
   );
 };
