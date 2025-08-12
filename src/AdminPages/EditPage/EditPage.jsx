@@ -1,88 +1,147 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+// src/pages/admin/EditPage.jsx
+import React, { useEffect } from "react";
+import { useParams, useNavigate } from "react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import LexicalEditor from "../../components/LexicalEditor/LexicalEditor";
+import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
-import Loader from "../../pages/Loader/Loader";
 
 const EditPage = () => {
-  const { id } = useParams();
+  const { id } = useParams(); 
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
-  const [editorContent, setEditorContent] = useState(null);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    document.title = "ThreadQube | Edit Terms and Policy";
-  }, []);
+  const { register, handleSubmit, reset} = useForm();
+  const mapPageToForm = (data = {}) => {
+    const mapped = {
+      title: data.title ?? "",
+      description: data.description ?? "",
+      lastUpdated: data.lastUpdated ?? "",
+    };
 
-  const { data: pageData = {}, isLoading } = useQuery({
-    queryKey: ["page", id],
+    for (let i = 1; i <= 10; i++) {
+      mapped[`t${i}_title`] = data[`t${i}_title`] ?? "";
+      mapped[`t${i}`] = data[`t${i}`] ?? "";
+    }
+
+    return mapped;
+  };
+
+  const { data: pageData, isLoading } = useQuery({
+    queryKey: ["staticPage", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/staticPages/${id}`);
-      const content = res.data?.content;
-
-      try {
-        const parsedContent = JSON.parse(content);
-        setEditorContent(parsedContent);
-      } catch {
-        setEditorContent(null);
-      }
-
-      return res.data;
+      return res.data?.data ?? res.data;
     },
     enabled: !!id,
+    retry: 1,
+    onError: (err) => {
+      console.error(err);
+      Swal.fire("Error", "Failed to load page data.", "error");
+    },
   });
 
-  console.log(pageData);
+  useEffect(() => {
+    if (pageData) {
+      reset(mapPageToForm(pageData));
+    }
+  }, [pageData, reset]);
 
-  const mutation = useMutation({
-    mutationFn: async () => {
-      return await axiosSecure.patch(`/staticPages/${id}`, {
-        content: JSON.stringify(editorContent),
-        lastUpdated: new Date(),
-      });
+  const updateMutation = useMutation({
+    mutationFn: async (payload) => {
+      const res = await axiosSecure.put(`/staticPages/${id}`, payload);
+      return res.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["page", id]);
-      Swal.fire({
-        title: "Success!",
-        text: "Page content updated!",
-        icon: "success",
+      queryClient.invalidateQueries(["staticPage", id]);
+      Swal.fire("Saved", "Page updated successfully.", "success").then(() => {
+        navigate("/"); 
       });
     },
     onError: (err) => {
-      Swal.fire({
-        title: "Error!",
-        text: err?.message || "Something went wrong",
-        icon: "error",
-      });
+      console.error(err);
+      Swal.fire("Error", "Could not update page.", "error");
     },
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    mutation.mutate();
+  const onSubmit = (formValues) => {
+    updateMutation.mutate(formValues);
   };
 
-  if (isLoading) return <Loader></Loader>;
+  if (isLoading) return <div className="p-6">Loading page...</div>;
 
   return (
-    <div className=" p-6">
-      <h1 className="text-3xl text-center font-bold mt-5 mb-7">
-        Update: {pageData?.title}
-      </h1>
-      <form onSubmit={handleSubmit}>
-        <LexicalEditor
-          initialContent={editorContent}
-          onChange={(val) => setEditorContent(val)}
-        />
-        <button
-          type="submit"
-          className="mt-8 w-full btn bg-gradient-to-r from-[#ef7706] to-[#fa9a1b] hover:from-[#fa9a1b] hover:to-[#ef7706] text-white"
-        >
-          Update
-        </button>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-4">Edit Terms & Conditions</h1>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Title */}
+        <div>
+          <label className="block font-medium mb-1">Title</label>
+          <input
+            {...register("title")}
+            className="border rounded w-full p-2"
+            placeholder="Page title"
+          />
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="block font-medium mb-1">Description</label>
+          <textarea
+            {...register("description")}
+            rows={5}
+            className="border rounded w-full p-2"
+            placeholder="Short description shown on top"
+          />
+        </div>
+
+        {/* Sections t1..t10 */}
+        {Array.from({ length: 10 }).map((_, i) => {
+          const num = i + 1;
+          return (
+            <div key={num} className="border p-3 rounded">
+              <label className="block font-medium mb-1">Term {num} (Title)</label>
+              <input
+                {...register(`t${num}_title`)}
+                className="border rounded w-full p-2 mb-2"
+                placeholder={`Section ${num} title`}
+              />
+              <label className="block font-medium mb-1">Term {num} (Content)</label>
+              <textarea
+                {...register(`t${num}`)}
+                rows={3}
+                className="border rounded w-full p-2"
+                placeholder={`Section ${num} content`}
+              />
+            </div>
+          );
+        })}
+
+        {/* actions */}
+        <div className="flex items-center gap-3">
+          <button
+            type="submit"
+            disabled={updateMutation.isLoading}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            {updateMutation.isLoading ? "Saving..." : "Save Changes"}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => reset(mapPageToForm(pageData))}
+            className="px-3 py-2 border rounded"
+          >
+            Reset to server values
+          </button>
+
+          <div className="ml-auto text-sm text-gray-600">
+            Last updated:{" "}
+            {pageData?.lastUpdated ? new Date(pageData.lastUpdated).toLocaleString() : "—"}
+          </div>
+        </div>
       </form>
     </div>
   );
