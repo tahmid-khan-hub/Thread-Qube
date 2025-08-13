@@ -10,6 +10,7 @@ import StatCard from "../../hooks/StatCard";
 import { FaClipboardList } from "react-icons/fa";
 import { FaComments } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
+import MostUsedTag from "../MostUsedTag/MostUsedTag";
 
 const COLORS = ["#FF8042", "#00C49F", "#FFBB28"];
 
@@ -68,6 +69,13 @@ const AdminProfile = () => {
         gradientTo="#ffc66e"
         ></StatCard>
       </div></Animation>
+
+      <h3 className="text-3xl font-semibold mb-4 mt-24 text-center">
+        Most Used Tag (Bar Chart)
+      </h3>
+      <div>
+        <MostUsedTag></MostUsedTag>
+      </div>
 
       <h3 className="text-3xl font-semibold mb-4 mt-24 text-center">
         Site Overview (Pie Chart)

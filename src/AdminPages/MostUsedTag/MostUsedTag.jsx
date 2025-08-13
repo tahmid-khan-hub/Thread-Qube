@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../pages/Loader/Loader";
+import BarChart from "./BarChart";
 
 const MostUsedTag = () => {
   const axiosSecure = useAxiosSecure();
