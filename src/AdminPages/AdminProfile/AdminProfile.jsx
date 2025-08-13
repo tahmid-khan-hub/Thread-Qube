@@ -71,13 +71,6 @@ const AdminProfile = () => {
       </div></Animation>
 
       <h3 className="text-3xl font-semibold mb-4 mt-24 text-center">
-        Most Used Tag (Bar Chart)
-      </h3>
-      <div>
-        <MostUsedTag></MostUsedTag>
-      </div>
-
-      <h3 className="text-3xl font-semibold mb-4 mt-24 text-center">
         Site Overview (Pie Chart)
       </h3>
       <div className="w-full h-96">
@@ -103,6 +96,13 @@ const AdminProfile = () => {
             <Legend />
           </PieChart>
         </ResponsiveContainer>
+      </div>
+
+      <h3 className="text-3xl font-semibold mb-4 mt-24 text-center">
+        Most Used Tag (Bar Chart)
+      </h3>
+      <div>
+        <MostUsedTag></MostUsedTag>
       </div>
 
       <AdminTagManager></AdminTagManager>

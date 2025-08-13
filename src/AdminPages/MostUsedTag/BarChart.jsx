@@ -12,12 +12,12 @@ import {
 const BarChart = ({ data }) => {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <ReBarChart data={data} layout="vertical" margin={{ top: 20, right: 20, left: 40, bottom: 20 }}>
+      <ReBarChart data={data} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis type="number" />
-        <YAxis dataKey="tag" type="category" />
+        <XAxis dataKey="tag" />
+        <YAxis />
         <Tooltip />
-        <Bar dataKey="count" fill="#4F46E5" radius={[0, 8, 8, 0]} />
+        <Bar dataKey="count" fill="#f97316" radius={[8, 8, 0, 0]} /> 
       </ReBarChart>
     </ResponsiveContainer>
   );

@@ -31,8 +31,7 @@ const MostUsedTag = () => {
 
   if (isLoading) return <Loader></Loader>;
   return (
-    <div className="bg-white p-4 rounded-xl shadow-md">
-      <h2 className="text-xl font-bold mb-4">Most Used Tags</h2>
+    <div className=" p-4 rounded-xl">
       {tagData.length > 0 ? <BarChart data={tagData} /> : <p>No tags found</p>}
     </div>
   );
