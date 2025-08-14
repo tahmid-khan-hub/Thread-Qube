@@ -20,11 +20,13 @@ const NewUserThisMonth = () => {
 
   if (isLoading) return <Loader></Loader>;
   return (
-    <div className=" rounded-xl p-5">
+    <div className=" p-5">
       {newUsers.length === 0 ? (
-        <div className="w-72 h-72">
-          <Lottie animationData={NoUserLottie} loop />
-          <p className="text-gray-500">No new user this month</p>
+        <div className="flex flex-col items-center">
+          <div className="w-52 h-52">
+            <Lottie animationData={NoUserLottie} loop />
+          </div>
+          <p className="text-gray-500 text-lg text-center mt-16">No new user this month</p>
         </div>
       ) : (
         <Animation><div data-aos="fade-up" className="space-y-3">
