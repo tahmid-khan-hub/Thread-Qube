@@ -5,6 +5,7 @@ import Loader from "../../pages/Loader/Loader";
 import Lottie from "lottie-react";
 import NoUserLottie from "../../assets/lotties/no user.json"
 import Animation from "../../hooks/Animation";
+import { RiMedalFill } from "react-icons/ri";
 
 const NewUserThisMonth = () => {
   const axiosSecure = useAxiosSecure();
@@ -44,8 +45,13 @@ const NewUserThisMonth = () => {
                 <p className="font-medium">{user.name}</p>
                 <p className="text-sm text-gray-500">{user.email}</p>
               </div>
-              <span className="ml-auto text-xs px-2 py-1 rounded-full bg-gray-200">
-                {user.badge}
+              <span className="ml-auto text-xs px-2 py-1 rounded-full ">
+                {user.badge === 'bronze' 
+                ? 
+                <RiMedalFill size={21} className="text-[#CD7F32]"></RiMedalFill>
+                : 
+                <RiMedalFill size={21} className="text-amber-400"></RiMedalFill>
+                }
               </span>
             </div>
           ))}
