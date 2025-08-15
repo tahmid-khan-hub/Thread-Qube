@@ -6,7 +6,7 @@ const useAxiosSecure = () => {
   const {user, logOut} = useAuth();
   const navigate = useNavigate();
   const axiosSecure = axios.create({
-    baseURL: "https://thread-qube-server-main.vercel.app/Alltags",
+    baseURL: "https://thread-qube-server-main-lr789p3nn-tahmids-projects-d81f204e.vercel.app/Alltags",
   });
 
   axiosSecure.interceptors.request.use(
