@@ -77,10 +77,14 @@ const UserDashboardHome = () => {
         <StatCard
         icon={FaCalendarAlt}
         value={
-          stats.memberSince
-            ? new Date(stats.memberSince).toLocaleDateString()
-            : "--"
-        }
+        stats.memberSince
+          ? new Date(stats.memberSince).toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+              year: "2-digit",
+            })
+          : "--"
+      }
         label="Member Since"
         gradientFrom="#ef7706"
         gradientTo="#ffc66e"
