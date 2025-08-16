@@ -5,12 +5,13 @@ import useAxiosSecure from "../../hooks/UseAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import useUserRole from "../../hooks/useUserRole";
 import Loader from "../../pages/Loader/Loader";
+import Loader2 from "../../pages/Loader/Loader2";
 
 const NotificationBell = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const queryClient = useQueryClient();
-  const { role } = useUserRole();
+  const { role , roleLoading} = useUserRole();
   const [isOpen, setIsOpen] = useState(false);
 
   const dropdownRef = useRef(null);
@@ -32,7 +33,7 @@ const NotificationBell = () => {
     };
   }, []);
 
-  const { data: announcements = [],  } = useQuery({
+  const { data: announcements = [], isLoading } = useQuery({
     queryKey: ["announcements"],
     queryFn: async () => {
       const res = await axiosSecure.get("/announcements");
@@ -40,7 +41,7 @@ const NotificationBell = () => {
     },
   });
 
-  const { data: feedbacks = [],  } = useQuery({
+  const { data: feedbacks = [], feedbackLoading } = useQuery({
     queryKey: ["feedback"],
     queryFn: async () => {
       const res = await axiosSecure.get("/feedback");
@@ -65,6 +66,7 @@ const NotificationBell = () => {
   });
 
   // if (roleLoading || announcementLoading || feedbackLoading) return <Loader />;
+  if(isLoading || roleLoading || feedbackLoading) return <Loader2></Loader2>;
 
   const userFeedbacks = feedbacks.filter(
     (item) => item.userId === user?.uid && item.response === true && !item.read
