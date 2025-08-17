@@ -65,4 +65,4 @@
 ---
 
 ### 🔗 Live Link  
-- 🌐 [Live Site](https://threadqube.netlify.app)
+- 🌐 [Live Site](https://thread-qube-app.netlify.app)
