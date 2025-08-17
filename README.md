@@ -1,7 +1,7 @@
 # 💬 ThreadQube
 
 ### 📝 Project Overview  
-**ThreadQube** is a modern, feature-rich forum platform built using the MERN stack, providing a space for users to engage in meaningful conversations through posts and comments. With role-based dashboards, premium memberships, and admin moderation tools, ThreadQube is designed to foster healthy, community-driven discussions.
+**ThreadQube** is a modern, feature-rich forum platform built using the MERN stack, providing a space for users to engage in meaningful conversations through posts and comments. With role-based dashboards, premium memberships and admin moderation tools, ThreadQube is designed to foster healthy, community-driven discussions.
 
 ---
 
@@ -20,23 +20,21 @@
 ---
 
 ### ✨ Key Features  
-- **🧑‍💼 Role-Based Dashboards**  
-  Separate dashboards for users and admins, with features based on role privileges  
 
 - **📝 Post Management**  
   Users can create new posts and manage (edit/delete) their existing ones  
 
 - **👤 User Profile**  
-  View profile and membership status (editing not supported)  
+  View profile and membership status  
 
 - **📢 Admin Announcements**  
   Admins can create and manage platform-wide announcements  
 
 - **👥 User Management (Admin)**  
-  Admins can view, promote, or manage user roles and take moderation actions  
+  Admins can view, promote or manage user roles and take moderation actions  
 
 - **🚩 Report Handling**  
-  Users can report inappropriate comments; admins can review and take action  
+  Users can report inappropriate comments, admins can review and take action  
 
 - **💳 Gold Membership**  
   Users can upgrade to Gold Membership via secure Stripe payment integration  
