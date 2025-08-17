@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import CommentsSection from "../CommentsSection/CommentsSection";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
@@ -17,7 +17,10 @@ import {
 } from "react-share";
 
 const PostDetails = () => {
-  // const postData = useLoaderData();
+  useEffect(() => {
+    document.title = "ThreadQube | Post Details";
+    window.scrollTo(0, 0);
+  }, []);
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
